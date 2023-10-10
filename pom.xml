@@ -167,6 +167,13 @@
                             </goals>
                         </execution>
                     </executions>
+                    <configuration>
+                        <excludes>
+                            <exclude>**/edu/hw1/Task0.class</exclude>
+                            <exclude>**/edu/hw1/Main.class</exclude>
+                            <exclude>**/edu/project1/Main.class</exclude>
+                        </excludes>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>

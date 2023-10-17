@@ -402,7 +402,11 @@
 
         <!-- https://checkstyle.org/config_filters.html -->
         <!-- Comments/annotation suppression.           -->
-        <module name="SuppressionCommentFilter"/>
+        <module name="SuppressionCommentFilter">
+            <property name="offCommentFormat" value="CHECKSTYLE.OFF\: ([\w\|]+)" />
+            <property name="onCommentFormat" value="CHECKSTYLE.ON\: ([\w\|]+)" />
+            <property name="checkFormat" value="$1" />
+        </module>
         <!-- <module name="SuppressWarnings"/> -->
         <module name="SuppressWarningsHolder"/>
         <module name="SuppressWithNearbyCommentFilter"/>

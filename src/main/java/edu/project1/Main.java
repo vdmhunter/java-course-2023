@@ -1,27 +1,31 @@
 package edu.project1;
 
+import edu.project1.controllers.GameController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
 public final class Main {
+    private final static int MAX_ATTEMPTS = 5;
+    private final static String SEPARATOR_LINE = "SEPARATOR_LINE";
     private final static Logger LOGGER = LogManager.getLogger();
 
     private Main() {
     }
 
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        LOGGER.info("Hello and welcome!");
+        var controller = new GameController();
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 0; i <= 2; i++) {
+        LOGGER.info(String.format(Settings.ITEMS.get("ATTEMPTS_MESSAGE"), MAX_ATTEMPTS));
+        LOGGER.info(String.format(
+            Settings.ITEMS.get("GIVE_UP_COMMAND_HINT_MESSAGE"),
+            Settings.ITEMS.get("GIVE_UP_COMMAND")
+        ));
+        LOGGER.info(Settings.ITEMS.get(SEPARATOR_LINE));
 
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            LOGGER.info("i = {}", i);
-        }
+        controller.playGame();
+
+        LOGGER.info(Settings.ITEMS.get(SEPARATOR_LINE));
+        LOGGER.info(Settings.ITEMS.get("GAME_OVER_MESSAGE"));
+        LOGGER.info(Settings.ITEMS.get(SEPARATOR_LINE));
     }
 }

@@ -3,6 +3,7 @@ package edu.hw3.task4;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A utility class for converting integer values to Roman numerals.
@@ -16,19 +17,19 @@ public final class IntegerToRomanConverter {
     static {
         // CHECKSTYLE:OFF: Disable MagicNumber check
         INT_TO_ROMAN.addAll(Arrays.asList(
-            new Pair(1000, "M"),
-            new Pair(900, "CM"),
-            new Pair(500, "D"),
-            new Pair(400, "CD"),
-            new Pair(100, "C"),
-            new Pair(90, "XC"),
-            new Pair(50, "L"),
-            new Pair(40, "XL"),
-            new Pair(10, "X"),
-            new Pair(9, "IX"),
-            new Pair(5, "V"),
-            new Pair(4, "IV"),
-            new Pair(1, "I")
+            new Pair(1000, "M" ),
+            new Pair(900 , "CM"),
+            new Pair(500 , "D" ),
+            new Pair(400 , "CD"),
+            new Pair(100 , "C" ),
+            new Pair(90  , "XC"),
+            new Pair(50  , "L" ),
+            new Pair(40  , "XL"),
+            new Pair(10  , "X" ),
+            new Pair(9   , "IX"),
+            new Pair(5   , "V" ),
+            new Pair(4   , "IV"),
+            new Pair(1   , "I" )
         ));
         // CHECKSTYLE:ON: Enable MagicNumber check
     }
@@ -43,7 +44,7 @@ public final class IntegerToRomanConverter {
      * @return The Roman numeral representation of the input integer.
      * @throws IllegalArgumentException if the input integer is outside the allowed range [1 to 3999].
      */
-    public static String intToRoman(int num) {
+    public static @NotNull String intToRoman(int num) {
         if (num < MIN_ALLOWED_VALUE || num > MAX_ALLOWED_VALUE) {
             throw new IllegalArgumentException(ILLEGAL_ARGUMENT_MESSAGE);
         }

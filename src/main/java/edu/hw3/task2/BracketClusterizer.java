@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Stack;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * The {@code BracketClusterizer} class provides a method {@link BracketClusterizer#clusterize(String)}
@@ -25,7 +24,7 @@ public final class BracketClusterizer {
      * @throws IllegalArgumentException if the input string is empty or if the bracketed clusters are unbalanced.
      * @throws NullPointerException     if the input string is null.
      */
-    public static @NotNull List<String> clusterize(String str) {
+    public static List<String> clusterize(String str) {
         Objects.requireNonNull(str);
 
         if (str.isEmpty()) {

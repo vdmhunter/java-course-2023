@@ -3,7 +3,6 @@ package edu.hw3.task4;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * A utility class for converting integer values to Roman numerals.
@@ -44,7 +43,7 @@ public final class IntegerToRomanConverter {
      * @return The Roman numeral representation of the input integer.
      * @throws IllegalArgumentException if the input integer is outside the allowed range [1 to 3999].
      */
-    public static @NotNull String intToRoman(int num) {
+    public static String intToRoman(int num) {
         if (num < MIN_ALLOWED_VALUE || num > MAX_ALLOWED_VALUE) {
             throw new IllegalArgumentException(ILLEGAL_ARGUMENT_MESSAGE);
         }

@@ -26,8 +26,10 @@ public class Task2Test {
     @MethodSource("provideBracketsForHappyPaths")
     @DisplayName("Happy paths")
     void clusterize_HappyPaths(String str, ArrayList<String> expected) {
+        // Act
         List<String> actual = BracketClusterizer.clusterize(str);
 
+        // Assert
         Assertions.assertEquals(expected, actual);
     }
 

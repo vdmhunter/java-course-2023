@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * The {@code ItemCounter} class provides a method {@link ItemCounter#freqDict(List)}
@@ -24,7 +23,7 @@ public final class ItemCounter {
      * @throws IllegalArgumentException if the input list is empty.
      * @throws NullPointerException     if the input list is null.
      */
-    public static @NotNull Map<Object, Integer> freqDict(List<Object> list) {
+    public static Map<Object, Integer> freqDict(List<Object> list) {
         Objects.requireNonNull(list);
 
         if (list.isEmpty()) {

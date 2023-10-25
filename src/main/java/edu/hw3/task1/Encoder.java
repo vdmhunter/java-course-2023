@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * The {@code Encoder} class provides utility method {@link Encoder#atbash(String)}
@@ -24,7 +23,7 @@ public final class Encoder {
      * @throws IllegalArgumentException if the input string is empty
      * @throws NullPointerException     if the input string is null
      */
-    public static @NotNull String atbash(String str) {
+    public static String atbash(String str) {
         Objects.requireNonNull(str);
 
         if (str.isEmpty()) {

@@ -27,7 +27,8 @@ public class ContactComparator implements Comparator<Contact> {
      * @return a negative integer, zero, or a positive integer as the first argument is less than,
      *     equal to, or greater than the second argument
      */
-    @Override public int compare(Contact contact1, Contact contact2) {
+    @Override
+    public int compare(Contact contact1, Contact contact2) {
         String key1 = contact1.getLastNameForSort();
         String key2 = contact2.getLastNameForSort();
 

@@ -1,4 +1,4 @@
-package edu.hw3.Task8;
+package edu.hw3.task8;
 
 import java.util.Collection;
 import java.util.Iterator;

@@ -1,6 +1,6 @@
 package edu.hw3;
 
-import edu.hw3.Task7.NullSafeComparator;
+import edu.hw3.task7.NullSafeComparator;
 import java.util.TreeMap;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

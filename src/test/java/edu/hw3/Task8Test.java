@@ -1,6 +1,6 @@
 package edu.hw3;
 
-import edu.hw3.Task8.BackwardIterator;
+import edu.hw3.task8.BackwardIterator;
 import org.junit.jupiter.api.*;
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,4 +1,4 @@
-package edu.hw3.Task7;
+package edu.hw3.task7;
 
 import java.util.Comparator;
 

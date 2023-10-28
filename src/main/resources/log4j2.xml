@@ -16,7 +16,7 @@
         <Console name="STDOUT_PLAIN_MINIMAL" target="SYSTEM_OUT">
             <PatternLayout
                 disableAnsi="false"
-                pattern="%m%n"
+                pattern="%m"
             />
         </Console>
     </Appenders>

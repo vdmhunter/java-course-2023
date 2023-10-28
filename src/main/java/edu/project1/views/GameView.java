@@ -57,6 +57,7 @@ public class GameView extends View {
 
         LOGGER.info("\n");
 
+        // CHECKSTYLE:OFF: Disable MissingSwitchDefault check
         switch (model.getState()) {
             case START -> LOGGER.info(GameState.START.getMessage());
             case INVALID_INPUT -> LOGGER.info(GameState.INVALID_INPUT.getMessage());
@@ -67,5 +68,6 @@ public class GameView extends View {
             case PLAYER_LOSE -> LOGGER.info(GameState.PLAYER_LOSE.getMessage());
             case FINISH -> LOGGER.info(GameState.FINISH.getMessage());
         }
+        // CHECKSTYLE:ON: Enable MissingSwitchDefault check
     }
 }

@@ -2,6 +2,11 @@ package edu.project1;
 
 import edu.project1.views.base.Color;
 
+/**
+ * The {@code Settings} class contains a set of constant configuration values and messages used in
+ * a hangman game application. These values define game parameters, user prompts, and messages
+ * that can be customized to tailor the game experience.
+ */
 public final class Settings {
     public static final int MAX_SECRET_WORD_LENGTH = 8;
     public static final int MAX_ATTEMPTS_COUNT = 5;

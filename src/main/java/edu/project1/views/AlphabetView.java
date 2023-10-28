@@ -7,6 +7,10 @@ import edu.project1.views.base.Pixel;
 import edu.project1.views.sprites.AlphabetSprites;
 import edu.project1.views.sprites.Sprite;
 
+/**
+ * The {@code AlphabetView} class is responsible for rendering the alphabet and displaying the player's letter
+ * selection on the screen. It uses sprites to render individual letters.
+ */
 class AlphabetView extends View {
     static final int ALPHABET_FIRST_ROW_X = 37;
     static final int ALPHABET_FIRST_ROW_Y = 14;
@@ -15,6 +19,11 @@ class AlphabetView extends View {
     static final int ALPHABET_UNUSED_POSITION_NUMBER2 = 21;
     static final int DECIMAL_BASE = 10;
 
+    /**
+     * Constructs an {@code AlphabetView} with the provided screen as the rendering target.
+     *
+     * @param screen The screen represented as a two-dimensional array of pixels.
+     */
     AlphabetView(Pixel[][] screen) {
         super(
             new Coordinate(ALPHABET_FIRST_ROW_X, ALPHABET_FIRST_ROW_Y),
@@ -24,6 +33,11 @@ class AlphabetView extends View {
         this.screen = screen;
     }
 
+    /**
+     * Renders the alphabet and player's letter selection based on the provided {@link GameModel}.
+     *
+     * @param model The {@link GameModel} containing the game's data and state.
+     */
     @Override
     public void render(GameModel model) {
         Sprite sprite = AlphabetSprites.get(0);

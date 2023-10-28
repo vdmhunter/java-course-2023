@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
+/**
+ * The {@code Dictionary} class provides a collection of predefined words and their corresponding definitions in
+ * the form of two-line descriptions. This class is designed to serve as a source of words.
+ */
 public final class Dictionary {
     public static final HashMap<String, Lines> WORDS = new HashMap<>() {{
         put("ANCHOR", new Lines("A heavy object used to keep a ship or", "boat in place."));
@@ -38,6 +42,11 @@ public final class Dictionary {
     private Dictionary() {
     }
 
+    /**
+     * Retrieve a random word from the dictionary.
+     *
+     * @return A randomly selected word from the dictionary as a {@link String}.
+     */
     public static String getRandomWord() {
         var random = new Random();
         var keys = new ArrayList<>(Dictionary.WORDS.keySet());
@@ -45,19 +54,39 @@ public final class Dictionary {
         return keys.get(random.nextInt(keys.size()));
     }
 
+    /**
+     * The {@code Lines} class represents a two-line description of a word.
+     * It consists of a first line and a second line that together provide a concise definition of the word.
+     */
     public static class Lines {
         String firstLine;
         String secondLine;
 
+        /**
+         * Constructs a new {@code Lines} object with the provided first and second lines for the word's description.
+         *
+         * @param firstLine  The first line of the description.
+         * @param secondLine The second line of the description.
+         */
         Lines(String firstLine, String secondLine) {
             this.firstLine = firstLine;
             this.secondLine = secondLine;
         }
 
+        /**
+         * Get the first line of the word's description.
+         *
+         * @return The first line of the description as a `String`.
+         */
         public String getFirstLine() {
             return firstLine;
         }
 
+        /**
+         * Get the second line of the word's description.
+         *
+         * @return The second line of the description as a `String`.
+         */
         public String getSecondLine() {
             return secondLine;
         }

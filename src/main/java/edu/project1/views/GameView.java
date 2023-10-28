@@ -8,6 +8,10 @@ import edu.project1.views.base.Pixel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * The {@code GameView} class is responsible for rendering the visual elements and messages of the game to the screen.
+ * It includes views for the hangman, secret word, game description, and alphabet for letter selection.
+ */
 public class GameView extends View {
     private final HangmanView hangmanView;
     private final SecretWordView secretWordView;
@@ -15,6 +19,9 @@ public class GameView extends View {
     private final AlphabetView alphabetView;
     private final static Logger LOGGER = LogManager.getLogger();
 
+    /**
+     * Constructs a {@code GameView} with predefined coordinates for the game screen.
+     */
     public GameView() {
         super(
             new Coordinate(0, 0),
@@ -29,6 +36,11 @@ public class GameView extends View {
         this.alphabetView = new AlphabetView(this.screen);
     }
 
+    /**
+     * Renders the game based on the provided {@link GameModel}, updating the visual elements and displaying messages.
+     *
+     * @param model The {@link GameModel} containing the game's data and state.
+     */
     @Override
     public void render(GameModel model) {
         if (!(model.getState() == GameState.FINISH)) {

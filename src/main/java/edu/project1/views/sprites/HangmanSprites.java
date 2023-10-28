@@ -2,6 +2,9 @@ package edu.project1.views.sprites;
 
 import java.util.HashMap;
 
+/**
+ * The {@code HangmanSprites} class provides a collection of sprites for rendering different hangman stages.
+ */
 @SuppressWarnings("SpellCheckingInspection")
 public final class HangmanSprites {
     // CHECKSTYLE:OFF: Disable MultipleStringLiterals check
@@ -348,6 +351,13 @@ public final class HangmanSprites {
     private HangmanSprites() {
     }
 
+
+    /**
+     * Get the sprite for the specified index, which represents hangman stages.
+     *
+     * @param index The index of the hangman sprite.
+     * @return The sprite representing the specified hangman stage.
+     */
     public static Sprite get(int index) {
         return sprites.get(index);
     }

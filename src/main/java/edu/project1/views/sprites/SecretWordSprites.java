@@ -2,6 +2,13 @@ package edu.project1.views.sprites;
 
 import java.util.HashMap;
 
+/**
+ * The {@code SecretWordSprites} class provides a collection of predefined ASCII art sprites for displaying secret words
+ * or characters. These sprites are designed for use in text-based games or applications to add visual elements to the
+ * user interface.
+ * The class includes a set of methods for retrieving specific sprites based on characters, including uppercase letters
+ * (A-Z) and a special '*' character.
+ */
 public final class SecretWordSprites {
     // CHECKSTYLE:OFF: Disable MultipleStringLiterals check
     private static final HashMap<Character, Sprite> sprites = new HashMap<>() {{
@@ -551,6 +558,14 @@ public final class SecretWordSprites {
     private SecretWordSprites() {
     }
 
+    /**
+     * Retrieve a predefined ASCII art sprite for a specific character.
+     *
+     * @param ch The character for which to retrieve the sprite. This can be an uppercase letter (A-Z) or the special
+     *           '*' character.
+     * @return A {@code Sprite} object representing the ASCII art for the specified character.
+     *     If the character is not found, null is returned.
+     */
     public static Sprite get(char ch) {
         return sprites.get(ch);
     }

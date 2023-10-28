@@ -8,12 +8,21 @@ import edu.project1.views.base.Pixel;
 import edu.project1.views.sprites.DescriptionSprites;
 import edu.project1.views.sprites.Sprite;
 
+/**
+ * The {@code DescriptionView} class is responsible for rendering the game's description on the screen. It includes
+ * information about the secret word to be guessed.
+ */
 class DescriptionView extends View {
     static final int DESCRIPTION_FIRST_ROW_X = 35;
     static final int DESCRIPTION_FIRST_ROW_Y = 10;
     static final int DESCRIPTION_TOP_BORDER = 9;
     static final int DESCRIPTION_LOW_BORDER = 12;
 
+    /**
+     * Constructs a {@code DescriptionView} with the provided screen as the rendering target.
+     *
+     * @param screen The screen represented as a two-dimensional array of pixels.
+     */
     DescriptionView(Pixel[][] screen) {
         super(
             new Coordinate(SCREEN_DIVIDER, DESCRIPTION_TOP_BORDER),
@@ -23,6 +32,12 @@ class DescriptionView extends View {
         this.screen = screen;
     }
 
+    /**
+     * Renders the description of the game based on the provided {@link GameModel},
+     * including information about the secret word.
+     *
+     * @param model The {@link GameModel} containing the game's data and state.
+     */
     @Override public void render(GameModel model) {
         Sprite sprite = DescriptionSprites.get(0);
 

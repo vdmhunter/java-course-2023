@@ -1,5 +1,7 @@
 package edu.hw4;
 
+import java.io.Serial;
+
 /**
  * The {@code ValidationError} class is a custom exception that extends the {@code Throwable} class. It is used
  * to represent and handle validation errors in the context of animal attributes.
@@ -9,6 +11,9 @@ package edu.hw4;
  * encapsulating an error message.
  */
 public class ValidationError extends Throwable {
+    @Serial
+    private static final long serialVersionUID = -7964128654217783409L;
+
     /**
      * Constructs a new {@code ValidationError} instance with the specified error message.
      *

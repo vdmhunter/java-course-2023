@@ -9,6 +9,7 @@ import static org.mockito.Mockito.when;
 /**
  * Tests for Homework 4, Task 7
  */
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class Task07Test {
     private AutoCloseable closeable;
 
@@ -26,6 +27,7 @@ public class Task07Test {
     }
 
     @Test
+    @Order(1)
     @DisplayName("Find the k-th the oldest animal in the list. K is within bounds")
     void task7_FindFirstOldestAnimalWithinBounds() {
         // Arrange
@@ -48,6 +50,7 @@ public class Task07Test {
     }
 
     @Test
+    @Order(2)
     @DisplayName("Return null when K is out of bounds")
     void task7_FindKthOldestAnimalReturnNullWhenKIsOutOfBounds() {
         // Arrange

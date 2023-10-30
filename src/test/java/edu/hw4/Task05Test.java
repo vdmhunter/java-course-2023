@@ -5,7 +5,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import static org.mockito.Mockito.when;
@@ -13,6 +16,7 @@ import static org.mockito.Mockito.when;
 /**
  * Tests for Homework 4, Task 5
  */
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class Task05Test {
     private AutoCloseable closeable;
 
@@ -30,6 +34,7 @@ public class Task05Test {
     }
 
     @Test
+    @Order(1)
     @DisplayName("Compare the genders (male vs. female). Count of male less then count of female")
     void task5_CompareGendersMaleLessToFemale() {
         // Arrange
@@ -51,6 +56,7 @@ public class Task05Test {
     }
 
     @Test
+    @Order(2)
     @DisplayName("Compare the genders (male vs. female). Count of male greater then count of female")
     void task5_CompareGendersMaleGreaterFemale() {
         // Arrange
@@ -72,6 +78,7 @@ public class Task05Test {
     }
 
     @Test
+    @Order(3)
     @DisplayName("Compare the genders (male vs. female). Count of male equal to count of female")
     void task5_CompareGendersMaleEqualToFemale() {
         // Arrange

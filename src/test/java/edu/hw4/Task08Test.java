@@ -10,6 +10,7 @@ import static org.mockito.Mockito.when;
 /**
  * Tests for Homework 4, Task 8
  */
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class Task08Test {
     private AutoCloseable closeable;
 
@@ -27,6 +28,7 @@ public class Task08Test {
     }
 
     @Test
+    @Order(1)
     @DisplayName("Find the heaviest animal below a specified height. (Animal present)")
     void task8_FindHeaviestAnimalBelowHeightWithAnimal() {
         // Arrange
@@ -58,6 +60,7 @@ public class Task08Test {
     }
 
     @Test
+    @Order(2)
     @DisplayName("Find the heaviest animal below a specified height. (No animal present)")
     void task1_FindHeaviestAnimalBelowHeightWithoutAnimal() {
         // Arrange

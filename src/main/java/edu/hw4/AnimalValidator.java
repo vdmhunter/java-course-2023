@@ -20,16 +20,12 @@ public final class AnimalValidator {
      *
      * @param animal The {@link Animal} to be validated.
      * @return A {@link List} of {@link ValidationError} objects representing validation errors.
-     *
-     * @throws NullPointerException if the provided {@code animal} is {@code null}.
      */
     public static List<ValidationError> getValidationErrors(Animal animal) {
-        Objects.requireNonNull(animal);
-
         List<ValidationError> errors = new ArrayList<>();
 
         if (animal.age() < 0) {
-            errors.add(new ValidationError("Age must be greater than zero."));
+            errors.add(new ValidationError("Age must be greater than zero"));
         }
 
         if (animal.height() < 0) {

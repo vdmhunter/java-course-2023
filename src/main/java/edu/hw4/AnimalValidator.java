@@ -2,7 +2,6 @@ package edu.hw4;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * The {@code AnimalValidator} class provides a set of static methods for validating {@link Animal} classes

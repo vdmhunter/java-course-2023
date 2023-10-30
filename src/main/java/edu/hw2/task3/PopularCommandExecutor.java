@@ -45,11 +45,11 @@ public class PopularCommandExecutor {
      * @param command the command to be executed.
      * @throws ConnectionException if unable to execute the command after max attempts due to connection issues.
      */
+    @SuppressWarnings("SameParameterValue")
     void tryExecute(String command) {
         for (int a = 1; a <= maxAttempts; a++) {
             try (var connection = manager.getConnection()) {
                 connection.execute(command);
-                break;
             } catch (ConnectionException e) {
                 if (a == maxAttempts) {
                     throw new ConnectionException("Unable to execute the command '"

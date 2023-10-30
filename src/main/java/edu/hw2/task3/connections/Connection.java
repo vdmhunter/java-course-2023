@@ -13,4 +13,9 @@ public interface Connection extends AutoCloseable {
      * @param command the command to be executed.
      */
     void execute(String command);
+
+    /**
+     * Closes the connection and releases associated resources.
+     */
+    void close();
 }

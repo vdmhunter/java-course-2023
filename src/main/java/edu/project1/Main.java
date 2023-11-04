@@ -1,27 +1,30 @@
 package edu.project1;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import edu.project1.controllers.GameController;
+import edu.project1.models.GameModel;
+import edu.project1.views.GameView;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+/**
+ * The {@code Main} class serves as the entry point for the hangman game application.
+ * It initializes the game's core components, including the model, view, and controller,
+ * and starts the game by invoking the {@link GameController#playGame()} method on the controller.
+ */
 public final class Main {
-    private final static Logger LOGGER = LogManager.getLogger();
-
     private Main() {
     }
 
+    /**
+     * The main method that is called when the application is executed.
+     * It initializes the game model, view, and controller, and then starts the game by invoking
+     * the {@link GameController#playGame()} method on the controller.
+     *
+     * @param args Command-line arguments (not used in this application).
+     */
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        LOGGER.info("Hello and welcome!");
+        var model = new GameModel();
+        var view = new GameView();
+        var controller = new GameController(model, view);
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 0; i <= 2; i++) {
-
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            LOGGER.info("i = {}", i);
-        }
+        controller.playGame();
     }
 }

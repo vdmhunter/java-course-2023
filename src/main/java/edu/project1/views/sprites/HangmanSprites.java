@@ -7,9 +7,11 @@ import java.util.HashMap;
  */
 @SuppressWarnings("SpellCheckingInspection")
 public final class HangmanSprites {
-    // CHECKSTYLE:OFF: Disable MultipleStringLiterals check
-    private static final HashMap<Integer, Sprite> sprites = new HashMap<>() {{
-        put(0, new Sprite(
+    private static final HashMap<Integer, Sprite> SPRITES = new HashMap<>();
+
+    static {
+        // CHECKSTYLE:OFF: Disable MultipleStringLiterals check
+        SPRITES.put(0, new Sprite(
             new String[] {
                 "                               ",
                 "                               ",
@@ -65,7 +67,7 @@ public final class HangmanSprites {
                 "9999999999999999999999999999999"
             }
         ));
-        put(1, new Sprite(
+        SPRITES.put(1, new Sprite(
             new String[] {
                 "          █░                   ",
                 "         ██            ██      ",
@@ -121,7 +123,7 @@ public final class HangmanSprites {
                 "9999999999999999999999999999999"
             }
         ));
-        put(2, new Sprite(
+        SPRITES.put(2, new Sprite(
             new String[] {
                 "          █░                   ",
                 "         ██            ██      ",
@@ -177,7 +179,7 @@ public final class HangmanSprites {
                 "9999999999999999999999999999999"
             }
         ));
-        put(3, new Sprite(
+        SPRITES.put(3, new Sprite(
             new String[] {
                 "          █░                   ",
                 "         ██            ██      ",
@@ -233,7 +235,7 @@ public final class HangmanSprites {
                 "9999999999999999999999999999999"
             }
         ));
-        put(4, new Sprite(
+        SPRITES.put(4, new Sprite(
             new String[] {
                 "          █░                   ",
                 "         ██            ██      ",
@@ -289,7 +291,7 @@ public final class HangmanSprites {
                 "9999999999999999999999999999999"
             }
         ));
-        put(5, new Sprite(
+        SPRITES.put(5, new Sprite(
             new String[] {
                 "          █░                   ",
                 "         ██            ██      ",
@@ -345,12 +347,11 @@ public final class HangmanSprites {
                 "9999999999999999999999999999999"
             }
         ));
-    }};
-    // CHECKSTYLE:ON: Enable MultipleStringLiterals check
+        // CHECKSTYLE:ON: Enable MultipleStringLiterals check
+    }
 
     private HangmanSprites() {
     }
-
 
     /**
      * Get the sprite for the specified index, which represents hangman stages.
@@ -359,6 +360,6 @@ public final class HangmanSprites {
      * @return The sprite representing the specified hangman stage.
      */
     public static Sprite get(int index) {
-        return sprites.get(index);
+        return SPRITES.get(index);
     }
 }

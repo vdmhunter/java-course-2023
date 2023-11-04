@@ -1,10 +1,11 @@
 package edu.project1.views;
 
 import edu.project1.GameState;
-import edu.project1.Settings;
 import edu.project1.models.GameModel;
 import edu.project1.views.base.Coordinate;
 import edu.project1.views.base.Pixel;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,11 +14,9 @@ import org.apache.logging.log4j.Logger;
  * It includes views for the hangman, secret word, game description, and alphabet for letter selection.
  */
 public class GameView extends View {
-    private final HangmanView hangmanView;
-    private final SecretWordView secretWordView;
-    private final DescriptionView descriptionView;
-    private final AlphabetView alphabetView;
-    private final static Logger LOGGER = LogManager.getLogger();
+    private final List<View> views;
+    public static final String SESSION_SEPARATOR = "\n\n\n\n\n\n\n";
+    private static final Logger LOGGER = LogManager.getLogger();
 
     /**
      * Constructs a {@code GameView} with predefined coordinates for the game screen.
@@ -30,10 +29,11 @@ public class GameView extends View {
 
         this.screen = new Pixel[GLOBAL_WIDTH][GLOBAL_HEIGHT];
 
-        this.hangmanView = new HangmanView(this.screen);
-        this.secretWordView = new SecretWordView(this.screen);
-        this.descriptionView = new DescriptionView(this.screen);
-        this.alphabetView = new AlphabetView(this.screen);
+        views = new ArrayList<>();
+        views.add(new HangmanView(this.screen));
+        views.add(new SecretWordView(this.screen));
+        views.add(new DescriptionView(this.screen));
+        views.add(new AlphabetView(this.screen));
     }
 
     /**
@@ -43,13 +43,10 @@ public class GameView extends View {
      */
     @Override
     public void render(GameModel model) {
-        if (!(model.getState() == GameState.FINISH)) {
-            LOGGER.info(Settings.SESSION_SEPARATOR);
+        if (model.getState() != GameState.FINISH) {
+            LOGGER.info(SESSION_SEPARATOR);
 
-            hangmanView.render(model);
-            secretWordView.render(model);
-            descriptionView.render(model);
-            alphabetView.render(model);
+            views.forEach(view -> view.render(model));
 
             for (int y = topLeft.y(); y <= bottomRight.y(); y++) {
                 var sb = new StringBuilder();
@@ -63,7 +60,9 @@ public class GameView extends View {
                     }
                 }
 
-                LOGGER.info(sb + "\n");
+                sb.append('\n');
+
+                LOGGER.info(sb);
             }
         }
 

@@ -58,9 +58,15 @@ class AlphabetView extends View {
 
             drawSpriteOnScreen(sprite, topLeftX, topLeftY, bottomRightX, bottomRightY);
 
-            Color color = !model.getUsedLetters().contains(ch)
-                ? Color.WHITE
-                : model.getSecretWord().contains(String.valueOf(ch)) ? Color.GRASS : Color.RED;
+            Color color;
+
+            if (!model.getUsedLetters().contains(ch)) {
+                color = Color.WHITE;
+            } else if (model.getSecretWord().contains(String.valueOf(ch))) {
+                color = Color.GRASS;
+            } else {
+                color = Color.RED;
+            }
 
             screen[topLeftX + 1][topLeftY + 1] = new Pixel(ch, color);
         }

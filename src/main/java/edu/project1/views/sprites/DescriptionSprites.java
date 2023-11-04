@@ -7,9 +7,11 @@ import java.util.HashMap;
  */
 public final class DescriptionSprites {
 
-    // CHECKSTYLE:OFF: Disable MultipleStringLiterals check
-    private static final HashMap<Integer, Sprite> sprites = new HashMap<>() {{
-        put(0, new Sprite(
+    private static final HashMap<Integer, Sprite> SPRITES = new HashMap<>();
+
+    static {
+        // CHECKSTYLE:OFF: Disable MultipleStringLiterals check
+        SPRITES.put(0, new Sprite(
             new String[] {
                 "╔═════════════════════════════════════════════╗",
                 "║                                             ║",
@@ -23,8 +25,8 @@ public final class DescriptionSprites {
                 "88888888888888888888888888888888888888888888888"
             }
         ));
-    }};
-    // CHECKSTYLE:ON: Enable MultipleStringLiterals check
+        // CHECKSTYLE:ON: Enable MultipleStringLiterals check
+    }
 
     private DescriptionSprites() {
     }
@@ -36,6 +38,6 @@ public final class DescriptionSprites {
      * @return The sprite representing the specified description or border.
      */
     public static Sprite get(int index) {
-        return sprites.get(index);
+        return SPRITES.get(index);
     }
 }

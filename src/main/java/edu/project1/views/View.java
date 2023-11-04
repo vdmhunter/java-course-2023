@@ -28,7 +28,7 @@ public abstract class View {
      * @param topLeft     The top-left coordinate of the screen region.
      * @param bottomRight The bottom-right coordinate of the screen region.
      */
-    public View(Coordinate topLeft, Coordinate bottomRight) {
+    View(Coordinate topLeft, Coordinate bottomRight) {
         this.topLeft = topLeft;
         this.bottomRight = bottomRight;
     }

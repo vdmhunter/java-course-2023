@@ -1,9 +1,9 @@
 package edu.project1.controllers;
 
 import edu.project1.GameState;
-import edu.project1.Settings;
 import edu.project1.models.GameModel;
 import edu.project1.views.GameView;
+import edu.project1.views.base.Color;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -17,7 +17,13 @@ import org.apache.logging.log4j.Logger;
 public class GameController {
     private final GameModel model;
     private final GameView view;
-    private final static Logger LOGGER = LogManager.getLogger();
+    public static final String SEPARATOR_MESSAGE =
+        Color.BODY.getValue() + "===================================================\n";
+    public static final String GUESS_PROMPT_MESSAGE = Color.BODY.getValue() + "Guess a letter: ";
+    public static final String EXIT_COMMAND = "EXIT";
+    public static final String INPUT_REGEX = "^[a-zA-Z]$";
+    public static final int MAX_ATTEMPTS_COUNT = 5;
+    private static final Logger LOGGER = LogManager.getLogger();
 
     /**
      * Constructs a {@code GameController} with a specified {@link GameModel} and {@link GameView}.
@@ -63,7 +69,8 @@ public class GameController {
      * Prints a guess prompt message to the log.
      */
     private void printGuessPrompt() {
-        LOGGER.info(Settings.SEPARATOR_MESSAGE + Settings.GUESS_PROMPT_MESSAGE);
+        String message = "%s%s".formatted(SEPARATOR_MESSAGE, GUESS_PROMPT_MESSAGE);
+        LOGGER.info(message);
     }
 
     /**
@@ -83,11 +90,11 @@ public class GameController {
      * @return The game state based on the input and guess result.
      */
     private GameState tryGuess(String input) {
-        if (input.equalsIgnoreCase(Settings.EXIT_COMMAND)) {
+        if (input.equalsIgnoreCase(EXIT_COMMAND)) {
             return GameState.FINISH;
         }
 
-        if (!input.matches(Settings.INPUT_REGEX)) {
+        if (!input.matches(INPUT_REGEX)) {
             return GameState.INVALID_INPUT;
         }
 
@@ -161,7 +168,7 @@ public class GameController {
         ++attempts;
         model.setAttempts(attempts);
 
-        if (attempts >= Settings.MAX_ATTEMPTS_COUNT) {
+        if (attempts >= MAX_ATTEMPTS_COUNT) {
             return GameState.PLAYER_LOSE;
         } else {
             return GameState.FAILED_INPUT;

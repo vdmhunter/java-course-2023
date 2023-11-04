@@ -7,18 +7,13 @@ import java.io.ByteArrayInputStream;
 import java.util.HashSet;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
 
 /**
  * Tests for Project 1
  */
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class Project1Test {
+ class Project1Test {
     @Test
-    @Order(1)
     @DisplayName("Test the situation where the player wins")
     void gameController_TestTheSituationWhereThePlayerWins() {
         // Arrange
@@ -41,7 +36,6 @@ public class Project1Test {
     }
 
     @Test
-    @Order(2)
     @DisplayName("Test the situation where the player lose")
     void gameController_TestTheSituationWhereThePlayerLose() {
         // Arrange
@@ -64,7 +58,6 @@ public class Project1Test {
     }
 
     @Test
-    @Order(3)
     @DisplayName("Test the situation when player type \"exit\"")
     void gameController_TestTheSituationWhenPlayerTypeExit() {
         // Arrange
@@ -87,7 +80,6 @@ public class Project1Test {
     }
 
     @Test
-    @Order(4)
     @DisplayName("Test Initial Game Model State")
     void gameModel_InitialState() {
         // Arrange

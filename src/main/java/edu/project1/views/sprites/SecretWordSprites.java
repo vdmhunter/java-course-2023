@@ -10,9 +10,11 @@ import java.util.HashMap;
  * (A-Z) and a special '*' character.
  */
 public final class SecretWordSprites {
-    // CHECKSTYLE:OFF: Disable MultipleStringLiterals check
-    private static final HashMap<Character, Sprite> sprites = new HashMap<>() {{
-        put('A', new Sprite(
+    private static final HashMap<Character, Sprite> SPRITES = new HashMap<>();
+
+    static {
+        // CHECKSTYLE:OFF: Disable MultipleStringLiterals check
+        SPRITES.put('A', new Sprite(
             new String[] {
                 "  ██┐",
                 " █│█│",
@@ -32,7 +34,7 @@ public final class SecretWordSprites {
                 "88888"
             }
         ));
-        put('B', new Sprite(
+        SPRITES.put('B', new Sprite(
             new String[] {
                 "████ ",
                 "█┌─┘█",
@@ -52,7 +54,7 @@ public final class SecretWordSprites {
                 "88888"
             }
         ));
-        put('C', new Sprite(
+        SPRITES.put('C', new Sprite(
             new String[] {
                 " ████",
                 "█┌──┘",
@@ -72,7 +74,7 @@ public final class SecretWordSprites {
                 "88888"
             }
         ));
-        put('D', new Sprite(
+        SPRITES.put('D', new Sprite(
             new String[] {
                 "███┐ ",
                 "█┌─█┐",
@@ -92,7 +94,7 @@ public final class SecretWordSprites {
                 "88888"
             }
         ));
-        put('E', new Sprite(
+        SPRITES.put('E', new Sprite(
             new String[] {
                 "█████",
                 "█┌──┘",
@@ -112,7 +114,7 @@ public final class SecretWordSprites {
                 "88888"
             }
         ));
-        put('F', new Sprite(
+        SPRITES.put('F', new Sprite(
             new String[] {
                 "█████",
                 "█┌──┘",
@@ -132,7 +134,7 @@ public final class SecretWordSprites {
                 "88888"
             }
         ));
-        put('G', new Sprite(
+        SPRITES.put('G', new Sprite(
             new String[] {
                 " ███▌",
                 "█┌─┘ ",
@@ -152,7 +154,7 @@ public final class SecretWordSprites {
                 "88888"
             }
         ));
-        put('H', new Sprite(
+        SPRITES.put('H', new Sprite(
             new String[] {
                 "█┐ █┐",
                 "█│ █│",
@@ -172,7 +174,7 @@ public final class SecretWordSprites {
                 "88888"
             }
         ));
-        put('I', new Sprite(
+        SPRITES.put('I', new Sprite(
             new String[] {
                 " ███┐",
                 "  █┌┘",
@@ -192,7 +194,7 @@ public final class SecretWordSprites {
                 "88888"
             }
         ));
-        put('J', new Sprite(
+        SPRITES.put('J', new Sprite(
             new String[] {
                 " ███┐",
                 " └─█│",
@@ -212,7 +214,7 @@ public final class SecretWordSprites {
                 "88888"
             }
         ));
-        put('K', new Sprite(
+        SPRITES.put('K', new Sprite(
             new String[] {
                 "█┐  █",
                 "█│ █┘",
@@ -232,7 +234,7 @@ public final class SecretWordSprites {
                 "88888"
             }
         ));
-        put('L', new Sprite(
+        SPRITES.put('L', new Sprite(
             new String[] {
                 "█┐   ",
                 "█│   ",
@@ -252,7 +254,7 @@ public final class SecretWordSprites {
                 "88888"
             }
         ));
-        put('M', new Sprite(
+        SPRITES.put('M', new Sprite(
             new String[] {
                 "█┐  █",
                 "██┐██",
@@ -272,7 +274,7 @@ public final class SecretWordSprites {
                 "88888"
             }
         ));
-        put('N', new Sprite(
+        SPRITES.put('N', new Sprite(
             new String[] {
                 "█┐ █┐",
                 "██┐█│",
@@ -292,7 +294,7 @@ public final class SecretWordSprites {
                 "88888"
             }
         ));
-        put('O', new Sprite(
+        SPRITES.put('O', new Sprite(
             new String[] {
                 " ███ ",
                 "█┌─┘█",
@@ -312,7 +314,7 @@ public final class SecretWordSprites {
                 "88888"
             }
         ));
-        put('P', new Sprite(
+        SPRITES.put('P', new Sprite(
             new String[] {
                 "████ ",
                 "█┌─┘█",
@@ -332,7 +334,7 @@ public final class SecretWordSprites {
                 "88888"
             }
         ));
-        put('Q', new Sprite(
+        SPRITES.put('Q', new Sprite(
             new String[] {
                 " ███ ",
                 "█┌─┘█",
@@ -352,7 +354,7 @@ public final class SecretWordSprites {
                 "88888"
             }
         ));
-        put('R', new Sprite(
+        SPRITES.put('R', new Sprite(
             new String[] {
                 "████┐",
                 "█┌──█",
@@ -372,7 +374,7 @@ public final class SecretWordSprites {
                 "88888"
             }
         ));
-        put('S', new Sprite(
+        SPRITES.put('S', new Sprite(
             new String[] {
                 " ▄██┐",
                 "█┌──█",
@@ -392,7 +394,7 @@ public final class SecretWordSprites {
                 "88888"
             }
         ));
-        put('T', new Sprite(
+        SPRITES.put('T', new Sprite(
             new String[] {
                 "█████",
                 " └█┌┘",
@@ -412,7 +414,7 @@ public final class SecretWordSprites {
                 "88888"
             }
         ));
-        put('U', new Sprite(
+        SPRITES.put('U', new Sprite(
             new String[] {
                 "█┐  █",
                 "█│  █",
@@ -432,7 +434,7 @@ public final class SecretWordSprites {
                 "88888"
             }
         ));
-        put('V', new Sprite(
+        SPRITES.put('V', new Sprite(
             new String[] {
                 "█┐  █",
                 "█│  █",
@@ -452,7 +454,7 @@ public final class SecretWordSprites {
                 "88888"
             }
         ));
-        put('W', new Sprite(
+        SPRITES.put('W', new Sprite(
             new String[] {
                 "█┐█┐█",
                 "█│█│█",
@@ -472,7 +474,7 @@ public final class SecretWordSprites {
                 "88888"
             }
         ));
-        put('X', new Sprite(
+        SPRITES.put('X', new Sprite(
             new String[] {
                 "█┐ █┐",
                 "█└─█│",
@@ -492,7 +494,7 @@ public final class SecretWordSprites {
                 "88888"
             }
         ));
-        put('Y', new Sprite(
+        SPRITES.put('Y', new Sprite(
             new String[] {
                 "█┐ █┐",
                 "█│ █│",
@@ -512,7 +514,7 @@ public final class SecretWordSprites {
                 "88888"
             }
         ));
-        put('Z', new Sprite(
+        SPRITES.put('Z', new Sprite(
             new String[] {
                 "████▌",
                 "└──█┘",
@@ -532,7 +534,7 @@ public final class SecretWordSprites {
                 "88888"
             }
         ));
-        put('*', new Sprite(
+        SPRITES.put('*', new Sprite(
             new String[] {
                 "░░░░░",
                 "░░░░░",
@@ -552,8 +554,8 @@ public final class SecretWordSprites {
                 "88888"
             }
         ));
-    }};
-    // CHECKSTYLE:ON: Enable MultipleStringLiterals check
+        // CHECKSTYLE:ON: Enable MultipleStringLiterals check
+    }
 
     private SecretWordSprites() {
     }
@@ -567,6 +569,6 @@ public final class SecretWordSprites {
      *     If the character is not found, null is returned.
      */
     public static Sprite get(char ch) {
-        return sprites.get(ch);
+        return SPRITES.get(ch);
     }
 }

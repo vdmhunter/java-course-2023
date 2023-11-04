@@ -1,6 +1,5 @@
 package edu.project1.views;
 
-import edu.project1.Settings;
 import edu.project1.models.GameModel;
 import edu.project1.views.base.Coordinate;
 import edu.project1.views.base.Pixel;
@@ -15,6 +14,7 @@ import edu.project1.views.sprites.Sprite;
 class SecretWordView extends View {
     static final int SECRET_WORD_TOP_BORDER = 1;
     static final int SECRET_WORD_LOW_BORDER = 7;
+    public static final int MAX_SECRET_WORD_LENGTH = 8;
 
     /**
      * Constructs a {@code SecretWordView} with the provided screen as the rendering target.
@@ -40,12 +40,12 @@ class SecretWordView extends View {
     public void render(GameModel model) {
         int len = model.getSecretWord().length();
 
-        for (int i = 0; i < Settings.MAX_SECRET_WORD_LENGTH; i++) {
-            if (Settings.MAX_SECRET_WORD_LENGTH - i > len) {
+        for (int i = 0; i < MAX_SECRET_WORD_LENGTH; i++) {
+            if (MAX_SECRET_WORD_LENGTH - i > len) {
                 continue;
             }
 
-            char ch = model.getSecretWord().toCharArray()[i - (Settings.MAX_SECRET_WORD_LENGTH - len)];
+            char ch = model.getSecretWord().toCharArray()[i - (MAX_SECRET_WORD_LENGTH - len)];
             Sprite sprite;
 
             if (model.getUsedLetters().contains(ch)) {

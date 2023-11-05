@@ -10,7 +10,13 @@
         <Console name="STDOUT_PLAIN" target="SYSTEM_OUT">
             <PatternLayout
                 disableAnsi="false"
-                pattern="%d{HH:mm:ss.SSS} %highlight{%-5p} [%-15.15thread] %-15.15logger{20} -- %highlight{%m}%n"
+                pattern="%d{HH:mm:ss.SSS} %highlight{%-5p} [%-15.15thread] %-15.50logger{20} -- %highlight{%m}%n"
+            />
+        </Console>
+        <Console name="STDOUT_PLAIN_MINIMAL" target="SYSTEM_OUT">
+            <PatternLayout
+                disableAnsi="false"
+                pattern="%m"
             />
         </Console>
     </Appenders>
@@ -22,6 +28,12 @@
         <Logger name="sun.rmi.transport" level="WARN"/>
 
         <Logger name="edu" level="TRACE"/>
+        <Logger name="edu.project1" level="TRACE" additivity="false">
+            <AppenderRef ref="STDOUT_PLAIN_MINIMAL"/>
+        </Logger>
+        <Logger name="edu.project2" level="TRACE" additivity="false">
+            <AppenderRef ref="STDOUT_PLAIN_MINIMAL"/>
+        </Logger>
 
         <Root level="INFO">
             <AppenderRef ref="STDOUT_PLAIN"/>

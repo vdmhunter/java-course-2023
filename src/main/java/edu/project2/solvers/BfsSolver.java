@@ -3,24 +3,24 @@ package edu.project2.solvers;
 import edu.project2.types.Cell;
 import edu.project2.types.Coordinate;
 import edu.project2.types.Maze;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import static edu.project2.Helper.createFilledMaze;
 import static edu.project2.Helper.getAvailableNeighbors;
 
-public class DfsSolver implements Solver {
+public class BfsSolver implements Solver {
     @Override
     public List<Coordinate> solve(Maze maze, Coordinate start, Coordinate end) {
         var cameFrom = createFilledMaze(maze.height(), maze.width(), Cell.Type.UNDEFINED);
         var visited = createFilledMaze(maze.height(), maze.width(), Cell.Type.UNVISITED);
 
-        Queue<Coordinate> cellsStack = new ArrayDeque<>();
-        cellsStack.add(start);
+        Queue<Coordinate> cellsQueue = new LinkedList<>();
+        cellsQueue.add(start);
 
-        while (!cellsStack.isEmpty()) {
-            Coordinate currentCellIndex = cellsStack.poll();
+        while (!cellsQueue.isEmpty()) {
+            Coordinate currentCellIndex = cellsQueue.poll();
 
             if (currentCellIndex.equals(end)) {
                 return reconstructPath(cameFrom, currentCellIndex);
@@ -35,13 +35,15 @@ public class DfsSolver implements Solver {
                     visited
                 );
 
+            availableNeighbors.removeIf(neighbor ->
+                visited[neighbor.getRow()][neighbor.getCol()].getType() == Cell.Type.VISITED);
+
             for (Cell neighbor : availableNeighbors) {
                 cameFrom[neighbor.getRow()][neighbor.getCol()] =
                     maze.grid()[currentCellIndex.row()][currentCellIndex.col()];
-            }
 
-            for (Cell neighbor : availableNeighbors) {
-                cellsStack.add(new Coordinate(neighbor.getRow(), neighbor.getCol()));
+                visited[neighbor.getRow()][neighbor.getCol()].setType(Cell.Type.VISITED);
+                cellsQueue.add(new Coordinate(neighbor.getRow(), neighbor.getCol()));
             }
         }
 

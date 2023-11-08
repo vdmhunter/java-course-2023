@@ -11,39 +11,60 @@ import static edu.project2.Helper.getUnvisitedNeighbors;
 import static edu.project2.Helper.removeWallGrid;
 
 public class GrowingTreeGenerator implements Generator {
+
     @Override
     public Maze generate(int height, int width) {
-        Maze result = new Maze(height, width, createFilledMaze(height, width, Cell.Type.WALL));
-        Cell randomCell = result.getGrid()[chooseRandomIndex(height)][chooseRandomIndex(width)];
-
-        List<Cell> activeCells = new ArrayList<>();
-        activeCells.add(randomCell);
+        Maze maze = createInitialMaze(height, width);
+        List<Cell> activeCells = initializeActiveCells(maze, height, width);
 
         while (!activeCells.isEmpty()) {
-            int currentCellIndex = chooseRandomIndex(activeCells.size());
-            Cell currentCell = activeCells.get(currentCellIndex);
-            int currentRow = currentCell.getRow();
-            int currentCol = currentCell.getCol();
-
-            result.getGrid()[currentRow][currentCol].setType(Cell.Type.PASSAGE);
-
-            List<Cell> neighbors = getUnvisitedNeighbors(result, currentCell);
-
-            // Remove a cell if it has no neighbors to visit
-            if (neighbors.isEmpty()) {
-                activeCells.remove(currentCellIndex);
-
-                continue;
-            }
-
-            Cell randomNeighbor = chooseRandom(neighbors);
-
-            removeWallGrid(result, currentCell, randomNeighbor);
-
-            activeCells.add(randomNeighbor);
-            result.getGrid()[randomNeighbor.getRow()][randomNeighbor.getCol()].setType(Cell.Type.PASSAGE);
+            processActiveCells(maze, activeCells);
         }
 
-        return result;
+        return maze;
+    }
+
+    private Maze createInitialMaze(int height, int width) {
+        Cell.Type initialCellType = Cell.Type.WALL;
+        Cell[][] grid = createFilledMaze(height, width, initialCellType);
+
+        return new Maze(height, width, grid);
+    }
+
+    private List<Cell> initializeActiveCells(Maze maze, int height, int width) {
+        Cell initialCell = chooseRandomCell(maze, height, width);
+        List<Cell> activeCells = new ArrayList<>();
+        activeCells.add(initialCell);
+
+        return activeCells;
+    }
+
+    private Cell chooseRandomCell(Maze maze, int height, int width) {
+        int randomRowIndex = chooseRandomIndex(height);
+        int randomColIndex = chooseRandomIndex(width);
+
+        return maze.grid()[randomRowIndex][randomColIndex];
+    }
+
+    private void processActiveCells(Maze maze, List<Cell> activeCells) {
+        int activeCellIndex = chooseRandomIndex(activeCells.size());
+        Cell activeCell = activeCells.get(activeCellIndex);
+
+        makeCellAPassage(maze, activeCell);
+
+        List<Cell> neighbors = getUnvisitedNeighbors(maze, activeCell);
+
+        if (neighbors.isEmpty()) {
+            activeCells.remove(activeCellIndex);
+        } else {
+            Cell chosenNeighbor = chooseRandom(neighbors);
+            removeWallGrid(maze, activeCell, chosenNeighbor);
+            activeCells.add(chosenNeighbor);
+            makeCellAPassage(maze, chosenNeighbor);
+        }
+    }
+
+    private void makeCellAPassage(Maze maze, Cell cell) {
+        maze.grid()[cell.getRow()][cell.getCol()].setType(Cell.Type.PASSAGE);
     }
 }

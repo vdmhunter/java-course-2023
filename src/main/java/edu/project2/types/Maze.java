@@ -1,25 +1,32 @@
 package edu.project2.types;
 
-public class Maze {
-    private final int height;
-    private final int width;
-    private final Cell[][] grid;
+import java.util.Arrays;
+import java.util.Objects;
 
-    public Maze(int height, int width, Cell[][] grid) {
-        this.height = height;
-        this.width = width;
-        this.grid = grid;
+public record Maze(int height, int width, Cell[][] grid) {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (!(o instanceof Maze maze)) {
+            return false;
+        }
+
+        return height == maze.height && width == maze.width && Arrays.deepEquals(grid, maze.grid);
     }
 
-    public int getHeight() {
-        return height;
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(height, width);
+        result = 31 * result + Arrays.deepHashCode(grid);
+
+        return result;
     }
 
-    public int getWidth() {
-        return width;
-    }
-
-    public Cell[][] getGrid() {
-        return grid;
+    @Override
+    public String toString() {
+        return "Maze[height=" + height + ", width=" + width + ", grid=" + Arrays.deepToString(grid) + "]";
     }
 }

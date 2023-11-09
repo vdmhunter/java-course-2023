@@ -35,9 +35,6 @@ public class BfsSolver implements Solver {
                     visited
                 );
 
-            availableNeighbors.removeIf(neighbor ->
-                visited[neighbor.getRow()][neighbor.getCol()].getType() == Cell.Type.VISITED);
-
             for (Cell neighbor : availableNeighbors) {
                 cameFrom[neighbor.getRow()][neighbor.getCol()] =
                     maze.grid()[currentCellIndex.row()][currentCellIndex.col()];

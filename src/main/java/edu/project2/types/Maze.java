@@ -1,6 +1,7 @@
 package edu.project2.types;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public record Maze(int height, int width, Cell[][] grid) {
@@ -28,5 +29,11 @@ public record Maze(int height, int width, Cell[][] grid) {
     @Override
     public String toString() {
         return "Maze[height=" + height + ", width=" + width + ", grid=" + Arrays.deepToString(grid) + "]";
+    }
+
+    public List<Cell> getCells() {
+        return Arrays.stream(grid)
+            .flatMap(Arrays::stream)
+            .toList();
     }
 }

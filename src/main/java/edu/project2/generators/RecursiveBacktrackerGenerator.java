@@ -5,7 +5,10 @@ import edu.project2.types.Maze;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.List;
-import static edu.project2.Helper.*;
+import static edu.project2.Helper.chooseRandom;
+import static edu.project2.Helper.createFilledMaze;
+import static edu.project2.Helper.getUnvisitedNeighbors;
+import static edu.project2.Helper.removeWallGrid;
 
 /**
  * The {@code RecursiveBacktrackerGenerator} class implements the {@link Generator} interface

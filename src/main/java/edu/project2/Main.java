@@ -9,11 +9,11 @@ import edu.project2.solvers.Solver;
 import edu.project2.types.Cell;
 import edu.project2.types.Coordinate;
 import edu.project2.types.Maze;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * The {@code Main} class for the Maze Generator program.

@@ -86,9 +86,11 @@ public class Main {
         int choice = scanner.nextInt();
         scanner.nextLine();
 
+        // CHECKSTYLE:OFF: Disable MagicNumber check
         if (choice < 1 || choice > 5) {
             LOGGER.info("Invalid choice. Please select a valid option.\n\n");
         }
+        // CHECKSTYLE:ON: Enable MagicNumber check
 
         return choice;
     }
@@ -102,11 +104,13 @@ public class Main {
     }
 
     private static Solver getSolver(int choice) {
+        // CHECKSTYLE:OFF: Disable MagicNumber check
         return switch (choice) {
             case 3 -> new DfsSolver();
             case 4 -> new BfsSolver();
             default -> null;
         };
+        // CHECKSTYLE:ON: Enable MagicNumber check
     }
 
     private static void printMaze(Maze maze, List<Coordinate> solution) {

@@ -10,7 +10,19 @@ import java.util.Queue;
 import static edu.project2.Helper.createFilledMaze;
 import static edu.project2.Helper.getAvailableNeighbors;
 
+/**
+ * The {@code BfsSolver} class implements the {@link Solver} interface to solve mazes
+ * using the Breadth-First Search (BFS) algorithm.
+ */
 public class BfsSolver implements Solver {
+    /**
+     * Solves a maze from a start coordinate to an end coordinate using the BFS algorithm.
+     *
+     * @param maze  the maze to be solved
+     * @param start the starting coordinate
+     * @param end   the ending coordinate
+     * @return a {@link List} of {@link Coordinate}s representing the path from start to end
+     */
     @Override
     public List<Coordinate> solve(Maze maze, Coordinate start, Coordinate end) {
         var cameFrom = createFilledMaze(maze.height(), maze.width(), Cell.Type.UNDEFINED);

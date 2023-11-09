@@ -10,7 +10,19 @@ import java.util.Queue;
 import static edu.project2.Helper.createFilledMaze;
 import static edu.project2.Helper.getAvailableNeighbors;
 
+/**
+ * The {@code DfsSolver} class implements the {@link Solver} interface
+ * to solve mazes using the Depth-First Search (DFS) algorithm.
+ */
 public class DfsSolver implements Solver {
+    /**
+     * Solves a maze from a start coordinate to an end coordinate using the DFS algorithm.
+     *
+     * @param maze  the maze to be solved
+     * @param start the starting coordinate
+     * @param end   the ending coordinate
+     * @return a {@link List} of {@link Coordinate}s representing the path from start to end
+     */
     @Override
     public List<Coordinate> solve(Maze maze, Coordinate start, Coordinate end) {
         var cameFrom = createFilledMaze(maze.height(), maze.width(), Cell.Type.UNDEFINED);

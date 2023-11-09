@@ -29,10 +29,10 @@ public final class Helper {
         List<Cell> neighbors = new ArrayList<>();
 
         Coordinate[] potentialNeighbors = {
-            new Coordinate(row - 2, col), // West
-            new Coordinate(row + 2, col), // East
-            new Coordinate(row, col + 2), // South
-            new Coordinate(row, col - 2)  // North
+            new Coordinate(row - 2, col), // North
+            new Coordinate(row + 2, col), // South
+            new Coordinate(row, col + 2), // East
+            new Coordinate(row, col - 2)  // West
         };
 
         for (Coordinate neighbor : potentialNeighbors) {
@@ -61,10 +61,10 @@ public final class Helper {
         List<Cell> neighbors = new ArrayList<>();
 
         Coordinate[] potentialNeighbors = {
-            new Coordinate(row - 1, col), // West
-            new Coordinate(row + 1, col), // East
-            new Coordinate(row, col + 1), // South
-            new Coordinate(row, col - 1)  // North
+            new Coordinate(row - 1, col), // North
+            new Coordinate(row + 1, col), // South
+            new Coordinate(row, col + 1), // West
+            new Coordinate(row, col - 1)  // East
         };
 
         for (Coordinate neighbor : potentialNeighbors) {

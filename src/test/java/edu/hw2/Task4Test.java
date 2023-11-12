@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests for Homework 2, Task 4
  */
-public class Task4Test {
+class Task4Test {
     @Test
     @DisplayName("Test StackTraceInspector.callingInfo()")
     void stackTraceInspector_TestCallingInfo() {

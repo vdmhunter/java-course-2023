@@ -14,7 +14,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 /**
  * Tests for Homework 2, Task 2
  */
-public class Task2Test {
+class Task2Test {
     // Happy paths
     @ParameterizedTest(name = "Test {index} - Check area of shape")
     @MethodSource("rectangles")

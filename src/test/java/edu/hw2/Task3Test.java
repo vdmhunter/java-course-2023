@@ -16,7 +16,7 @@ import org.junit.jupiter.api.function.Executable;
 /**
  * Tests for Homework 2, Task 3
  */
-public class Task3Test {
+class Task3Test {
     @Test
     @DisplayName("Test DefaultConnectionManager with StableConnection")
     void defaultConnectionManager_TestWithStableConnection() {

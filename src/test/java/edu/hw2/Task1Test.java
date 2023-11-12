@@ -9,10 +9,10 @@ import static edu.hw2.task1.Expr.*;
 /**
  * Tests for Homework 2, Task 1
  */
-public class Task1Test {
+class Task1Test {
     @Test
     @DisplayName("Evaluate the complex expression provided in the task description")
-    public void Expr_TaskTest() {
+    void Expr_TaskTest() {
         // Arrange
         var two = new Constant(2);
         var four = new Constant(4);

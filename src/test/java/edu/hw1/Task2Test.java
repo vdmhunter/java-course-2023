@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 /**
  * Tests for Homework 1, Task 2
  */
-public class Task2Test {
+class Task2Test {
     @ParameterizedTest(name = "Test {index} - For number {0}, expected digit count is {1}")
     @CsvSource({
         "0,1",

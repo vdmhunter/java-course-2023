@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 /**
  * Tests for Homework 1, Task 1
  */
-public class Task1Test {
+class Task1Test {
     @ParameterizedTest(name = "Test {index} - Converting \"{0}\" to seconds should return {1}")
     @CsvSource({
         "0:0,0",

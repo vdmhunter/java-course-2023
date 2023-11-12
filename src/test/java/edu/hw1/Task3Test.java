@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 /**
  * Tests for Homework 1, Task 3
  */
-public class Task3Test {
+class Task3Test {
     @ParameterizedTest(name = "Test {index} - Array [{0}] nested in array [{1}] should return ''{2}''")
     @CsvSource({
         "'1,2,3,4', '0,6', true",

@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 /**
  * Tests for Homework 1, Task 6
  */
-public class Task6Test {
+class Task6Test {
     @ParameterizedTest(name = "Test {index} - Kaprekar’s constant test for number {0}, expected result is {1}")
     @CsvSource({
         "6621,5",

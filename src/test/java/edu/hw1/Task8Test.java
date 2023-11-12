@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 /**
  * Tests for Homework 1, Task 8
  */
-public class Task8Test {
+class Task8Test {
     @ParameterizedTest(name = "Test {index} - Knight Board Capture Test")
     @MethodSource("provideBoardsForHappyPaths")
     @DisplayName("Happy paths")

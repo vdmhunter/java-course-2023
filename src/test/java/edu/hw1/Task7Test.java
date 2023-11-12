@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 /**
  * Tests for Homework 1, Task 7
  */
-public class Task7Test {
+class Task7Test {
     @ParameterizedTest(name = "Test {index} - rotateLeft: n=0b{0}, shift={1}, expected=0b{2}")
     @CsvSource({
         "10000,1,00001",

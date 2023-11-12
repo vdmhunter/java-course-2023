@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 /**
  * Tests for Homework 1, Task 4
  */
-public class Task4Test {
+class Task4Test {
     @ParameterizedTest(name = "Test {index} - Fixing string \"{0}\" should return \"{1}\"")
     @SuppressWarnings("SpellCheckingInspection")
     @CsvSource({

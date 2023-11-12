@@ -8,6 +8,14 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * The {@code ComputerClubAnalytics} class provides methods for analyzing and calculating
+ * average session durations based on time data in a specified format.
+ * The class is designed to work with a list of string representations of time intervals.
+ * Time intervals must follow the pattern "yyyy-MM-dd, HH:mm - yyyy-MM-dd, HH:mm".
+ * The class includes a static method {@link ComputerClubAnalytics#getAverageTime(List)}
+ * to calculate the average session duration.
+ */
 public final class ComputerClubAnalytics {
     private static final Pattern PATTERN;
     private static final DateTimeFormatter FORMATTER;
@@ -23,6 +31,14 @@ public final class ComputerClubAnalytics {
         FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm");
     }
 
+    /**
+     * Calculates and returns the average session duration based on a list of time intervals.
+     *
+     * @param lines A list of string representations of time intervals.
+     * @return A formatted string representing the average session duration in hours and minutes.
+     * @throws IllegalArgumentException if the input list is empty.
+     * @throws NullPointerException     if the input list is null.
+     */
     public static String getAverageTime(List<String> lines) {
         Objects.requireNonNull(lines);
 

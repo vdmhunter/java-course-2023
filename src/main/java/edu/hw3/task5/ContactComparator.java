@@ -1,10 +1,11 @@
 package edu.hw3.task5;
 
 import java.util.Comparator;
+import org.jetbrains.annotations.NotNull;
 
 /**
- * The {@code ContactComparator} class is a custom comparator for comparing Contact objects.
- * It allows sorting Contact objects based on the last name (or first name if the last name is empty)
+ * The {@code ContactComparator} class is a custom comparator for comparing {@link Contact} objects.
+ * It allows sorting {@link Contact} objects based on the last name (or first name if the last name is empty)
  * in either ascending or descending order.
  */
 public class ContactComparator implements Comparator<Contact> {
@@ -20,7 +21,7 @@ public class ContactComparator implements Comparator<Contact> {
     }
 
     /**
-     * Compares two Contact objects based on their last names (or first names if the last name is empty).
+     * Compares two {@link Contact} objects based on their last names (or first names if the last name is empty).
      *
      * @param contact1 the first {@link Contact} object to compare
      * @param contact2 the second {@link Contact} object to compare
@@ -28,7 +29,7 @@ public class ContactComparator implements Comparator<Contact> {
      *     equal to, or greater than the second argument
      */
     @Override
-    public int compare(Contact contact1, Contact contact2) {
+    public int compare(@NotNull Contact contact1, @NotNull Contact contact2) {
         String key1 = contact1.getLastNameForSort();
         String key2 = contact2.getLastNameForSort();
 

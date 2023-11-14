@@ -1,6 +1,8 @@
 package edu.hw3.task5;
 
 import java.util.Objects;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * The {@code Contact} class represents a contact with a first name and last name.
@@ -19,7 +21,8 @@ public final class Contact {
      *
      * @param fullName the full name of the contact
      */
-    public Contact(String fullName) {
+    @Contract(pure = true)
+    public Contact(@NotNull String fullName) {
         String[] parts = fullName.split(" ");
 
         if (parts.length == 2) {

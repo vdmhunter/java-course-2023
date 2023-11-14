@@ -3,6 +3,8 @@ package edu.hw3.task8;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * The {@code BackwardIterator} class is an iterator that allows iterating over a collection in a backward direction.
@@ -18,7 +20,8 @@ public class BackwardIterator<T> implements Iterator<T> {
      *
      * @param collection the collection to iterate over
      */
-    public BackwardIterator(Collection<T> collection) {
+    @Contract(pure = true)
+    public BackwardIterator(@NotNull Collection<T> collection) {
         this.collection = collection;
         this.index = collection.size() - 1;
     }
@@ -26,7 +29,7 @@ public class BackwardIterator<T> implements Iterator<T> {
     /**
      * Checks if there are more elements to iterate in the backward direction.
      *
-     * @return `true` if there are more elements, `false` otherwise
+     * @return {@code true} if there are more elements, {@code false} otherwise
      */
     @Override
     public boolean hasNext() {

@@ -1,19 +1,19 @@
 package edu.hw3;
 
 import edu.hw3.task8.BackwardIterator;
-import org.junit.jupiter.api.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for Homework 3, Task 8
  */
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class Task8Test {
+class Task8Test {
     @Test
-    @Order(1)
     @DisplayName("Test BackwardIterator with Integer collection")
     void backwardIterator_TesrWithIntegerCollection() {
         // Arrange
@@ -34,24 +34,26 @@ public class Task8Test {
     }
 
     @Test
-    @Order(2)
     @DisplayName("Test BackwardIterator with empty collection")
     void backwardIterator_TestHasNextWithEmptyCollection() {
         // Arrange
         BackwardIterator<Integer> iterator = new BackwardIterator<>(Collections.emptyList());
 
-        // Act and Assert
-        Assertions.assertFalse(iterator.hasNext());
+        // Act
+        boolean actual = iterator.hasNext();
+
+        // Assert
+        Assertions.assertFalse(actual);
     }
 
     @Test
-    @Order(3)
     @DisplayName("Test BackwardIterator with empty collection")
     void backwardIterator_TestNextWithEmptyCollection() {
         // Arrange
+        var expectedType = NoSuchElementException.class;
         BackwardIterator<Integer> iterator = new BackwardIterator<>(Collections.emptyList());
 
-        // Act and Assert
-        Assertions.assertThrows(NoSuchElementException.class, iterator::next);
+        // Act & Assert
+        Assertions.assertThrows(expectedType, iterator::next);
     }
 }

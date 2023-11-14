@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 /**
  * Tests for Homework 3, Task 4
  */
-public class Task4Test {
+class Task4Test {
     @ParameterizedTest(name = "Test {index} - {0} to Roman numeral is: {1}")
     @CsvSource({
         "2,II",
@@ -40,9 +40,10 @@ public class Task4Test {
     @DisplayName("Fail paths")
     void integerToRoman_FailPaths(int num) {
         // Arrange
+        var expectedType = IllegalArgumentException.class;
         Executable executable = () -> IntegerToRomanConverter.intToRoman(num);
 
         // Act & Assert
-        Assertions.assertThrows(IllegalArgumentException.class, executable);
+        Assertions.assertThrows(expectedType, executable);
     }
 }

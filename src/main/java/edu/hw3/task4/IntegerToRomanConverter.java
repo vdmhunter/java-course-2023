@@ -3,15 +3,16 @@ package edu.hw3.task4;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A utility class for converting integer values to Roman numerals.
  */
 public final class IntegerToRomanConverter {
-    private final static List<Pair> INT_TO_ROMAN = new ArrayList<>();
-    private final static int MIN_ALLOWED_VALUE = 1;
-    private final static int MAX_ALLOWED_VALUE = 3999;
-    private final static String ILLEGAL_ARGUMENT_MESSAGE = "The input integer must be between 1 and 3999.";
+    private static final List<Pair> INT_TO_ROMAN = new ArrayList<>();
+    private static final int MIN_ALLOWED_VALUE = 1;
+    private static final int MAX_ALLOWED_VALUE = 3999;
+    private static final String ILLEGAL_ARGUMENT_MESSAGE = "The input integer must be between 1 and 3999.";
 
     static {
         // CHECKSTYLE:OFF: Disable MagicNumber check
@@ -43,7 +44,7 @@ public final class IntegerToRomanConverter {
      * @return The Roman numeral representation of the input integer.
      * @throws IllegalArgumentException if the input integer is outside the allowed range [1 to 3999].
      */
-    public static String intToRoman(int num) {
+    public static @NotNull String intToRoman(int num) {
         if (num < MIN_ALLOWED_VALUE || num > MAX_ALLOWED_VALUE) {
             throw new IllegalArgumentException(ILLEGAL_ARGUMENT_MESSAGE);
         }

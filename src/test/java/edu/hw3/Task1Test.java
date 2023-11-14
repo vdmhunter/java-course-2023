@@ -3,20 +3,15 @@ package edu.hw3;
 import edu.hw3.task1.Encoder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 /**
  * Tests for Homework 3, Task 1
  */
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class Task1Test {
+class Task1Test {
     @ParameterizedTest(name = "Test {index} - Encode \"{0}\" with Atbash should return \"{1}\"")
-    @Order(1)
     @CsvSource({
         "Hello world!,Svool dliow!",
         "Any fool can write code that a computer can understand. " +
@@ -35,16 +30,22 @@ public class Task1Test {
     }
 
     @Test
-    @Order(2)
     @DisplayName("Test when input string is null")
     void atbash_InputStringIsNull() {
-        Assertions.assertThrows(NullPointerException.class, () -> Encoder.atbash(null));
+        // Arrange
+        var expectedType = NullPointerException.class;
+
+        // Act & Assert
+        Assertions.assertThrows(expectedType, () -> Encoder.atbash(null));
     }
 
     @Test
-    @Order(3)
     @DisplayName("Test when input string is empty")
     void atbash_InputStringIsEmpty() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> Encoder.atbash(""));
+        // Arrange
+        var expectedType = IllegalArgumentException.class;
+
+        // Act & Assert
+        Assertions.assertThrows(expectedType, () -> Encoder.atbash(""));
     }
 }

@@ -1,6 +1,8 @@
 package edu.hw3.task5;
 
 import java.util.Arrays;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * The {@code ContactSorter} class provides methods for sorting an array of {@link Contact} objects
@@ -18,7 +20,8 @@ public final class ContactSorter {
      * @param order the sorting order, use "ASC" for ascending and "DESC" for descending
      * @return a new array of {@link Contact} objects sorted according to the specified order
      */
-    public static Contact[] parseContacts(String[] names, String order) {
+    @Contract("null, _ -> new")
+    public static Contact @NotNull [] parseContacts(String[] names, String order) {
         if (names == null || names.length == 0) {
             return new Contact[0];
         }

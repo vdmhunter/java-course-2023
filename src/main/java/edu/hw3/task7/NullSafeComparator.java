@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 /**
  * The {@code NullSafeComparator} class is a generic comparator that allows comparing objects
- * with consideration for null values. It decorates an existing comparator to handle null values.
+ * with consideration for {@code null} values. It decorates an existing comparator to handle {@code null} values.
  *
  * @param <K> the type of objects to be compared
  */

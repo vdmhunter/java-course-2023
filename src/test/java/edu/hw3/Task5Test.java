@@ -6,10 +6,7 @@ import java.util.stream.Stream;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -17,10 +14,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 /**
  * Tests for Homework 3, Task 5
  */
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class Task5Test {
+class Task5Test {
     @ParameterizedTest(name = "Test {index} - Sorting contacts: \"{0}\", order: {1}")
-    @Order(1)
     @MethodSource("provideObjectsForHappyPaths")
     @DisplayName("Happy paths")
     void parseContacts_HappyPaths(String[] names, String order, Contact[] expected) {
@@ -32,7 +27,6 @@ public class Task5Test {
     }
 
     @Test
-    @Order(2)
     @DisplayName("Comparing object to itself should return true")
     void contact_SelfReferenceShouldReturnTrue() {
         // Arrange
@@ -43,11 +37,11 @@ public class Task5Test {
         boolean b = contact.equals(contact);
 
         // Assert
+        //noinspection ConstantValue
         Assertions.assertTrue(b);
     }
 
     @Test
-    @Order(3)
     @DisplayName("Comparing object to null should return false")
     void contact_NullObjectShouldReturnFalse() {
         // Arrange
@@ -58,11 +52,11 @@ public class Task5Test {
         boolean b = contact == null;
 
         // Assert
+        //noinspection ConstantValue
         Assertions.assertFalse(b);
     }
 
     @Test
-    @Order(4)
     @DisplayName("Comparing to a different class should return false")
     void contact_DifferentClassShouldReturnFalse() {
         // Arrange
@@ -79,7 +73,6 @@ public class Task5Test {
     }
 
     @Test
-    @Order(5)
     @DisplayName("Comparing objects with the same fields should return true")
     void contact_SameFieldsShouldReturnTrue() {
         // Arrange
@@ -94,7 +87,6 @@ public class Task5Test {
     }
 
     @Test
-    @Order(6)
     @DisplayName("Comparing objects with different first names should return false")
     void contact_DifferentFirstNamesShouldReturnFalse() {
         // Arrange
@@ -109,7 +101,6 @@ public class Task5Test {
     }
 
     @Test
-    @Order(7)
     @DisplayName("Comparing objects with different last names should return false")
     void contact_DifferentLastNamesShouldReturnFalse() {
         // Arrange
@@ -124,7 +115,6 @@ public class Task5Test {
     }
 
     @Test()
-    @Order(8)
     @DisplayName("Test for Contact's method hashCode")
     void parseContacts_hashCodeTest() {
         // Arrange

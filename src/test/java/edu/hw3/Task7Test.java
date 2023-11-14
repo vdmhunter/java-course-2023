@@ -4,18 +4,13 @@ import edu.hw3.task7.NullSafeComparator;
 import java.util.TreeMap;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
 
 /**
  * Tests for Homework 3, Task 7
  */
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class Task7Test {
+class Task7Test {
     @Test()
-    @Order(1)
     @DisplayName("Test adding null key to TreeMap with NullSafeComparator")
     void nullSafeComparator_containsNullKey() {
         // Arrange
@@ -23,16 +18,17 @@ public class Task7Test {
 
         // Act
         tree.put(null, "test");
+        boolean actual = tree.containsKey(null);
 
         // Assert
-        Assertions.assertTrue(tree.containsKey(null));
+        Assertions.assertTrue(actual);
     }
 
     @Test
-    @Order(2)
     @DisplayName("Compare with both null keys")
     void nullSafeComparator_testCompareBothNull() {
         // Arrange
+        int expected = 0;
         NullSafeComparator<String> comparator = new NullSafeComparator<>(String::compareTo);
 
         // Act
@@ -40,63 +36,63 @@ public class Task7Test {
         int actual = comparator.compare(null, null);
 
         // Assert
-        Assertions.assertEquals(0, actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    @Order(3)
     @DisplayName("Compare with first key null")
     void nullSafeComparator_testCompareFirstNull() {
         // Arrange
+        int expected = -1;
         NullSafeComparator<String> comparator = new NullSafeComparator<>(String::compareTo);
 
         // Act
-        int result = comparator.compare(null, "test");
+        int actual = comparator.compare(null, "test");
 
         // Assert
-        Assertions.assertEquals(-1, result);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    @Order(4)
     @DisplayName("Compare with second key null")
     void nullSafeComparator_testCompareSecondNull() {
         // Arrange
+        int expected = 1;
         NullSafeComparator<String> comparator = new NullSafeComparator<>(String::compareTo);
 
         // Act
-        int result = comparator.compare("test", null);
+        int actual = comparator.compare("test", null);
 
         // Assert
-        Assertions.assertEquals(1, result);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    @Order(5)
     @DisplayName("Compare with both keys not null")
     void nullSafeComparator_testCompareBothNotNull() {
         // Arrange
+        int expected = -1;
         NullSafeComparator<String> comparator = new NullSafeComparator<>(String::compareTo);
 
         // Act
-        int result = comparator.compare("apple", "banana");
+        int actual = comparator.compare("apple", "banana");
 
         // Assert
-        Assertions.assertEquals(-1, result);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    @Order(6)
     @DisplayName("Compare with both keys not null and equal")
     void nullSafeComparator_testCompareBothNotNullEqual() {
         // Arrange
+        int expected = 0;
         NullSafeComparator<String> comparator = new NullSafeComparator<>(String::compareTo);
 
         // Act
         @SuppressWarnings("EqualsWithItself")
-        int result = comparator.compare("apple", "apple");
+        int actual = comparator.compare("apple", "apple");
 
         // Assert
-        Assertions.assertEquals(0, result);
+        Assertions.assertEquals(expected, actual);
     }
 }

@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * The {@code Encoder} class provides utility method {@link Encoder#atbash(String)}
  * for encoding strings using the Atbash cipher.
  */
 public final class Encoder {
-    private final static int LATIN_ALPHABET_LETTER_COUNT = 26;
+    private static final int LATIN_ALPHABET_LETTER_COUNT = 26;
 
     private Encoder() {
     }
@@ -21,9 +22,9 @@ public final class Encoder {
      * @param str the string to be encoded
      * @return the encoded string
      * @throws IllegalArgumentException if the input string is empty
-     * @throws NullPointerException     if the input string is null
+     * @throws NullPointerException     if the input string is {@code null}
      */
-    public static String atbash(String str) {
+    public static @NotNull String atbash(String str) {
         Objects.requireNonNull(str);
 
         if (str.isEmpty()) {
@@ -71,7 +72,7 @@ public final class Encoder {
      * Checks if a character is a letter in the Latin alphabet.
      *
      * @param ch the character to be checked
-     * @return true if the character is a letter in the Latin alphabet, false otherwise
+     * @return {@code true} if the character is a letter in the Latin alphabet, {@code false} otherwise
      */
     private static boolean isLatinAlphabet(char ch) {
         return Pattern.matches("[a-zA-Z]", Character.toString(ch));

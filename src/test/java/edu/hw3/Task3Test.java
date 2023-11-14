@@ -10,10 +10,7 @@ import java.util.stream.Stream;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -21,30 +18,37 @@ import org.junit.jupiter.params.provider.MethodSource;
 /**
  * Tests for Homework 3, Task 3
  */
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class Task3Test {
+class Task3Test {
     @ParameterizedTest(name = "Test {index} - Generate a frequency map for {0}")
-    @Order(1)
     @MethodSource("provideObjectsForHappyPaths")
     @DisplayName("Happy paths")
     void freqDict_HappyPaths(List<Object> list, Map<Object, Integer> expected) {
+        // Act
         Map<Object, Integer> actual = ItemCounter.freqDict(list);
 
+        // Assert
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    @Order(2)
     @DisplayName("Test when input list is null")
     void freqDict_InputStringIsNull() {
-        Assertions.assertThrows(NullPointerException.class, () -> ItemCounter.freqDict(null));
+        // Arrange
+        var expectedType = NullPointerException.class;
+
+        // Act & Assert
+        Assertions.assertThrows(expectedType, () -> ItemCounter.freqDict(null));
     }
 
     @Test
-    @Order(3)
     @DisplayName("Test when input list is empty")
     void freqDict_InputStringIsEmpty() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> ItemCounter.freqDict(new ArrayList<>()));
+        // Arrange
+        var expectedType = IllegalArgumentException.class;
+        var emptyArrayList = new ArrayList<>();
+
+        // Act & Assert
+        Assertions.assertThrows(expectedType, () -> ItemCounter.freqDict(emptyArrayList));
     }
 
     private static @NotNull Stream<Arguments> provideObjectsForHappyPaths() {

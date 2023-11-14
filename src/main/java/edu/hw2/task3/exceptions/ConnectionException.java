@@ -3,7 +3,8 @@ package edu.hw2.task3.exceptions;
 import java.io.Serial;
 
 /**
- * This class represents a custom exception that is thrown when there is a problem with a connection.
+ * The {@code ConnectionException} class represents a custom exception that is thrown
+ * when there is a problem with a connection.
  * It extends the {@link RuntimeException} class, meaning it is an unchecked exception.
  * Unchecked exceptions are not checked at compile-time, but at runtime.
  */

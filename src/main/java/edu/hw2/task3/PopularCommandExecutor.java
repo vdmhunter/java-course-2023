@@ -25,7 +25,7 @@ public class PopularCommandExecutor {
     public PopularCommandExecutor(ConnectionManager manager, int maxAttempts) {
         Objects.requireNonNull(manager);
 
-        if (!(maxAttempts > 0)) {
+        if (maxAttempts <= 0) {
             throw new IllegalArgumentException("The input integer 'maxAttempts' must be greater than 0.");
         }
 
@@ -58,8 +58,6 @@ public class PopularCommandExecutor {
                         + maxAttempts
                         + " attempts due to connection issues.", e);
                 }
-            } catch (Exception e) {
-                throw new RuntimeException(e);
             }
         }
     }

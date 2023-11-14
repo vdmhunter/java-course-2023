@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 /**
- * The Task3 class provides a utility method {@link Task3#isNestable(int[], int[])}
+ * The {@code Task3} class provides a utility method {@link Task3#isNestable(int[], int[])}
  * to check if one array can be nested into another array.
  */
 public final class Task3 {
@@ -19,10 +19,10 @@ public final class Task3 {
      * <li>The maximum value in a1 is less than the maximum value in a2.</li>
      * </ul>
      *
-     * @param a1 The first array, must not be null.
-     * @param a2 The second array, must not be null.
-     * @return true if a1 can be nested inside a2, false otherwise.
-     * @throws NullPointerException if either input array is null.
+     * @param a1 The first array, must not be {@code null}.
+     * @param a2 The second array, must not be {@code null}.
+     * @return {@code true} if a1 can be nested inside a2, {@code false} otherwise.
+     * @throws NullPointerException if either input array is {@code null}.
      */
     public static boolean isNestable(int[] a1, int[] a2) {
         Objects.requireNonNull(a1);

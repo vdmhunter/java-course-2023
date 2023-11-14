@@ -23,8 +23,10 @@ class Task1Test {
     })
     @DisplayName("Happy paths")
     void minutesToSeconds_HappyPaths(String str, int expected) {
+        // Act
         int actual = Task1.minutesToSeconds(str);
 
+        // Assert
         Assertions.assertEquals(expected, actual);
     }
 
@@ -43,15 +45,23 @@ class Task1Test {
     })
     @DisplayName("Fail paths")
     void minutesToSeconds_FailPaths(String str) {
-        int actual = Task1.minutesToSeconds(str);
+        // Arrange
         int expected = -1;
 
+        // Act
+        int actual = Task1.minutesToSeconds(str);
+
+        // Assert
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     @DisplayName("Test when input string is null")
     void minutesToSeconds_InputStringIsNull() {
-        Assertions.assertThrows(NullPointerException.class, () -> Task1.minutesToSeconds(null));
+        // Arrange
+        var expectedType = NullPointerException.class;
+
+        // Act & Assert
+        Assertions.assertThrows(expectedType, () -> Task1.minutesToSeconds(null));
     }
 }

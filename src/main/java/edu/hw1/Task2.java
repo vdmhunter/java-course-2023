@@ -1,11 +1,11 @@
 package edu.hw1;
 
 /**
- * The Task2 class provides a method {@link Task2#countDigits(int)}
+ * The {@code Task2} class provides a method {@link Task2#countDigits(int)}
  * which returns the number of digits in the decimal form of a number.
  */
 public final class Task2 {
-    private final static int BASE = 10;
+    private static final int BASE = 10;
 
     private Task2() {
     }

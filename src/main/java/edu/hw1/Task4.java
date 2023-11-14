@@ -3,7 +3,7 @@ package edu.hw1;
 import java.util.Objects;
 
 /**
- * The Task4 class provides a method {@link Task4#fixString(String)}
+ * The {@code Task4} class provides a method {@link Task4#fixString(String)}
  * to fix strings where every pair of characters are swapped.
  */
 public final class Task4 {
@@ -16,10 +16,9 @@ public final class Task4 {
      *
      * @param str A non-null and not empty string to be fixed.
      * @return A new string where every pair of characters in the input string are swapped.
-     * @throws NullPointerException     if the input string is null.
+     * @throws NullPointerException     if the input string is {@code null}.
      * @throws IllegalArgumentException if the input string is empty.
      */
-
     public static String fixString(String str) {
         Objects.requireNonNull(str);
 

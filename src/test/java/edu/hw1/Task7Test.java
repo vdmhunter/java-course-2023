@@ -20,10 +20,14 @@ class Task7Test {
     })
     @DisplayName("Happy paths for rotateLeft")
     void rotateLeft_HappyPaths(String nStr, int shift, String expectedStr) {
+        // Arrange
         int n = Integer.parseInt(nStr, 2);
         int expected = Integer.parseInt(expectedStr, 2);
+
+        // Act
         int actual = Task7.rotateLeft(n, shift);
 
+        // Assert
         Assertions.assertEquals(expected, actual);
     }
 
@@ -38,10 +42,14 @@ class Task7Test {
     })
     @DisplayName("Happy paths for rotateRight")
     void rotateRight_HappyPaths(String nStr, int shift, String expectedStr) {
+        // Arrange
         int n = Integer.parseInt(nStr, 2);
         int expected = Integer.parseInt(expectedStr, 2);
+
+        // Act
         int actual = Task7.rotateRight(n, shift);
 
+        // Assert
         Assertions.assertEquals(expected, actual);
     }
 
@@ -54,7 +62,11 @@ class Task7Test {
     })
     @DisplayName("Fail paths for rotateLeft")
     void rotateLeft_FailPaths(int num, int shift) {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> Task7.rotateLeft(num, shift));
+        // Arrange
+        var expectedType = IllegalArgumentException.class;
+
+        // Act & Assert
+        Assertions.assertThrows(expectedType, () -> Task7.rotateLeft(num, shift));
     }
 
     @ParameterizedTest(name = "Test {index} - Testing input: n={0}, shift={1} expecting IllegalArgumentException")
@@ -66,6 +78,10 @@ class Task7Test {
     })
     @DisplayName("Fail paths for rotateRight")
     void rotateRight_FailPaths(int num, int shift) {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> Task7.rotateRight(num, shift));
+        // Arrange
+        var expectedType = IllegalArgumentException.class;
+
+        // Act & Assert
+        Assertions.assertThrows(expectedType, () -> Task7.rotateRight(num, shift));
     }
 }

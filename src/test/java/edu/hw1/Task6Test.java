@@ -23,8 +23,10 @@ class Task6Test {
     })
     @DisplayName("Happy paths")
     void countK_HappyPaths(int num, int expected) {
+        // Act
         int actual = Task6.countK(num);
 
+        // Assert
         Assertions.assertEquals(expected, actual);
     }
 
@@ -38,6 +40,10 @@ class Task6Test {
     })
     @DisplayName("Fail paths")
     void countK_FailPaths(int num) {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> Task6.countK(num));
+        // Arrange
+        var expectedType = IllegalArgumentException.class;
+
+        // Act & Assert
+        Assertions.assertThrows(expectedType, () -> Task6.countK(num));
     }
 }

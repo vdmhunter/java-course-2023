@@ -21,8 +21,10 @@ class Task2Test {
     })
     @DisplayName("Happy paths")
     void countDigits_HappyPaths(int num, int expected) {
+        // Act
         int actual = Task2.countDigits(num);
 
+        // Assert
         Assertions.assertEquals(expected, actual);
     }
 }

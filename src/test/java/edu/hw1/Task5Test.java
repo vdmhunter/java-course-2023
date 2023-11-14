@@ -20,8 +20,10 @@ class Task5Test {
     })
     @DisplayName("Happy paths")
     void isPalindromeDescendant_HappyPaths(int num, boolean expected) {
+        // Act
         boolean actual = Task5.isPalindromeDescendant(num);
 
+        // Assert
         Assertions.assertEquals(expected, actual);
     }
 
@@ -35,6 +37,10 @@ class Task5Test {
     })
     @DisplayName("Fail paths")
     void isPalindromeDescendant_FailPaths(int num) {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> Task5.isPalindromeDescendant(num));
+        // Arrange
+        var expectedType = IllegalArgumentException.class;
+
+        // Act & Assert
+        Assertions.assertThrows(expectedType, () -> Task5.isPalindromeDescendant(num));
     }
 }

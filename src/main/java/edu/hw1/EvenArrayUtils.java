@@ -5,7 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public final class EvenArrayUtils {
-    private final static Logger LOGGER = LogManager.getLogger();
+    private static final Logger LOGGER = LogManager.getLogger();
 
     private EvenArrayUtils() {
     }
@@ -25,11 +25,13 @@ public final class EvenArrayUtils {
 
         int[] result = new int[count];
         int idx = 0;
+
         for (int number : numbers) {
             if (number % 2 == 0) {
                 result[idx++] = number;
             }
         }
+
         return result;
     }
 
@@ -44,11 +46,13 @@ public final class EvenArrayUtils {
         Objects.requireNonNull(numbers);
 
         int count = 0;
+
         for (int number : numbers) {
             if (number % 2 == 0) {
                 ++count;
             }
         }
+
         return count;
     }
 }

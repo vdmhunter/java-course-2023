@@ -4,13 +4,13 @@ import java.util.Arrays;
 import java.util.regex.Pattern;
 
 /**
- * The Task6 class provides a method {@link Task6#countK(int)}
+ * The {@code Task6} class provides a method {@link Task6#countK(int)}
  * which calculates the number of iterations required to reach the Kaprekar's constant.
  */
 public final class Task6 {
-    private final static int KAPREKAR_NUMBER = 6174;
-    private final static int THOUSAND = 1000;
-    private final static Pattern PATTERN;
+    private static final int KAPREKAR_NUMBER = 6174;
+    private static final int THOUSAND = 1000;
+    private static final Pattern PATTERN;
 
     private Task6() {
     }
@@ -48,8 +48,8 @@ public final class Task6 {
      * Method to sort the digits of a number in ascending or descending order.
      *
      * @param num       The number to be sorted.
-     * @param ascending A boolean flag indicating the sort order. If true, the number is sorted in ascending order.
-     *                  If false, the number is sorted in descending order.
+     * @param ascending A boolean flag indicating the sort order. If {@code true}, the number is sorted
+     *                  in ascending order. If {@code false}, the number is sorted in descending order.
      * @return The sorted number.
      */
     private static int sort(int num, boolean ascending) {

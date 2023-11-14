@@ -21,20 +21,30 @@ class Task4Test {
     })
     @DisplayName("Happy paths")
     void fixString_HappyPaths(String str, String expected) {
+        // Act
         String actual = Task4.fixString(str);
 
+        // Assert
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     @DisplayName("Test when input string is null")
     void fixString_InputStringIsNull() {
-        Assertions.assertThrows(NullPointerException.class, () -> Task4.fixString(null));
+        // Arrange
+        var expectedType = NullPointerException.class;
+
+        // Act & Assert
+        Assertions.assertThrows(expectedType, () -> Task4.fixString(null));
     }
 
     @Test
     @DisplayName("Test when input string is empty")
     void fixString_InputStringIsEmpty() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> Task4.fixString(""));
+        // Arrange
+        var expectedType = IllegalArgumentException.class;
+
+        // Act & Assert
+        Assertions.assertThrows(expectedType, () -> Task4.fixString(""));
     }
 }

@@ -10,6 +10,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import static edu.hw6.task4.OutputStreamCompositionManager.write;
 
+/**
+ * Tests for Homework 6, Task 4
+ */
 class Task4Test {
     @TempDir Path tempDir;
 

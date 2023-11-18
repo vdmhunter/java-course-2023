@@ -1,4 +1,4 @@
-package edu.hw6;
+package edu.common;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;

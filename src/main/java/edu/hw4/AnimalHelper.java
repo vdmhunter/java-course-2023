@@ -26,7 +26,7 @@ public final class AnimalHelper {
     public static List<Animal> task1SortAnimalsByHeight(List<Animal> animals) {
         return animals.stream()
             .sorted(Comparator.comparingInt(Animal::height))
-            .collect(Collectors.toList());
+            .toList();
     }
 
     /**
@@ -40,7 +40,7 @@ public final class AnimalHelper {
         return animals.stream()
             .sorted(Comparator.comparingInt(Animal::weight).reversed())
             .limit(k)
-            .collect(Collectors.toList());
+            .toList();
     }
 
     /**
@@ -159,7 +159,7 @@ public final class AnimalHelper {
     public static List<Animal> task10FindAnimalsWithAgeNotMatchingPaws(List<Animal> animals) {
         return animals.stream()
             .filter(animal -> animal.age() != animal.paws())
-            .collect(Collectors.toList());
+            .toList();
     }
 
     /**
@@ -173,7 +173,7 @@ public final class AnimalHelper {
 
         return animals.stream()
             .filter(animal -> (animal.bites() == null || animal.bites()) && animal.height() > height)
-            .collect(Collectors.toList());
+            .toList();
     }
 
     /**
@@ -197,7 +197,7 @@ public final class AnimalHelper {
     public static List<Animal> task13FindAnimalsWithNamesConsistingOfMoreThanTwoWords(List<Animal> animals) {
         return animals.stream()
             .filter(animal -> animal.name().split(" ").length > 2)
-            .collect(Collectors.toList());
+            .toList();
     }
 
     /**
@@ -237,7 +237,7 @@ public final class AnimalHelper {
             .sorted(Comparator.comparing(Animal::type)
                 .thenComparing(Animal::sex)
                 .thenComparing(Animal::name))
-            .collect(Collectors.toList());
+            .toList();
     }
 
     /**

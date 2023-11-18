@@ -4,11 +4,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class AnimalTest {
+class AnimalTest {
 
     @Test
     @DisplayName("Animal constructor test")
-    public void animal_Test() {
+    void animal_Test() {
         // Arrange
         Animal cat = new Animal("Tom", Animal.Type.CAT, Animal.Sex.M, 3, 25, 5, false);
         Animal dog = new Animal("Max", Animal.Type.CAT, Animal.Sex.M, 3, 25, 5, false);

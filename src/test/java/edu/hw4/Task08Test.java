@@ -11,7 +11,7 @@ import static org.mockito.Mockito.when;
  * Tests for Homework 4, Task 8
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class Task08Test {
+class Task08Test {
     private AutoCloseable closeable;
 
     @Mock

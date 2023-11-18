@@ -13,7 +13,7 @@ import static org.mockito.Mockito.when;
 /**
  * Tests for Homework 4, Task 12
  */
-public class Task12Test {
+class Task12Test {
     private AutoCloseable closeable;
 
     @Mock

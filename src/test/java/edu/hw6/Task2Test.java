@@ -18,10 +18,9 @@ class Task2Test {
     @Test
     @DisplayName("Test cloneFile operation in FileCloner")
     void fileCloner_TestCloneFile() {
-        // Arrange
-        Path originalFile = tempDir.resolve("original.txt");
-
         try {
+            // Arrange
+            Path originalFile = tempDir.resolve("original.txt");
             Files.createFile(originalFile);
 
             // Act

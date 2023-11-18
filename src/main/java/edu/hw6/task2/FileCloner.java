@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * The {@code FileCloner} class provides a method to clone a file with a new name.
  */
-public class FileCloner {
+public final class FileCloner {
     private static final Logger LOGGER = LogManager.getLogger();
 
     private FileCloner() {
@@ -39,9 +39,9 @@ public class FileCloner {
 
             Files.copy(filePath, filePath.resolveSibling(copyFileName), StandardCopyOption.REPLACE_EXISTING);
 
-            LOGGER.info("The file has been successfully copied: {}", copyFileName);
+            LOGGER.info("The file has been successfully copied: {}\n", copyFileName);
         } catch (IOException e) {
-            LOGGER.error("Error when copying a file: {}", e.getMessage());
+            LOGGER.error("Error when copying a file: {}\n", e.getMessage());
 
             throw e;
         }

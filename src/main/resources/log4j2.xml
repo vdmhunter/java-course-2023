@@ -31,6 +31,9 @@
         <Logger name="edu.project1" level="TRACE" additivity="false">
             <AppenderRef ref="STDOUT_PLAIN_MINIMAL"/>
         </Logger>
+        <Logger name="edu.project3" level="TRACE" additivity="false">
+            <AppenderRef ref="STDOUT_PLAIN_MINIMAL"/>
+        </Logger>
 
         <Root level="INFO">
             <AppenderRef ref="STDOUT_PLAIN"/>

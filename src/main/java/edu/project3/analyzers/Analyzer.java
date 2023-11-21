@@ -1,8 +1,8 @@
 package edu.project3.analyzers;
 
+import edu.common.Generated;
 import java.util.List;
 import java.util.Map;
-import edu.common.Generated;
 import org.jetbrains.annotations.NotNull;
 import static edu.project3.report.ReportGenerator.createTwoColumnRow;
 

@@ -10,7 +10,6 @@ import java.time.OffsetDateTime;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
@@ -27,23 +26,21 @@ public class ProjectSettings {
         Options options = getOptions();
 
         CommandLineParser parser = new DefaultParser();
-        HelpFormatter formatter = new HelpFormatter();
         CommandLine cmd;
 
         try {
             cmd = parser.parse(options, args);
         } catch (ParseException e) {
-            formatter.printHelp("Nginx log files analysis", options);
-            System.exit(1);
-
-            return;
+            throw new IllegalArgumentException(e);
         }
 
         // CHECKSTYLE:OFF: Disable MultipleStringLiterals check
         source = convert(cmd.getOptionValue("path"));
-        from = OffsetDateTime.parse(cmd.getOptionValue("from"));
-        to = OffsetDateTime.parse(cmd.getOptionValue("to"));
-        format = ReportFormat.valueOf(cmd.getOptionValue("format").toUpperCase());
+        from = cmd.getOptionValue("from") != null ? OffsetDateTime.parse(cmd.getOptionValue("from")) : null;
+        to = cmd.getOptionValue("to") != null ? OffsetDateTime.parse(cmd.getOptionValue("to")) : null;
+        format = cmd.getOptionValue("format") != null
+                ? ReportFormat.valueOf(cmd.getOptionValue("format").toUpperCase())
+                : ReportFormat.MARKDOWN;
         // CHECKSTYLE:ON: Disable MultipleStringLiterals check
     }
 

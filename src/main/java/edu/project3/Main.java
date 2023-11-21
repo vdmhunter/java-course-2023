@@ -12,9 +12,12 @@ public final class Main {
     }
 
     public static void main(String[] args) {
-        Processor nginxLogProcessor = new Processor(args);
+
+        String[] a = {"--path", "*nginx*.txt", "--format", "adoc"};
+
+        Processor nginxLogProcessor = new Processor(a);
         Report result = nginxLogProcessor.processAllAnalyzers();
 
-        LOGGER.info(result);
+        LOGGER.info(result.content());
     }
 }

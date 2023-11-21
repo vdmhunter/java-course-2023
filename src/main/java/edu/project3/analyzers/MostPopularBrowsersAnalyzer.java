@@ -1,6 +1,5 @@
 package edu.project3.analyzers;
 
-import edu.common.Generated;
 import edu.project3.parser.NginxLogEntry;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,25 +7,21 @@ import java.util.List;
 import java.util.Map;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import static edu.project3.report.ReportGenerator.createTwoColumnRow;
 
-public final class MostPopularResourcesAnalyzer {
-    private static final int NUMBER_OF_PARTS = 3;
-    private static final int LIMIT = 5;
+public final class MostPopularBrowsersAnalyzer {
+    private static final int LIMIT = 10;
 
-    private MostPopularResourcesAnalyzer() {
+    private MostPopularBrowsersAnalyzer() {
     }
 
     public static @NotNull String analyze(@NotNull List<NginxLogEntry> nginxLogItems) {
         Map<String, Long> resourceCount = new HashMap<>();
 
         for (NginxLogEntry entry : nginxLogItems) {
-            String resource = getResourceFromRequest(entry.request());
+            String browser = detectBrowser(entry.httpUserAgent());
 
-            if (resource != null) {
-                resourceCount.put(resource, resourceCount.getOrDefault(resource, 0L) + 1L);
-            }
+            resourceCount.put(browser, resourceCount.getOrDefault(browser, 0L) + 1L);
         }
 
         List<Map.Entry<String, Long>> sortedEntries = new ArrayList<>(resourceCount.entrySet());
@@ -47,11 +42,27 @@ public final class MostPopularResourcesAnalyzer {
         return builder;
     }
 
-    @Generated
     @Contract(pure = true)
-    private static @Nullable String getResourceFromRequest(@NotNull String request) {
-        String[] parts = request.split(" ");
+    public static @NotNull String detectBrowser(@NotNull String userAgent) {
+        var ua = userAgent.toLowerCase();
+        String browser;
 
-        return (parts.length == NUMBER_OF_PARTS) ? parts[1] : null;
+        if (ua.contains("msie") || ua.contains("trident")) {
+            browser = "Internet Explorer";
+        } else if (ua.contains("edge")) {
+            browser = "Microsoft Edge";
+        } else if (ua.contains("opr") || ua.contains("opera")) {
+            browser = "Opera";
+        } else if (ua.contains("chrome")) {
+            browser = "Google Chrome";
+        } else if (ua.contains("safari")) {
+            browser = "Safari";
+        } else if (ua.contains("firefox")) {
+            browser = "Firefox";
+        } else {
+            browser = "Unknown Browser";
+        }
+
+        return browser;
     }
 }

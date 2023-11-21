@@ -1,5 +1,6 @@
 package edu.project3.provider;
 
+import edu.common.Generated;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,19 +15,13 @@ import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
 public class NginxLogsProvider {
-    private static final Path LOG_FILES_PATH = Path.of("src/main/java/edu/project3/");
+    private static final Path LOG_FILES_PATH = Path.of("src/main/resources/project3/");
 
     private NginxLogsProvider() {
     }
 
-    public static List<Path> getLogFiles(@NotNull PathMatcher pathMatcher) {
-        try (var fileStream = Files.walk(LOG_FILES_PATH)) {
-            return fileStream
-                .filter(pathMatcher::matches)
-                .toList();
-        } catch (IOException ignored) {
-            return Collections.emptyList();
-        }
+    public static @NotNull List<Path> getLogFiles(@NotNull PathMatcher pathMatcher) {
+        return getPaths(pathMatcher);
     }
 
     public static @NotNull List<String> readLogLinesFromUrl(@NotNull URL url) {
@@ -44,6 +39,18 @@ public class NginxLogsProvider {
 
                 return logLines;
             }
+        } catch (IOException ignored) {
+            return Collections.emptyList();
+        }
+    }
+
+    @NotNull
+    @Generated
+    private static List<Path> getPaths(@NotNull PathMatcher pathMatcher) {
+        try (var fileStream = Files.walk(LOG_FILES_PATH)) {
+            return fileStream
+                .filter(pathMatcher::matches)
+                .toList();
         } catch (IOException ignored) {
             return Collections.emptyList();
         }

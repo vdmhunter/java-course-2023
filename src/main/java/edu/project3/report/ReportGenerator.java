@@ -7,6 +7,8 @@ import org.jetbrains.annotations.NotNull;
 public final class ReportGenerator {
     private static final String COLUMN_SEPARATOR = ">-<";
     private static final String ROW_SEPARATOR = System.lineSeparator();
+    private static final String MARKDOWN_SECTION_TITLE = "#### ";
+    private static final String ADOC_SECTION_TITLE = ".";
     private static final String ADOC_TABLE_SIGNATURE = "|===";
 
     private ReportGenerator() {
@@ -20,8 +22,9 @@ public final class ReportGenerator {
     }
 
     @Contract(pure = true)
-    public static @NotNull String createSingleColumnRow(String columnData) {
-        return columnData + ROW_SEPARATOR;
+    public static @NotNull String createSectionTitle(String header) {
+        return header
+            + ROW_SEPARATOR;
     }
 
     @Contract(pure = true)
@@ -48,13 +51,16 @@ public final class ReportGenerator {
 
         for (String table : tableData) {
             String[] rows = table.split(ROW_SEPARATOR);
-            reportBuilder.append(createMarkdownHeader(rows[0]));
+            reportBuilder.append(MARKDOWN_SECTION_TITLE);
+            reportBuilder.append(rows[0]);
+            reportBuilder.append(createSeparator());
+            reportBuilder.append(createMarkdownHeader(rows[1]));
 
-            for (int rowIndex = 1; rowIndex < rows.length; ++rowIndex) {
+            for (int rowIndex = 2; rowIndex < rows.length; rowIndex++) {
                 reportBuilder.append(createMarkdownRow(rows[rowIndex]));
             }
 
-            reportBuilder.append(createSeparator());
+            reportBuilder.append(ROW_SEPARATOR);
         }
 
         return new Report(reportBuilder.toString());
@@ -66,13 +72,16 @@ public final class ReportGenerator {
 
         for (String table : tableData) {
             String[] rows = table.split(ROW_SEPARATOR);
-            reportBuilder.append(createAdocHeader(rows[0]));
+            reportBuilder.append(ADOC_SECTION_TITLE);
+            reportBuilder.append(rows[0]);
+            reportBuilder.append(createSeparator());
+            reportBuilder.append(createAdocHeader(rows[1]));
 
-            for (int rowIndex = 1; rowIndex < rows.length; ++rowIndex) {
+            for (int rowIndex = 2; rowIndex < rows.length; ++rowIndex) {
                 reportBuilder.append(createAdocRow(rows[rowIndex]));
             }
 
-            reportBuilder.append(ADOC_TABLE_SIGNATURE).append(createSeparator());
+            reportBuilder.append(ADOC_TABLE_SIGNATURE).append(ROW_SEPARATOR);
         }
 
         return new Report(reportBuilder.toString());

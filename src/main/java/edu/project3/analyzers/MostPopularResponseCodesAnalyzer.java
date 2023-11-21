@@ -1,62 +1,60 @@
 package edu.project3.analyzers;
 
 import edu.project3.parser.NginxLogEntry;
-import java.util.LinkedHashMap;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import static edu.project3.report.ReportGenerator.createThreeColumnRow;
 
 public final class MostPopularResponseCodesAnalyzer {
-    private static final int LIMIT = 5;
+    private static final int LIMIT = 6;
 
     private MostPopularResponseCodesAnalyzer() {
     }
 
     public static @NotNull String analyze(@NotNull List<NginxLogEntry> nginxLogItems) {
-        Map<String, String> top5codes = nginxLogItems.stream()
-            .map(item -> Integer.toString(item.status()))
-            .collect(
-                Collectors.groupingBy(
-                    Function.identity(),
-                    Collectors.counting()
-                )
-            )
-            .entrySet()
-            .stream()
-            .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
-            .limit(LIMIT)
-            .collect(
-                Collectors.toMap(
-                    Map.Entry::getKey,
-                    entry -> entry.getValue().toString(),
-                    (e1, e2) -> e1,
-                    LinkedHashMap::new
-                )
-            );
+        Map<String, Long> codeCount = new HashMap<>();
 
-        var builder = new StringBuilder();
+        for (NginxLogEntry entry : nginxLogItems) {
+            String code = Integer.toString(entry.status());
+            codeCount.put(code, codeCount.getOrDefault(code, 0L) + 1L);
+        }
 
-        top5codes.forEach((status, count) ->
-            builder.append(
-                createThreeColumnRow(status, getStatusDescription(status), count)
-            )
-        );
+        List<Map.Entry<String, Long>> sortedEntries = new ArrayList<>(codeCount.entrySet());
+        sortedEntries.sort(Map.Entry.<String, Long>comparingByValue().reversed());
 
-        return builder.toString();
+        return getTableData(sortedEntries).toString();
+    }
+
+    @NotNull
+    private static StringBuilder getTableData(@NotNull List<Map.Entry<String, Long>> entries) {
+        StringBuilder builder = new StringBuilder();
+
+        for (int i = 0; i < Math.min(LIMIT, entries.size()); i++) {
+            Map.Entry<String, Long> entry = entries.get(i);
+
+            builder.append(createThreeColumnRow(
+                entry.getKey(),
+                getCodeDescription(entry.getKey()),
+                entry.getValue().toString()
+            ));
+        }
+
+        return builder;
     }
 
     @Contract(pure = true)
-    private static String getStatusDescription(@NotNull String statusCode) {
-        return switch (statusCode) {
+    private static String getCodeDescription(@NotNull String code) {
+        return switch (code) {
             case "200" -> "OK";
-            case "201" -> "Created";
-            case "204" -> "No Content";
+            case "206" -> "Partial Content";
+            case "301" -> "Moved Permanently";
+            case "302" -> "Found";
+            case "304" -> "Not Modified";
             case "400" -> "Bad Request";
-            case "401" -> "Unauthorized";
             case "403" -> "Forbidden";
             case "404" -> "Not Found";
             case "500" -> "Internal Server Error";

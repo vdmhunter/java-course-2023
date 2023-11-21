@@ -1,6 +1,5 @@
 package edu.project3.analyzers;
 
-import edu.common.Generated;
 import edu.project3.parser.NginxLogEntry;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,25 +7,21 @@ import java.util.List;
 import java.util.Map;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import static edu.project3.report.ReportGenerator.createTwoColumnRow;
 
-public final class MostPopularResourcesAnalyzer {
-    private static final int NUMBER_OF_PARTS = 3;
-    private static final int LIMIT = 5;
+public final class MostPopularOperationSystemsAnalyzer {
+    private static final int LIMIT = 10;
 
-    private MostPopularResourcesAnalyzer() {
+    private MostPopularOperationSystemsAnalyzer() {
     }
 
     public static @NotNull String analyze(@NotNull List<NginxLogEntry> nginxLogItems) {
         Map<String, Long> resourceCount = new HashMap<>();
 
         for (NginxLogEntry entry : nginxLogItems) {
-            String resource = getResourceFromRequest(entry.request());
+            String os = detectOperatingSystem(entry.httpUserAgent());
 
-            if (resource != null) {
-                resourceCount.put(resource, resourceCount.getOrDefault(resource, 0L) + 1L);
-            }
+            resourceCount.put(os, resourceCount.getOrDefault(os, 0L) + 1L);
         }
 
         List<Map.Entry<String, Long>> sortedEntries = new ArrayList<>(resourceCount.entrySet());
@@ -47,11 +42,29 @@ public final class MostPopularResourcesAnalyzer {
         return builder;
     }
 
-    @Generated
     @Contract(pure = true)
-    private static @Nullable String getResourceFromRequest(@NotNull String request) {
-        String[] parts = request.split(" ");
+    public static @NotNull String detectOperatingSystem(@NotNull String userAgent) {
+        var ua = userAgent.toLowerCase();
+        String os;
 
-        return (parts.length == NUMBER_OF_PARTS) ? parts[1] : null;
+        if (ua.contains("win")) {
+            os = "Windows";
+        } else if (ua.contains("android")) {
+            os = "Android";
+        } else if (ua.contains("iphone")) {
+            os = "iOS";
+        } else if (ua.contains("mac")) {
+            os = "Mac";
+        } else if (ua.contains("linux")) {
+            os = "Linux";
+        } else if (ua.contains("x11") || ua.contains("unix")) {
+            os = "Unix";
+        } else if (ua.contains("debian")) {
+            os = "Debian";
+        } else {
+            os = "Unknown Operating System";
+        }
+
+        return os;
     }
 }

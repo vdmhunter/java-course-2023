@@ -1,5 +1,6 @@
 package edu.project3.parser;
 
+import edu.common.Generated;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.URI;
@@ -17,8 +18,7 @@ import java.util.regex.Pattern;
 import org.jetbrains.annotations.NotNull;
 
 public final class NginxLogParser {
-    private static final String IP_ADDRESS_PATTERN =
-        "\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b";
+    private static final String IP_ADDRESS_PATTERN = "\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b";
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(
         "dd/MMM/yyyy:HH:mm:ss Z", Locale.ENGLISH
     );
@@ -46,6 +46,7 @@ public final class NginxLogParser {
         return parse(readAllFiles(paths));
     }
 
+    @Generated
     private static @NotNull List<String> readAllFiles(@NotNull List<Path> paths) {
         List<String> lines = new ArrayList<>();
 
@@ -60,6 +61,7 @@ public final class NginxLogParser {
         return lines;
     }
 
+    @Generated
     private static @NotNull List<NginxLogEntry> parse(@NotNull List<String> lines) {
         List<NginxLogEntry> logEntries = new ArrayList<>(lines.size());
 

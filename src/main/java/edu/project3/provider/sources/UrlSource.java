@@ -13,7 +13,7 @@ public final class UrlSource implements Source {
     private static final Logger LOGGER = LogManager.getLogger();
 
     public UrlSource(String pattern) throws MalformedURLException, URISyntaxException {
-        URL tempUrl = null;
+        URL tempUrl;
 
         try {
             tempUrl = new URI(pattern).toURL();

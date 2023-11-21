@@ -6,7 +6,6 @@ import org.jetbrains.annotations.NotNull;
 import static edu.project3.report.ReportGenerator.createTwoColumnRow;
 
 public final class NumberOfRequestsAnalyzer {
-
     private NumberOfRequestsAnalyzer() {
     }
 

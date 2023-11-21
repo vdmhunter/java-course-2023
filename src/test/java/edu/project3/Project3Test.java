@@ -5,9 +5,6 @@ import edu.project3.provider.NginxLogsProvider;
 import edu.project3.provider.sources.UrlSource;
 import edu.project3.report.Report;
 import edu.project3.settings.ProjectSettings;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -15,6 +12,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for Project 3
@@ -132,7 +132,7 @@ class Project3Test {
     void NginxLogsProvider_TestReadLogLinesFromUrlWithInvalidUrl() throws MalformedURLException {
         // Arrange
         @SuppressWarnings("deprecation")
-        var invalidUrl = new URL("http://nonexistent-url.com");
+        var invalidUrl = new URL("https://nonexistent-url.com");
 
         // Act
         List<String> logLines = NginxLogsProvider.readLogLinesFromUrl(invalidUrl);

@@ -36,9 +36,9 @@
 |Firefox|10|
 |Internet Explorer|1|
 
-#### Operation Systems
+#### Operating Systems
 
-|Operation System|Count|
+|Operating System|Count|
 |:-:|:-:|
 |Debian|31840|
 |Unknown Operating System|1378|

@@ -21,16 +21,25 @@ import static edu.project3.report.ReportGenerator.createThreeColumnRow;
 import static edu.project3.report.ReportGenerator.createTwoColumnRow;
 import static edu.project3.report.ReportGenerator.generateReport;
 
+/**
+ * The main processor for analyzing Nginx log entries and generating reports based on various metrics.
+ */
 public class Processor {
     private ProjectSettings settings;
     private List<Path> logFiles;
     private List<NginxLogEntry> logEntries;
+    private static final String COUNT = "Count";
 
     public Processor(String[] args) {
         setup(args);
         init();
     }
 
+    /**
+     * Processes all analyzers and generates a report based on the configured settings.
+     *
+     * @return The generated report containing various metrics and analysis results.
+     */
     public Report processAllAnalyzers() {
         List<String> tables = new ArrayList<>();
 
@@ -38,18 +47,27 @@ public class Processor {
         tables.add(getMostPopularResourcesTable());
         tables.add(getMostPopularResponseCodesTable());
         tables.add(getMostPopularBrowsersTable());
-        tables.add(getMostPopularOperationSystemsTable());
+        tables.add(getMostPopularOperatingSystemsTable());
 
         ReportFormat format = settings.getFormat();
 
         return generateReport(tables, format);
     }
 
+    /**
+     * Initializes the project settings based on the provided command-line arguments.
+     *
+     * @param args Command-line arguments used to configure the project settings.
+     */
     private void setup(String[] args) {
         settings = new ProjectSettings();
         settings.parseArgs(args);
     }
 
+    /**
+     * Initializes the {@code Processor} by determining the source type (URL or file path),
+     * reading log entries accordingly, and filtering log entries based on the specified date range.
+     */
     private void init() {
         logFiles = new ArrayList<>();
         Source source = settings.getSource();
@@ -69,6 +87,12 @@ public class Processor {
             .toList();
     }
 
+    /**
+     * Checks whether a given Nginx log entry falls within the specified date range.
+     *
+     * @param entry The Nginx log entry to check.
+     * @return {@code true} if the entry is within the date range, {@code false} otherwise.
+     */
     private boolean isInDateRange(@NotNull NginxLogEntry entry) {
         OffsetDateTime timeLocal = entry.timeLocal();
         OffsetDateTime from = settings.getFrom();
@@ -80,6 +104,11 @@ public class Processor {
         return afterFrom && beforeTo;
     }
 
+    /**
+     * Retrieves the file names from the list of log files.
+     *
+     * @return A comma-separated string of file names.
+     */
     private @NotNull String getFileNames() {
         var list = new ArrayList<String>();
 
@@ -90,6 +119,12 @@ public class Processor {
         return String.join(",", list);
     }
 
+    /**
+     * Generates a table with general metric information, such as file names, date range, total requests,
+     * and average response size.
+     *
+     * @return A formatted string representing the metric value table.
+     */
     private @NotNull String getMetricValueTable() {
         var sb = new StringBuilder();
 
@@ -107,29 +142,47 @@ public class Processor {
         return sb.toString();
     }
 
-    // CHECKSTYLE:OFF: Disable MultipleStringLiterals check
+    /**
+     * Generates a table with information about the most popular resources requested.
+     *
+     * @return A formatted string representing the most popular resources table.
+     */
     private @NotNull String getMostPopularResourcesTable() {
         return createSectionTitle("Resources requested")
-            + createTwoColumnRow("Resource", "Count")
+            + createTwoColumnRow("Resource", COUNT)
             + MostPopularResourcesAnalyzer.analyze(logEntries);
     }
 
+    /**
+     * Generates a table with information about the most popular HTTP response codes.
+     *
+     * @return A formatted string representing the most popular response codes table.
+     */
     private @NotNull String getMostPopularResponseCodesTable() {
         return createSectionTitle("Response Codes")
-            + createThreeColumnRow("Status", "Name", "Count")
+            + createThreeColumnRow("Status", "Name", COUNT)
             + MostPopularResponseCodesAnalyzer.analyze(logEntries);
     }
 
+    /**
+     * Generates a table with information about the most popular web browsers.
+     *
+     * @return A formatted string representing the most popular browsers table.
+     */
     private @NotNull String getMostPopularBrowsersTable() {
         return createSectionTitle("Browsers")
-            + createTwoColumnRow("Browser", "Count")
+            + createTwoColumnRow("Browser", COUNT)
             + MostPopularBrowsersAnalyzer.analyze(logEntries);
     }
 
-    private @NotNull String getMostPopularOperationSystemsTable() {
-        return createSectionTitle("Operation Systems")
-            + createTwoColumnRow("Operation System", "Count")
-            + MostPopularOperationSystemsAnalyzer.analyze(logEntries);
+    /**
+     * Generates a table with information about the most popular operating systems.
+     *
+     * @return A formatted string representing the most popular operating systems table.
+     */
+    private @NotNull String getMostPopularOperatingSystemsTable() {
+        return createSectionTitle("Operating Systems")
+            + createTwoColumnRow("Operating System", COUNT)
+            + MostPopularOperatingSystemsAnalyzer.analyze(logEntries);
     }
-    // CHECKSTYLE:ON: Disable MultipleStringLiterals check
 }

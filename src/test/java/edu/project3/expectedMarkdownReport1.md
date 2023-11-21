@@ -41,9 +41,9 @@
 |Internet Explorer|1|
 |Microsoft Edge|1|
 
-#### Operation Systems
+#### Operating Systems
 
-|Operation System|Count|
+|Operating System|Count|
 |:-:|:-:|
 |Windows|218|
 |Mac|215|

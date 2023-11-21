@@ -49,11 +49,11 @@
 |Internet Explorer|1
 |Microsoft Edge|1
 |===
-.Operation Systems
+.Operating Systems
 
 [cols="^,^"]
 |===
-|Operation System|Count
+|Operating System|Count
 
 |Windows|218
 |Mac|215

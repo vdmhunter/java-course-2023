@@ -7,41 +7,47 @@ import java.util.List;
 import java.util.Map;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import static edu.project3.report.ReportGenerator.createTwoColumnRow;
 
-public final class MostPopularOperationSystemsAnalyzer {
+/**
+ * An analyzer that identifies the most popular operating systems based on Nginx log entries.
+ * It counts the occurrences of each operating system in the user-agent field and generates a report.
+ */
+public final class MostPopularOperatingSystemsAnalyzer extends Analyzer {
     private static final int LIMIT = 10;
 
-    private MostPopularOperationSystemsAnalyzer() {
+    private MostPopularOperatingSystemsAnalyzer() {
     }
 
+    /**
+     * Analyzes the given list of Nginx log entries and identifies the most popular operating systems.
+     * Generates a report in the form of a two-column table, displaying the operating systems
+     * and their occurrence counts.
+     *
+     * @param nginxLogItems A list of Nginx log entries to be analyzed.
+     * @return A formatted two-column table representing the most popular operating systems and their occurrence counts.
+     */
     public static @NotNull String analyze(@NotNull List<NginxLogEntry> nginxLogItems) {
-        Map<String, Long> resourceCount = new HashMap<>();
+        Map<String, Long> userAgentCount = new HashMap<>();
 
         for (NginxLogEntry entry : nginxLogItems) {
             String os = detectOperatingSystem(entry.httpUserAgent());
 
-            resourceCount.put(os, resourceCount.getOrDefault(os, 0L) + 1L);
+            userAgentCount.put(os, userAgentCount.getOrDefault(os, 0L) + 1L);
         }
 
-        List<Map.Entry<String, Long>> sortedEntries = new ArrayList<>(resourceCount.entrySet());
+        List<Map.Entry<String, Long>> sortedEntries = new ArrayList<>(userAgentCount.entrySet());
         sortedEntries.sort(Map.Entry.<String, Long>comparingByValue().reversed());
 
-        return getTableData(sortedEntries).toString();
+        return getTwoColumnsTableBuilder(sortedEntries, LIMIT).toString();
     }
 
-    @NotNull
-    private static StringBuilder getTableData(@NotNull List<Map.Entry<String, Long>> entries) {
-        StringBuilder builder = new StringBuilder();
-
-        for (int i = 0; i < Math.min(LIMIT, entries.size()); i++) {
-            Map.Entry<String, Long> entry = entries.get(i);
-            builder.append(createTwoColumnRow(entry.getKey(), entry.getValue().toString()));
-        }
-
-        return builder;
-    }
-
+    /**
+     * Detects the operating system from the given user-agent string.
+     *
+     * @param userAgent The user-agent string from an HTTP request.
+     * @return The detected operating system name or "Unknown Operating System"
+     *     if the operating system is not recognized.
+     */
     @Contract(pure = true)
     public static @NotNull String detectOperatingSystem(@NotNull String userAgent) {
         var ua = userAgent.toLowerCase();

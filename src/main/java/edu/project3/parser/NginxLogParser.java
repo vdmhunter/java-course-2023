@@ -17,6 +17,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Utility class for parsing Nginx log entries from lines or files.
+ */
 public final class NginxLogParser {
     private static final String IP_ADDRESS_PATTERN = "\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b";
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(
@@ -38,14 +41,32 @@ public final class NginxLogParser {
     private NginxLogParser() {
     }
 
+    /**
+     * Parses Nginx log entries from a list of log lines.
+     *
+     * @param lines The list of log lines to parse.
+     * @return A list of parsed Nginx log entries.
+     */
     public static @NotNull List<NginxLogEntry> parseLogLines(List<String> lines) {
         return parse(lines);
     }
 
+    /**
+     * Parses Nginx log entries from a list of log files.
+     *
+     * @param paths The list of file paths containing log entries to parse.
+     * @return A list of parsed Nginx log entries.
+     */
     public static @NotNull List<NginxLogEntry> parseLogFiles(List<Path> paths) {
         return parse(readAllFiles(paths));
     }
 
+    /**
+     * Reads all lines from a list of file paths.
+     *
+     * @param paths The list of file paths to read.
+     * @return A list of lines read from the specified files.
+     */
     @Generated
     private static @NotNull List<String> readAllFiles(@NotNull List<Path> paths) {
         List<String> lines = new ArrayList<>();
@@ -61,6 +82,12 @@ public final class NginxLogParser {
         return lines;
     }
 
+    /**
+     * Parses Nginx log entries from a list of log lines.
+     *
+     * @param lines The list of log lines to parse.
+     * @return A list of parsed Nginx log entries.
+     */
     @Generated
     private static @NotNull List<NginxLogEntry> parse(@NotNull List<String> lines) {
         List<NginxLogEntry> logEntries = new ArrayList<>(lines.size());

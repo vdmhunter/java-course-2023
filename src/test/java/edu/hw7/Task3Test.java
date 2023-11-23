@@ -25,9 +25,10 @@ class Task3Test {
         try (ExecutorService executor = Executors.newFixedThreadPool(optimalThreadCount)) {
             // Arrange
             var service = new PersonServiceSynchronized();
-            var latch = new CountDownLatch(2);
+            var latch = new CountDownLatch(3);
             var person1 = new Person(1, "John", "123 Street", "1234567890");
             var person2 = new Person(2, "Jane", "456 Avenue", "0987654321");
+            var person3 = new Person(3, "Alex", "789 Boulevard", "0987654321");
 
             // Act
             executor.submit(() -> {
@@ -38,12 +39,17 @@ class Task3Test {
                 service.add(person2);
                 latch.countDown();
             });
+            executor.submit(() -> {
+                service.add(person3);
+                latch.countDown();
+            });
 
             latch.await();
 
             executor.submit(() -> service.delete(1));
             Future<List<Person>> futureFindByName = executor.submit(() -> service.findByName("Jane"));
             Future<List<Person>> futureFindByAddress = executor.submit(() -> service.findByAddress("456 Avenue"));
+            executor.submit(() -> service.delete(3));
             Future<List<Person>> futureFindByPhone = executor.submit(() -> service.findByPhone("0987654321"));
 
             executor.shutdown();
@@ -68,9 +74,10 @@ class Task3Test {
         try (ExecutorService executor = Executors.newFixedThreadPool(optimalThreadCount)) {
             // Arrange
             var service = new PersonServiceReadWriteLock();
-            var latch = new CountDownLatch(2);
+            var latch = new CountDownLatch(3);
             var person1 = new Person(1, "John", "123 Street", "1234567890");
             var person2 = new Person(2, "Jane", "456 Avenue", "0987654321");
+            var person3 = new Person(3, "Alex", "789 Boulevard", "0987654321");
 
             // Act
             executor.submit(() -> {
@@ -81,12 +88,17 @@ class Task3Test {
                 service.add(person2);
                 latch.countDown();
             });
+            executor.submit(() -> {
+                service.add(person3);
+                latch.countDown();
+            });
 
             latch.await();
 
             executor.submit(() -> service.delete(1));
             Future<List<Person>> futureFindByName = executor.submit(() -> service.findByName("Jane"));
             Future<List<Person>> futureFindByAddress = executor.submit(() -> service.findByAddress("456 Avenue"));
+            executor.submit(() -> service.delete(3));
             Future<List<Person>> futureFindByPhone = executor.submit(() -> service.findByPhone("0987654321"));
 
             executor.shutdown();

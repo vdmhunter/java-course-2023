@@ -2,9 +2,7 @@ package edu.hw7.task3;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -19,12 +17,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * @see PersonDatabase
  * @see Person
  */
-public class PersonServiceReadWriteLock implements PersonDatabase {
-    private final Map<Integer, Person> peopleById = new HashMap<>();
-    private final Map<String, List<Person>> peopleByName = new HashMap<>();
-    private final Map<String, List<Person>> peopleByAddress = new HashMap<>();
-    private final Map<String, List<Person>> peopleByPhone = new HashMap<>();
-
+public class PersonServiceReadWriteLock extends PersonService implements PersonDatabase {
     private final ReadWriteLock lock = new ReentrantReadWriteLock();
     private final Lock readLock = lock.readLock();
     private final Lock writeLock = lock.writeLock();
@@ -39,10 +32,7 @@ public class PersonServiceReadWriteLock implements PersonDatabase {
         writeLock.lock();
 
         try {
-            peopleById.put(person.id(), person);
-            peopleByName.computeIfAbsent(person.name(), k -> new ArrayList<>()).add(person);
-            peopleByAddress.computeIfAbsent(person.address(), k -> new ArrayList<>()).add(person);
-            peopleByPhone.computeIfAbsent(person.phoneNumber(), k -> new ArrayList<>()).add(person);
+            addPerson(person);
         } finally {
             writeLock.unlock();
         }
@@ -61,9 +51,9 @@ public class PersonServiceReadWriteLock implements PersonDatabase {
             Person person = peopleById.remove(id);
 
             if (person != null) {
-                peopleByName.get(person.name()).remove(person);
-                peopleByAddress.get(person.address()).remove(person);
-                peopleByPhone.get(person.phoneNumber()).remove(person);
+                nameIndex.get(person.name()).remove(person);
+                addressIndex.get(person.address()).remove(person);
+                phoneIndex.get(person.phoneNumber()).remove(person);
             }
         } finally {
             writeLock.unlock();
@@ -81,7 +71,7 @@ public class PersonServiceReadWriteLock implements PersonDatabase {
         readLock.lock();
 
         try {
-            return new ArrayList<>(peopleByName.getOrDefault(name, Collections.emptyList()));
+            return new ArrayList<>(nameIndex.getOrDefault(name, Collections.emptyList()));
         } finally {
             readLock.unlock();
         }
@@ -98,7 +88,7 @@ public class PersonServiceReadWriteLock implements PersonDatabase {
         readLock.lock();
 
         try {
-            return new ArrayList<>(peopleByAddress.getOrDefault(address, Collections.emptyList()));
+            return new ArrayList<>(addressIndex.getOrDefault(address, Collections.emptyList()));
         } finally {
             readLock.unlock();
         }
@@ -115,7 +105,7 @@ public class PersonServiceReadWriteLock implements PersonDatabase {
         readLock.lock();
 
         try {
-            return new ArrayList<>(peopleByPhone.getOrDefault(phone, Collections.emptyList()));
+            return new ArrayList<>(phoneIndex.getOrDefault(phone, Collections.emptyList()));
         } finally {
             readLock.unlock();
         }

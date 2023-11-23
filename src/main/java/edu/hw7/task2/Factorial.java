@@ -5,7 +5,7 @@ import java.util.stream.IntStream;
 
 /**
  * A utility class for calculating the factorial of a non-negative integer using both
- * singlethreaded and multithreaded approaches.
+ * single-threaded and multithreaded approaches.
  */
 public final class Factorial {
     private static final String ILLEGAL_ARGUMENT_MESSAGE = "The input integer must be greater than 0.";
@@ -32,7 +32,7 @@ public final class Factorial {
     }
 
     /**
-     * Calculates the factorial of the given non-negative integer using a singlethreaded approach.
+     * Calculates the factorial of the given non-negative integer using a single-threaded approach.
      *
      * @param num The non-negative integer for which to calculate the factorial.
      * @return The factorial of the input integer.

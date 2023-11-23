@@ -77,14 +77,14 @@ class Task2Test {
         var expectedType = IllegalArgumentException.class;
 
         // Act & Assert
-        Assertions.assertThrows(expectedType, () -> Factorial.calculateMulti(num));
+        Assertions.assertThrows(expectedType, () -> Factorial.calculateSingle(num));
     }
 
     @Test
     @DisplayName("Performance Test: Factorial Calculation (Parallel vs Single-threaded)")
-    void factorialCalculate_TestPerfomance() {
+    void factorialCalculate_TestPerformance() {
         // Arrange
-        int num = 1000;
+        int num = 20_000;
 
         // Act
         long startTimeSingle = System.nanoTime();

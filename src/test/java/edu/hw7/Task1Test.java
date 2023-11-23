@@ -18,23 +18,27 @@ import org.junit.jupiter.api.Test;
 class Task1Test {
     @Test
     @DisplayName("Increment counter with multiple threads")
-    void counter_TestCounterWithConcurrency() throws InterruptedException {
-        try (ExecutorService service = Executors.newFixedThreadPool(10)) {
-            // Arrange
-            int expected = 100;
-            var counter = new Counter();
+    void counter_TestCounterWithConcurrency() {
+        // Arrange
+        var counter = new Counter();
+        int optimalThreadCount = Runtime.getRuntime().availableProcessors() - 1;
+        int operationsPerThread = 10_000;
+        int expected = optimalThreadCount * operationsPerThread;
 
-            List<Callable<Void>> tasks = IntStream.range(0, expected)
-                .mapToObj(i -> (Callable<Void>) () -> {
+        List<Callable<Void>> tasks = IntStream.range(0, optimalThreadCount)
+            .mapToObj(i -> (Callable<Void>) () -> {
+                for (int j = 0; j < operationsPerThread; j++) {
                     counter.increment();
-                    return null;
-                })
-                .collect(Collectors.toList());
+                }
+                return null;
+            })
+            .collect(Collectors.toList());
 
+        try (ExecutorService service = Executors.newFixedThreadPool(optimalThreadCount)) {
             // Act
             service.invokeAll(tasks);
             service.shutdown();
-            boolean terminated = service.awaitTermination(1, TimeUnit.MINUTES);
+            boolean terminated = service.awaitTermination(10, TimeUnit.SECONDS);
             int actual = counter.getCount();
 
             // Assert
@@ -42,6 +46,7 @@ class Task1Test {
                 () -> Assertions.assertTrue(terminated),
                 () -> Assertions.assertEquals(expected, actual)
             );
+        } catch (InterruptedException ignored) {
         }
     }
 }

@@ -25,10 +25,15 @@ class Task2Test {
 
             // Act
             FileCloner.cloneFile(originalFile);
-            Path copiedFile = tempDir.resolve("original — copy (1).txt");
+            FileCloner.cloneFile(originalFile);
+            Path copiedFile1 = tempDir.resolve("original — copy.txt");
+            Path copiedFile2 = tempDir.resolve("original — copy (2).txt");
 
             // Assert
-            Assertions.assertTrue(Files.exists(copiedFile), "Copied file should exist");
+            Assertions.assertAll(
+                () -> Assertions.assertTrue(Files.exists(copiedFile1), "Copied file should exist"),
+                () -> Assertions.assertTrue(Files.exists(copiedFile2), "Copied file should exist")
+            );
         } catch (IOException e) {
             Assertions.fail("Test failed due to IOException: " + e.getMessage());
         }

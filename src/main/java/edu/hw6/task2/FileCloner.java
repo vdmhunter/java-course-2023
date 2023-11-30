@@ -34,7 +34,7 @@ public final class FileCloner {
 
             while (Files.exists(filePath.resolveSibling(copyFileName))) {
                 copyNumber++;
-                copyFileName = baseName + " — copy (" + copyNumber + ")" + extension;
+                copyFileName = baseName + " — copy" + (copyNumber > 1 ? " (" + copyNumber + ")" : "") + extension;
             }
 
             Files.copy(filePath, filePath.resolveSibling(copyFileName), StandardCopyOption.REPLACE_EXISTING);

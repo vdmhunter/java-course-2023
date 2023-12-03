@@ -1,12 +1,12 @@
 package edu.hw8.task3;
 
-import org.jetbrains.annotations.NotNull;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
+import org.jetbrains.annotations.NotNull;
 
 public final class PasswordMiner {
     private final Map<String, String> md5HashLoginDatabase;

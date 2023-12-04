@@ -11,6 +11,12 @@ import java.util.Scanner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * The {@code QuoteClient} class represents a client that connects to a remote server
+ * to receive and store quotes. It allows the user to input quotes through the console
+ * and sends them to the server. The received quotes are logged and appended to a specified file.
+ * The client can be terminated by entering the quit command.
+ */
 public class QuoteClient {
     private static final String SERVER_ADDRESS = "localhost";
     private static final int SERVER_PORT = 7777;
@@ -18,6 +24,14 @@ public class QuoteClient {
     public static final String QUIT_COMMAND = "quit";
     private static final Logger LOGGER = LogManager.getLogger();
 
+    /**
+     * Starts the {@code QuoteClient}, establishing a connection to the server
+     * and allowing the user to input quotes until the quit command is entered.
+     * Quotes are sent to the server, logged, and appended to the specified file.
+     *
+     * @param file The path to the file where received quotes will be stored.
+     * @throws IOException If an I/O error occurs while communicating with the server.
+     */
     public void start(Path file) throws IOException {
         try (var socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
              InputStream inputStream = socket.getInputStream();

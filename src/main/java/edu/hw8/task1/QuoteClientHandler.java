@@ -1,5 +1,6 @@
 package edu.hw8.task1;
 
+import edu.common.Generated;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -8,8 +9,12 @@ import java.util.HashMap;
 import java.util.concurrent.Semaphore;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jetbrains.annotations.NotNull;
 
+/**
+ * The {@code QuoteClientHandler} class represents a handler for individual client connections
+ * in a multi-client quote server. It processes incoming requests, retrieves quotes based on
+ * specified keywords, and sends appropriate responses to clients.
+ */
 public class QuoteClientHandler implements Runnable {
     private final Socket clientSocket;
     private final Semaphore connectionSemaphore;
@@ -34,7 +39,7 @@ public class QuoteClientHandler implements Runnable {
         );
         QUOTES.put(
             "интеллект",
-            "Чем ниже интеллект, тем громче оскорбления"
+            "Чем ниже интеллект, тем громче оскорбления."
         );
         QUOTES.put(
             "самоуверенность",
@@ -46,39 +51,56 @@ public class QuoteClientHandler implements Runnable {
         );
     }
 
+    /**
+     * Constructs a new {@code QuoteClientHandler} for a specific client socket and semaphore.
+     *
+     * @param clientSocket        The client socket for communication with the connected client.
+     * @param connectionSemaphore The semaphore controlling access to the server's resources.
+     */
     public QuoteClientHandler(Socket clientSocket, Semaphore connectionSemaphore) {
         this.clientSocket = clientSocket;
         this.connectionSemaphore = connectionSemaphore;
     }
 
+    /**
+     * Executes the handler logic for the client connection. Processes incoming requests,
+     * retrieves quotes, and sends appropriate responses to the client.
+     */
     @Override
     public void run() {
-        try (InputStream inputStream = clientSocket.getInputStream();
-             OutputStream outputStream = clientSocket.getOutputStream()) {
-
-            processRequest(inputStream, outputStream);
-
-        } catch (IOException e) {
-            LOGGER.error(e);
+        try {
+            processRequest();
         } finally {
             connectionSemaphore.release();
         }
     }
 
-    private void processRequest(@NotNull InputStream inputStream, OutputStream outputStream) throws IOException {
-        var buffer = new byte[BUFFER_SIZE];
+    /**
+     * Processes an incoming request from the client, retrieves a quote based on the request,
+     * and sends the response back to the client.
+     */
+    @Generated()
+    private void processRequest() {
 
-        while (true) {
-            int bytesRead = inputStream.read(buffer);
+        try (InputStream inputStream = clientSocket.getInputStream();
+             OutputStream outputStream = clientSocket.getOutputStream()) {
 
-            if (bytesRead != -1) {
-                String request = new String(buffer, 0, bytesRead);
-                String response = QUOTES.getOrDefault(request.toLowerCase(), DEFAULT_QUOTE);
+            var buffer = new byte[BUFFER_SIZE];
 
-                outputStream.write(response.getBytes());
-            } else {
-                break;
+            while (true) {
+                int bytesRead = inputStream.read(buffer);
+
+                if (bytesRead != -1) {
+                    String request = new String(buffer, 0, bytesRead);
+                    String response = QUOTES.getOrDefault(request.toLowerCase(), DEFAULT_QUOTE);
+
+                    outputStream.write(response.getBytes());
+                } else {
+                    break;
+                }
             }
+        } catch (IOException e) {
+            LOGGER.error(e);
         }
     }
 }

@@ -73,6 +73,39 @@ class Task1Test {
         }
     }
 
+    @Test
+    @DisplayName("Test QuoteClient's multithreaded communication with QuoteServer")
+    void quoteClient_TestMultiThread() throws IOException {
+
+        // Arrange
+        String clientMessage1 = "интеллект" + System.lineSeparator() + "quit" + System.lineSeparator();
+        String expected1 = "Чем ниже интеллект, тем громче оскорбления.";
+        String clientMessage2 = "эрудиция" + System.lineSeparator() + "quit" + System.lineSeparator();
+        String expected2 = "Твоя эрудиция поражает — как если бы Google решил наделить котенка библиотечными знаниями.";
+
+        // Act
+        try (var inputStream = new ByteArrayInputStream(clientMessage1.getBytes())) {
+            System.setIn(inputStream);
+
+            QuoteClient client = new QuoteClient();
+            client.start(tempFile);
+        }
+
+        try (var inputStream = new ByteArrayInputStream(clientMessage2.getBytes())) {
+            System.setIn(inputStream);
+
+            QuoteClient client = new QuoteClient();
+            client.start(tempFile);
+        }
+
+        // Assert
+        await().atMost(1, SECONDS).untilAsserted(() ->
+            Assertions.assertAll(
+                () -> Assertions.assertTrue(containsInTempFile(expected1)),
+                () -> Assertions.assertTrue(containsInTempFile(expected2))
+            ));
+    }
+
     private boolean containsInTempFile(String expected) throws IOException {
         try (BufferedReader reader = Files.newBufferedReader(tempFile)) {
             String line;

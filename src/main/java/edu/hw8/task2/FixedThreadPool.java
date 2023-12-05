@@ -1,8 +1,8 @@
 package edu.hw8.task2;
 
+import edu.common.Generated;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
-import edu.common.Generated;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 

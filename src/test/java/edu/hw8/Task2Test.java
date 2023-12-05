@@ -24,37 +24,6 @@ class Task2Test {
     private static final Logger LOGGER = LogManager.getLogger();
 
     @Test
-    @DisplayName("Test Fibonacci calculation with concurrency")
-    void fixedThreadPool_TestFibonacciCalculationWithConcurrency() throws Exception {
-        // Arrange
-        int n = 1_000;
-        var latch = new CountDownLatch(n);
-
-        for (int i = 1; i <= n; i++) {
-            int finalI = i;
-            threadPool.execute(() -> {
-                fibonacci(finalI);
-                latch.countDown();
-            });
-        }
-
-        // Act
-        long startTime = System.nanoTime();
-        threadPool.start();
-
-        latch.await();
-
-        var actual = fibCache.get(n);
-        threadPool.close();
-
-        long executionTime = System.nanoTime() - startTime;
-        LOGGER.trace("Execution Time with multi-thread: " + executionTime + " nanoseconds");
-
-        // Assert
-        Assertions.assertEquals(VERY_LARGE_FIBONACCI, actual);
-    }
-
-    @Test
     @DisplayName("Test Fibonacci calculation with single thread")
     void fixedThreadPool_TestFibonacciCalculationWithSingleThread() {
         // Arrange
@@ -62,15 +31,42 @@ class Task2Test {
 
         // Act
         long startTime = System.nanoTime();
-        BigInteger actual = fibonacci(n);
-        long executionTime = System.nanoTime() - startTime;
-        LOGGER.trace("Execution Time with single thread: " + executionTime + " nanoseconds");
+        BigInteger actual = calculateFibonacciSingleThread(n);
+        LOGGER.trace("Execution Time with single thread: " + (System.nanoTime() - startTime) + " nanoseconds");
 
         // Assert
         Assertions.assertEquals(VERY_LARGE_FIBONACCI, actual);
     }
 
-    private static BigInteger fibonacci(int n) {
+    @Test
+    @DisplayName("Test Fibonacci calculation with multi thread")
+    void fixedThreadPool_TestFibonacciCalculationWithMultiThread() throws Exception {
+        // Arrange
+        int n = 1_000;
+        var latch = new CountDownLatch(n);
+
+        for (int i = 1; i <= n; i++) {
+            int finalI = i;
+            threadPool.execute(() -> {
+                calculateFibonacciMultiThread(finalI);
+                latch.countDown();
+            });
+        }
+
+        // Act
+        long startTime = System.nanoTime();
+        threadPool.start();
+        latch.await();
+        BigInteger actual = fibCache.get(n);
+        threadPool.close();
+
+        LOGGER.trace("Execution Time with multi thread: " + (System.nanoTime() - startTime) + " nanoseconds");
+
+        // Assert
+        Assertions.assertEquals(VERY_LARGE_FIBONACCI, actual);
+    }
+
+    private static BigInteger calculateFibonacciSingleThread(int n) {
         if (n == 0) {
             return BigInteger.ZERO;
         }
@@ -79,7 +75,33 @@ class Task2Test {
             return BigInteger.ONE;
         }
 
-        return fibCache.computeIfAbsent(n, k -> {
+        BigInteger a = BigInteger.ZERO;
+        BigInteger b = BigInteger.ONE;
+        BigInteger c = BigInteger.ZERO;
+
+        for (int i = 2; i <= n; i++) {
+            c = a.add(b);
+            a = b;
+            b = c;
+        }
+
+        return c;
+    }
+
+    private static void calculateFibonacciMultiThread(int n) {
+        if (n == 0) {
+            fibCache.put(0, BigInteger.ZERO);
+
+            return;
+        }
+
+        if (n == 1) {
+            fibCache.put(1, BigInteger.ONE);
+
+            return;
+        }
+
+        fibCache.computeIfAbsent(n, k -> {
             if (fibCache.containsKey(k - 1) && fibCache.containsKey(k - 2)) {
                 BigInteger a = fibCache.get(k - 2);
                 BigInteger b = fibCache.get(k - 1);

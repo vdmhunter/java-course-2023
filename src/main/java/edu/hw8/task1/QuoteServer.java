@@ -7,33 +7,50 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 
 /**
- * The {@code QuoteServer} class represents a simple server that accepts incoming client connections,
- * manages them using a thread pool, and delegates the handling of client requests to instances
- * of the {@link QuoteClientHandler} class. The server can be started, and its thread pool can be
- * shut down gracefully.
+ * The {@code QuoteServer} class is a server that manages client connections using a thread pool.
+ * It accepts incoming connections, delegates request handling to {@link QuoteClientHandler} instances,
+ * and can be gracefully started and shut down.
  */
 public class QuoteServer {
+    private ServerSocket serverSocket;
     private static final int PORT = 7777;
     private static final int MAX_SIMULTANEOUS_CONNECTIONS = 2;
     private static final ExecutorService POOL = Executors.newFixedThreadPool(MAX_SIMULTANEOUS_CONNECTIONS);
     private static final Semaphore SEMAPHORE = new Semaphore(MAX_SIMULTANEOUS_CONNECTIONS);
+    private static final Logger LOGGER = LogManager.getLogger();
 
     /**
-     * Starts the {@code QuoteServer}, creating a ServerSocket and accepting incoming client connections.
-     * Each connection is handled by a {@link QuoteClientHandler} instance from the thread pool.
+     * Initiates the {@code QuoteServer}, sets up a ServerSocket, and accepts incoming client connections.
+     * Each connection is managed by a {@link QuoteClientHandler} instance from the thread pool.
      *
-     * @throws IOException If an I/O error occurs while creating the ServerSocket or accepting connections.
+     * @throws IOException If an I/O error occurs during the creation of the ServerSocket or
+     * while accepting connections.
      */
     public void start() throws IOException {
-        handleIncomingConnections();
+        serverSocket = new ServerSocket(PORT);
+
+        try {
+            while (!Thread.currentThread().isInterrupted()) {
+                handleClientConnection(serverSocket);
+            }
+        } finally {
+            LOGGER.info("Server has stopped accepting new connections.");
+        }
     }
 
     /**
-     * Shuts down the thread pool gracefully, allowing ongoing tasks to complete before terminating.
+     * Gracefully shuts down the thread pool, allowing ongoing tasks to finish before termination.
+     * Also closes the server socket to stop accepting new connections.
+     *
+     * @throws IOException If an I/O error occurs while closing the server socket.
      */
-    public void shutdown() {
+    public void shutdown() throws IOException {
+        serverSocket.close();
         POOL.shutdown();
     }
 
@@ -47,20 +64,18 @@ public class QuoteServer {
     }
 
     /**
-     * Handles incoming client connections, creating a ServerSocket and accepting connections.
-     * Each connection is delegated to a {@link QuoteClientHandler} instance from the thread pool.
+     * Accepts a new client connection, acquires a permit from the semaphore, and assigns a {@link QuoteClientHandler}
+     * to manage the connection in the thread pool.
      *
-     * @throws IOException If an I/O error occurs while accepting connections.
+     * @param serverSocket The server socket to accept connections from.
      */
     @Generated
-    private static void handleIncomingConnections() throws IOException {
-        try (var serverSocket = new ServerSocket(PORT)) {
-            while (!Thread.currentThread().isInterrupted()) {
-                Socket socket = serverSocket.accept();
-                SEMAPHORE.acquire();
-                POOL.execute(new QuoteClientHandler(socket, SEMAPHORE));
-            }
-        } catch (InterruptedException e) {
+    private static void handleClientConnection(@NotNull ServerSocket serverSocket) {
+        try {
+            Socket socket = serverSocket.accept();
+            SEMAPHORE.acquire();
+            POOL.execute(new QuoteClientHandler(socket, SEMAPHORE));
+        } catch (InterruptedException | IOException e) {
             Thread.currentThread().interrupt();
         }
     }

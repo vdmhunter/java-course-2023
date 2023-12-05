@@ -1,5 +1,6 @@
 package edu.hw8.task1;
 
+import edu.common.Generated;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -23,17 +24,10 @@ public class QuoteServer {
      * Starts the {@code QuoteServer}, creating a ServerSocket and accepting incoming client connections.
      * Each connection is handled by a {@link QuoteClientHandler} instance from the thread pool.
      *
-     * @throws IOException          If an I/O error occurs while creating the ServerSocket or accepting connections.
-     * @throws InterruptedException If the thread is interrupted during the execution of the server.
+     * @throws IOException If an I/O error occurs while creating the ServerSocket or accepting connections.
      */
-    public void start() throws IOException, InterruptedException {
-        try (var serverSocket = new ServerSocket(PORT)) {
-            while (!Thread.currentThread().isInterrupted()) {
-                SEMAPHORE.acquire();
-                Socket socket = serverSocket.accept();
-                POOL.execute(new QuoteClientHandler(socket, SEMAPHORE));
-            }
-        }
+    public void start() throws IOException {
+        handleIncomingConnections();
     }
 
     /**
@@ -50,5 +44,24 @@ public class QuoteServer {
      */
     public boolean isShutdown() {
         return POOL.isShutdown();
+    }
+
+    /**
+     * Handles incoming client connections, creating a ServerSocket and accepting connections.
+     * Each connection is delegated to a {@link QuoteClientHandler} instance from the thread pool.
+     *
+     * @throws IOException If an I/O error occurs while accepting connections.
+     */
+    @Generated
+    private static void handleIncomingConnections() throws IOException {
+        try (var serverSocket = new ServerSocket(PORT)) {
+            while (!Thread.currentThread().isInterrupted()) {
+                Socket socket = serverSocket.accept();
+                SEMAPHORE.acquire();
+                POOL.execute(new QuoteClientHandler(socket, SEMAPHORE));
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
 }

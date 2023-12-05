@@ -34,7 +34,7 @@ class Task1Test {
             try {
                 quoteServer = new QuoteServer();
                 quoteServer.start();
-            } catch (IOException | InterruptedException e) {
+            } catch (IOException e) {
                 LOGGER.error(e);
             }
         });

@@ -1,11 +1,12 @@
 package edu.hw8;
 
+import edu.hw8.task2.FixedThreadPool;
+import edu.hw8.task2.ThreadPool;
 import java.math.BigInteger;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CountDownLatch;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,60 +15,89 @@ import org.junit.jupiter.api.Test;
  * Tests for Homework 8, Task 2
  */
 class Task2Test {
-    private static final int OPTIMAL_THREADS_NUMBER = Runtime.getRuntime().availableProcessors();
-
-    private static final ExecutorService executor = Executors.newFixedThreadPool(OPTIMAL_THREADS_NUMBER);
+    private static final int OPTIMAL_THREADS_NUMBER = Runtime.getRuntime().availableProcessors() - 1;
+    private static final ThreadPool threadPool = FixedThreadPool.create(OPTIMAL_THREADS_NUMBER);
+    private static final ConcurrentHashMap<Integer, BigInteger> fibCache = new ConcurrentHashMap<>();
+    private static final BigInteger VERY_LARGE_FIBONACCI = new BigInteger("43466557686937456435688527675040625" +
+        "802564660517371780402481729089536555417949051890403879840079255169295922593080322634775209689623239873322" +
+        "471161642996440906533187938298969649928516003704476137795166849228875");
+    private static final Logger LOGGER = LogManager.getLogger();
 
     @Test
     @DisplayName("Test Fibonacci calculation with concurrency")
-    void fixedThreadPool_TestFibonacciCalculationWithConcurrency() throws ExecutionException, InterruptedException {
+    void fixedThreadPool_TestFibonacciCalculationWithConcurrency() throws Exception {
         // Arrange
-        int fibonacciNumber = 100;
-        BigInteger expected = new BigInteger("354224848179261915075");
+        int n = 1_000;
+        var latch = new CountDownLatch(n);
+
+        for (int i = 1; i <= n; i++) {
+            int finalI = i;
+            threadPool.execute(() -> {
+                fibonacci(finalI);
+                latch.countDown();
+            });
+        }
 
         // Act
-        Future<BigInteger> fib1 = executor.submit(new FibonacciTask(fibonacciNumber - 1));
-        Future<BigInteger> fib2 = executor.submit(new FibonacciTask(fibonacciNumber - 2));
+        long startTime = System.nanoTime();
+        threadPool.start();
 
-        BigInteger result1 = fib1.get();
-        BigInteger result2 = fib2.get();
+        latch.await();
 
-        executor.shutdown();
+        var actual = fibCache.get(n);
+        threadPool.close();
 
-        BigInteger actual = result1.add(result2);
+        long executionTime = System.nanoTime() - startTime;
+        LOGGER.trace("Execution Time with multi-thread: " + executionTime + " nanoseconds");
 
-        //Assert
-        Assertions.assertEquals(expected, actual);
+        // Assert
+        Assertions.assertEquals(VERY_LARGE_FIBONACCI, actual);
     }
 
-    public static class FibonacciTask implements Callable<BigInteger> {
-        private final int n;
+    @Test
+    @DisplayName("Test Fibonacci calculation with single thread")
+    void fixedThreadPool_TestFibonacciCalculationWithSingleThread() {
+        // Arrange
+        int n = 1_000;
 
-        public FibonacciTask(int n) {
-            this.n = n;
-        }
+        // Act
+        long startTime = System.nanoTime();
+        BigInteger actual = fibonacci(n);
+        long executionTime = System.nanoTime() - startTime;
+        LOGGER.trace("Execution Time with single thread: " + executionTime + " nanoseconds");
 
-        @Override
-        public BigInteger call() {
-            return calculateFibonacci(n);
-        }
+        // Assert
+        Assertions.assertEquals(VERY_LARGE_FIBONACCI, actual);
     }
 
-    private static BigInteger calculateFibonacci(int n) {
-        if (n <= 1) {
-            return BigInteger.valueOf(n);
-        } else {
-            BigInteger a = BigInteger.ZERO;
-            BigInteger b = BigInteger.ONE;
-            BigInteger c = BigInteger.ZERO;
+    private static BigInteger fibonacci(int n) {
+        if (n == 0) {
+            return BigInteger.ZERO;
+        }
 
-            for (int i = 2; i <= n; i++) {
-                c = a.add(b);
-                a = b;
-                b = c;
+        if (n == 1) {
+            return BigInteger.ONE;
+        }
+
+        return fibCache.computeIfAbsent(n, k -> {
+            if (fibCache.containsKey(k - 1) && fibCache.containsKey(k - 2)) {
+                BigInteger a = fibCache.get(k - 2);
+                BigInteger b = fibCache.get(k - 1);
+
+                return a.add(b);
+            } else {
+                BigInteger a = BigInteger.ZERO;
+                BigInteger b = BigInteger.ONE;
+                BigInteger c = BigInteger.ZERO;
+
+                for (int i = 2; i <= k; i++) {
+                    c = a.add(b);
+                    a = b;
+                    b = c;
+                }
+
+                return c;
             }
-
-            return c;
-        }
+        });
     }
 }

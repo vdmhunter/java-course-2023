@@ -12,10 +12,9 @@ import org.apache.logging.log4j.Logger;
  * the execute method will throw a {@link ConnectionException}.
  */
 public class FaultyConnection implements Connection {
-    private final static Logger LOGGER = LogManager.getLogger();
-    private static final double THRESHOLD = 0.5;
-
     private final RandomGenerator random;
+    private static final Logger LOGGER = LogManager.getLogger();
+    private static final double THRESHOLD = 0.5;
 
     public FaultyConnection(RandomGenerator random) {
         this.random = random;

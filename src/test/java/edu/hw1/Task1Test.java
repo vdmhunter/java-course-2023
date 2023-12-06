@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 /**
  * Tests for Homework 1, Task 1
  */
-public class Task1Test {
+class Task1Test {
     @ParameterizedTest(name = "Test {index} - Converting \"{0}\" to seconds should return {1}")
     @CsvSource({
         "0:0,0",
@@ -23,8 +23,10 @@ public class Task1Test {
     })
     @DisplayName("Happy paths")
     void minutesToSeconds_HappyPaths(String str, int expected) {
+        // Act
         int actual = Task1.minutesToSeconds(str);
 
+        // Assert
         Assertions.assertEquals(expected, actual);
     }
 
@@ -43,15 +45,23 @@ public class Task1Test {
     })
     @DisplayName("Fail paths")
     void minutesToSeconds_FailPaths(String str) {
-        int actual = Task1.minutesToSeconds(str);
+        // Arrange
         int expected = -1;
 
+        // Act
+        int actual = Task1.minutesToSeconds(str);
+
+        // Assert
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     @DisplayName("Test when input string is null")
     void minutesToSeconds_InputStringIsNull() {
-        Assertions.assertThrows(NullPointerException.class, () -> Task1.minutesToSeconds(null));
+        // Arrange
+        var expectedType = NullPointerException.class;
+
+        // Act & Assert
+        Assertions.assertThrows(expectedType, () -> Task1.minutesToSeconds(null));
     }
 }

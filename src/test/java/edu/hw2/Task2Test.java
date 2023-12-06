@@ -2,6 +2,7 @@ package edu.hw2;
 
 import edu.hw2.task2.Rectangle;
 import edu.hw2.task2.Square;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,21 +15,21 @@ import org.junit.jupiter.params.provider.MethodSource;
 /**
  * Tests for Homework 2, Task 2
  */
-public class Task2Test {
+class Task2Test {
     // Happy paths
     @ParameterizedTest(name = "Test {index} - Check area of shape")
     @MethodSource("rectangles")
     @DisplayName("Modified test from task description for verifying the area of shapes")
-    void rectangle_ModifiedTaskTest(Rectangle rect) {
+    void rectangle_ModifiedTaskTest(@NotNull Rectangle rect) {
         // Arrange
         Rectangle result = rect
             .newRectangleWithWidth(20)
             .newRectangleWithHeight(10);
 
-        //Act
+        // Act
         int area = result.area();
 
-        //Assert
+        // Assert
         Assertions.assertEquals(200, area);
     }
 
@@ -38,11 +39,11 @@ public class Task2Test {
         // Arrange
         var rectangle = new Rectangle(3, 8);
 
-        //Act
+        // Act
         var width = rectangle.getWidth();
         var height = rectangle.getHeight();
 
-        //Assert
+        // Assert
         Assertions.assertAll(
             () -> Assertions.assertEquals(3, width),
             () -> Assertions.assertEquals(8, height)
@@ -55,11 +56,11 @@ public class Task2Test {
         // Arrange
         var square = new Square(8);
 
-        //Act
+        // Act
         var width = square.getWidth();
         var height = square.getHeight();
 
-        //Assert
+        // Assert
         Assertions.assertAll(
             () -> Assertions.assertEquals(8, width),
             () -> Assertions.assertEquals(8, height)
@@ -72,11 +73,11 @@ public class Task2Test {
         // Arrange
         var square = new Square().newSquareWithSize(8);
 
-        //Act
+        // Act
         var width = square.getWidth();
         var height = square.getHeight();
 
-        //Assert
+        // Assert
         Assertions.assertAll(
             () -> Assertions.assertEquals(8, width),
             () -> Assertions.assertEquals(8, height)
@@ -93,50 +94,55 @@ public class Task2Test {
     @DisplayName("Test Rectangle constructor with invalid dimensions")
     void rectangle_ConstructorWithInvalidDimensions(int width, int height) {
         // Arrange
+        var expectedType = IllegalArgumentException.class;
         Executable executable = () -> new Rectangle(width, height);
 
         // Act & Assert
-        Assertions.assertThrows(IllegalArgumentException.class, executable);
+        Assertions.assertThrows(expectedType, executable);
     }
 
     @Test
     @DisplayName("Test creating a new rectangle with illegal width")
     void rectangle_NewRectangleWithIllegalWidth() {
         // Arrange
+        var expectedType = IllegalArgumentException.class;
         Executable executable = () -> new Rectangle().newRectangleWithWidth(-1);
 
         // Act & Assert
-        Assertions.assertThrows(IllegalArgumentException.class, executable);
+        Assertions.assertThrows(expectedType, executable);
     }
 
     @Test
     @DisplayName("Test creating a new rectangle with illegal height")
     void rectangle_NewRectangleWithIllegalHeight() {
         // Arrange
+        var expectedType = IllegalArgumentException.class;
         Executable executable = () -> new Rectangle().newRectangleWithHeight(-1);
 
         // Act & Assert
-        Assertions.assertThrows(IllegalArgumentException.class, executable);
+        Assertions.assertThrows(expectedType, executable);
     }
 
     @Test
     @DisplayName("Test Square constructor with invalid size")
     void square_ConstructorWithInvalidSize() {
         // Arrange
+        var expectedType = IllegalArgumentException.class;
         Executable executable = () -> new Square(-1);
 
         // Act & Assert
-        Assertions.assertThrows(IllegalArgumentException.class, executable);
+        Assertions.assertThrows(expectedType, executable);
     }
 
     @Test
     @DisplayName("Test creating a new square with illegal size")
     void square_NewSquareWithIllegalSize() {
         // Arrange
+        var expectedType = IllegalArgumentException.class;
         Executable executable = () -> new Square().newSquareWithSize(-1);
 
         // Act & Assert
-        Assertions.assertThrows(IllegalArgumentException.class, executable);
+        Assertions.assertThrows(expectedType, executable);
     }
 
     private static Arguments[] rectangles() {

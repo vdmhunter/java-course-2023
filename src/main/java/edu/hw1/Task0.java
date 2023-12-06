@@ -4,11 +4,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * The Task0 class provides a method {@link Task0#helloWord} which print the string "Привет, мир!".
+ * The {@code Task0} class provides a method {@link Task0#helloWord} which print the string "Привет, мир!".
  */
+@SuppressWarnings("unused")
 public final class Task0 {
 
-    private final static Logger LOGGER = LogManager.getLogger();
+    private static final Logger LOGGER = LogManager.getLogger();
 
     private Task0() {
     }

@@ -1,11 +1,11 @@
 package edu.hw1;
 
 /**
- * The Task5 class provides a method {@link Task5#isPalindromeDescendant(int)},
+ * The {@code Task5} class provides a method {@link Task5#isPalindromeDescendant(int)},
  * which checks if a number or any of its descendants is a palindrome.
  */
 public final class Task5 {
-    private final static int BASE = 10;
+    private static final int BASE = 10;
 
     private Task5() {
     }
@@ -14,7 +14,7 @@ public final class Task5 {
      * Checks if a number or any of its descendants is a palindrome.
      *
      * @param num The input number to be checked. Must be a non-negative integer with an even number of digits.
-     * @return true if the number or any of its descendants is a palindrome, false otherwise.
+     * @return {@code true} if the number or any of its descendants is a palindrome, {@code false} otherwise.
      * @throws IllegalArgumentException if the input number is less than or equal to 0,
      *                                  or if it has an odd number of digits.
      */
@@ -69,7 +69,7 @@ public final class Task5 {
      * Checks if a number is a palindrome.
      *
      * @param num The input number to be checked.
-     * @return true if the number is a palindrome, false otherwise.
+     * @return {@code true} if the number is a palindrome, {@code false} otherwise.
      */
     private static boolean isPalindrome(int num) {
         String str = String.valueOf(num);

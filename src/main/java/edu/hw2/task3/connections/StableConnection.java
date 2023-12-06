@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
  * It simulates a stable connection where commands are always executed successfully.
  */
 public class StableConnection implements Connection {
-    private final static Logger LOGGER = LogManager.getLogger();
+    private static final Logger LOGGER = LogManager.getLogger();
 
     /**
      * Executes a given command. In this implementation, the command is always executed successfully,

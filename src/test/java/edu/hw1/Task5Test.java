@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 /**
  * Tests for Homework 1, Task 5
  */
-public class Task5Test {
+class Task5Test {
     @ParameterizedTest(name = "Test {index} - Checking palindrome descendant for number {0}, expected result is {1}")
     @CsvSource({
         "11211230,true",
@@ -20,8 +20,10 @@ public class Task5Test {
     })
     @DisplayName("Happy paths")
     void isPalindromeDescendant_HappyPaths(int num, boolean expected) {
+        // Act
         boolean actual = Task5.isPalindromeDescendant(num);
 
+        // Assert
         Assertions.assertEquals(expected, actual);
     }
 
@@ -35,6 +37,10 @@ public class Task5Test {
     })
     @DisplayName("Fail paths")
     void isPalindromeDescendant_FailPaths(int num) {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> Task5.isPalindromeDescendant(num));
+        // Arrange
+        var expectedType = IllegalArgumentException.class;
+
+        // Act & Assert
+        Assertions.assertThrows(expectedType, () -> Task5.isPalindromeDescendant(num));
     }
 }

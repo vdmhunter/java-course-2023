@@ -5,18 +5,18 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * The Task1 class provides a method {@link Task1#minutesToSeconds(String)}
+ * The {@code Task1} class provides a method {@link Task1#minutesToSeconds(String)}
  * which returns the total length of the video in seconds.
  */
 public final class Task1 {
-    private final static Pattern PATTERN;
-    private final static int SECONDS_PER_MINUTE = 60;
+    private static final Pattern PATTERN;
+    private static final int SECONDS_PER_MINUTE = 60;
 
     private Task1() {
     }
 
     static {
-        PATTERN = Pattern.compile("^(?<minutes>[0-9]{1,5}):(?<seconds>0?[0-9]|[1-5][0-9])$");
+        PATTERN = Pattern.compile("^(?<minutes>\\d{1,5}):(?<seconds>0?\\d|[1-5]\\d)$");
     }
 
     /**
@@ -27,7 +27,7 @@ public final class Task1 {
      *            and "ss" is an integer between 0 and 59 representing seconds.
      * @return An integer representing the total length of the video in seconds.
      *     If the input string is not in the correct format, returns -1.
-     * @throws NullPointerException If the input string is null.
+     * @throws NullPointerException If the input string is {@code null}.
      */
     public static int minutesToSeconds(String str) {
         Objects.requireNonNull(str);

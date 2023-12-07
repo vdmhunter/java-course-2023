@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class StatsCollector {
     private final Map<String, List<Double>> data = new ConcurrentHashMap<>();
-    private static final long TIMEOUT_SECONDS = 5L;
+    private static final long TIMEOUT_SECONDS = 10L;
     private static final Logger LOGGER = LogManager.getLogger();
 
     /**

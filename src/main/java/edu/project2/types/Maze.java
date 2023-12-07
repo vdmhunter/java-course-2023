@@ -3,6 +3,7 @@ package edu.project2.types;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * The {@code Maze} class represents a maze with a specified height and width, and a grid of cells.
@@ -46,7 +47,7 @@ public record Maze(int height, int width, Cell[][] grid) {
      * @return a string representation of this {@code Maze}
      */
     @Override
-    public String toString() {
+    public @NotNull String toString() {
         return "Maze[height=" + height + ", width=" + width + ", grid=" + Arrays.deepToString(grid) + "]";
     }
 

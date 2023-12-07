@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Scanner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * The {@code Main} class for the Maze Generator program.
@@ -107,7 +108,7 @@ public class Main {
      * @param scanner The {@link Scanner} object for user input.
      * @return The user's choice.
      */
-    private static int getChoice(Scanner scanner) {
+    private static int getChoice(@NotNull Scanner scanner) {
         int choice = scanner.nextInt();
         scanner.nextLine();
 
@@ -224,7 +225,7 @@ public class Main {
      * @param col      The column index.
      * @param solution The solution path to be highlighted in the maze.
      */
-    private static void printMazeInterior(Maze maze, int row, int col, List<Coordinate> solution) {
+    private static void printMazeInterior(@NotNull Maze maze, int row, int col, List<Coordinate> solution) {
         Cell cell = maze.grid()[row][col - 1];
         if (cell.getType() == Cell.Type.WALL) {
             LOGGER.info(WALL);
@@ -240,7 +241,7 @@ public class Main {
      * @param col      The column index.
      * @param solution The solution path to be highlighted in the maze.
      */
-    private static void printMazePassage(int row, int col, List<Coordinate> solution) {
+    private static void printMazePassage(int row, int col, @NotNull List<Coordinate> solution) {
         if (solution.contains(new Coordinate(row, col - 1))) {
             LOGGER.info(PATH);
         } else {

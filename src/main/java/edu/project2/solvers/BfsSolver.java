@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import org.jetbrains.annotations.NotNull;
 import static edu.project2.Helper.createFilledMaze;
 import static edu.project2.Helper.getAvailableNeighbors;
 
@@ -24,7 +25,7 @@ public class BfsSolver implements Solver {
      * @return a {@link List} of {@link Coordinate}s representing the path from start to end
      */
     @Override
-    public List<Coordinate> solve(Maze maze, Coordinate start, Coordinate end) {
+    public List<Coordinate> solve(@NotNull Maze maze, Coordinate start, Coordinate end) {
         var cameFrom = createFilledMaze(maze.height(), maze.width(), Cell.Type.UNDEFINED);
         var visited = createFilledMaze(maze.height(), maze.width(), Cell.Type.UNVISITED);
 

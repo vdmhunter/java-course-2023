@@ -84,8 +84,8 @@ class Project2Test {
             () -> Assertions.assertNotNull(maze),
             () -> Assertions.assertNotNull(path),
             () -> Assertions.assertFalse(path.isEmpty()),
-            () -> Assertions.assertEquals(start, path.get(path.size() - 1)),
-            () -> Assertions.assertEquals(end, path.get(0)),
+            () -> Assertions.assertEquals(start, path.getLast()),
+            () -> Assertions.assertEquals(end, path.getFirst()),
             () -> {
                 for (int i = 0; i < path.size() - 1; i++) {
                     Coordinate current = path.get(i);
@@ -139,8 +139,8 @@ class Project2Test {
             () -> Assertions.assertNotNull(maze),
             () -> Assertions.assertNotNull(path),
             () -> Assertions.assertFalse(path.isEmpty()),
-            () -> Assertions.assertEquals(start, path.get(path.size() - 1)),
-            () -> Assertions.assertEquals(end, path.get(0)),
+            () -> Assertions.assertEquals(start, path.getLast()),
+            () -> Assertions.assertEquals(end, path.getFirst()),
             () -> {
                 for (int i = 0; i < path.size() - 1; i++) {
                     Coordinate current = path.get(i);

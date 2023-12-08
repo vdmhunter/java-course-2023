@@ -20,12 +20,13 @@ import org.jetbrains.annotations.NotNull;
  */
 public class DfsSolver implements Solver {
     private final ExecutorService executorService;
+    private static final int NUMBER_OF_THREADS = 3;
 
     /**
      * Constructs a new {@code DfsSolver} with a specified number of threads.
      */
     public DfsSolver() {
-        this.executorService = Executors.newFixedThreadPool(3);
+        this.executorService = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
     }
 
     /**
@@ -46,9 +47,8 @@ public class DfsSolver implements Solver {
 
         while (!cellsStack.isEmpty()) {
             List<Callable<Void>> tasks = new ArrayList<>();
-            int numThreads = 3;
 
-            for (int i = 0; i < numThreads; i++) {
+            for (int i = 0; i < NUMBER_OF_THREADS; i++) {
                 Coordinate currentCellIndex = cellsStack.poll();
 
                 if (currentCellIndex != null) {

@@ -1,6 +1,7 @@
 package edu.hw9.task2;
 
 import java.io.File;
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.RecursiveTask;
@@ -23,6 +24,9 @@ public class FileSearchTask extends RecursiveTask<List<String>> {
      * The file extension to filter files.
      */
     private final String extension;
+
+    @Serial
+    private static final long serialVersionUID = 4049673324822769377L;
 
     /**
      * Constructs a new {@code FileSearchTask} with the specified starting file, minimum size, and file extension.

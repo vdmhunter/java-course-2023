@@ -1,6 +1,7 @@
 package edu.hw9.task2;
 
 import java.io.File;
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.RecursiveTask;
@@ -18,6 +19,9 @@ public class DirSearchTask extends RecursiveTask<List<String>> {
      * The minimum number of files a directory must contain to be considered in the result.
      */
     private final int numberOfFiles;
+
+    @Serial
+    private static final long serialVersionUID = 752150994361085757L;
 
     /**
      * Constructs a new {@code DirSearchTask} with the specified starting directory and minimum number of files.

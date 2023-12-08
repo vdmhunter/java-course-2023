@@ -25,7 +25,7 @@ public class DfsSolver implements Solver {
      * Constructs a new {@code DfsSolver} with a specified number of threads.
      */
     public DfsSolver() {
-        this.executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() - 1);
+        this.executorService = Executors.newFixedThreadPool(3);
     }
 
     /**
@@ -46,7 +46,7 @@ public class DfsSolver implements Solver {
 
         while (!cellsStack.isEmpty()) {
             List<Callable<Void>> tasks = new ArrayList<>();
-            int numThreads = Runtime.getRuntime().availableProcessors();
+            int numThreads = 3;
 
             for (int i = 0; i < numThreads; i++) {
                 Coordinate currentCellIndex = cellsStack.poll();

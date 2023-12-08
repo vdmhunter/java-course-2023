@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -49,7 +50,7 @@ public class StatsCollector {
      * @return A list of {@link StatResult} objects containing statistical information for each metric.
      */
     public List<StatResult> stats() {
-        List<StatResult> results = new ArrayList<>();
+        ConcurrentLinkedQueue<StatResult> results = new ConcurrentLinkedQueue<>();
 
         try (ExecutorService executorService = Executors.newFixedThreadPool(data.size())) {
 
@@ -73,7 +74,7 @@ public class StatsCollector {
             handleExecutorServiceTermination(executorService);
         }
 
-        return results;
+        return new ArrayList<>(results);
     }
 
     /**

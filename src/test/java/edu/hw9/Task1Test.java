@@ -42,21 +42,21 @@ class Task1Test {
         // Assert
         Assertions.assertAll(
             () -> {
-                assert resultForMetric1 != null;
+                Assertions.assertNotNull(resultForMetric1);
                 Assertions.assertEquals(22.1D, resultForMetric1.sum());
                 Assertions.assertEquals(2.21D, resultForMetric1.average());
                 Assertions.assertEquals(6.9D, resultForMetric1.max());
                 Assertions.assertEquals(0.1D, resultForMetric1.min());
             },
             () -> {
-                assert resultForMetric2 != null;
+                Assertions.assertNotNull(resultForMetric2);
                 Assertions.assertEquals(32.1D, resultForMetric2.sum());
                 Assertions.assertEquals(3.21D, resultForMetric2.average());
                 Assertions.assertEquals(9.1D, resultForMetric2.max());
                 Assertions.assertEquals(0.8D, resultForMetric2.min());
             },
             () -> {
-                assert resultForMetric3 != null;
+                Assertions.assertNotNull(resultForMetric3);
                 Assertions.assertEquals(11.7D, resultForMetric3.sum());
                 Assertions.assertEquals(2.34D, resultForMetric3.average());
                 Assertions.assertEquals(5.4D, resultForMetric3.max());

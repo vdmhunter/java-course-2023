@@ -12,13 +12,11 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
  * Tests for Project 4
  */
-@Disabled
 public final class Project4Test {
     private final static int WIDTH = 1920;
     private final static int HEIGHT = 1080;
@@ -31,7 +29,7 @@ public final class Project4Test {
     private static final Logger LOGGER = LogManager.getLogger();
 
     @Test
-    void performanceTest() throws IOException {
+    void fractalImages_TestPerformance() throws IOException {
         //Arrange
         long seed = System.currentTimeMillis();
 

@@ -13,11 +13,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 /**
  * Tests for Project 4
  */
-public final class Project4Test {
+class Project4Test {
+    @TempDir Path tempDir;
+
     private final static int WIDTH = 1920;
     private final static int HEIGHT = 1080;
     private final static Rect WORLD = new Rect(-1.5, -1.5, 3.0, 3.0);
@@ -31,6 +34,7 @@ public final class Project4Test {
     @Test
     void fractalImages_TestPerformance() throws IOException {
         //Arrange
+        Path imageFile = tempDir.resolve("image.png");
         long seed = System.currentTimeMillis();
 
         List<Transformation> variations = new ArrayList<>();
@@ -38,8 +42,7 @@ public final class Project4Test {
         variations.add(new Sinusoidal());
         variations.add(new Spherical());
 
-        String fileName = "image.png";
-        Path path = IMAGES_FOLDER.resolve(fileName);
+        Path path = imageFile.toAbsolutePath();
 
         // Act
         long timeStart = System.nanoTime();

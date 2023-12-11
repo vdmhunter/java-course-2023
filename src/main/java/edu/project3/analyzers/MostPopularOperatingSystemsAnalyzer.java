@@ -50,16 +50,16 @@ public final class MostPopularOperatingSystemsAnalyzer extends Analyzer {
      */
     @Contract(pure = true)
     public static @NotNull String detectOperatingSystem(@NotNull String userAgent) {
-        var ua = userAgent.toLowerCase();
+        var lowerCaseUserAgent = userAgent.toLowerCase();
 
-        return switch (ua) {
-            case String _ua when _ua.contains("win") -> "Windows";
-            case String _ua when _ua.contains("android") -> "Android";
-            case String _ua when _ua.contains("iphone") -> "iOS";
-            case String _ua when _ua.contains("mac") -> "Mac";
-            case String _ua when _ua.contains("linux") -> "Linux";
-            case String _ua when _ua.contains("x11") || _ua.contains("unix") -> "Unix";
-            case String _ua when _ua.contains("debian") -> "Debian";
+        return switch (lowerCaseUserAgent) {
+            case String ua when ua.contains("win") -> "Windows";
+            case String ua when ua.contains("android") -> "Android";
+            case String ua when ua.contains("iphone") -> "iOS";
+            case String ua when ua.contains("mac") -> "Mac";
+            case String ua when ua.contains("linux") -> "Linux";
+            case String ua when ua.contains("x11") || ua.contains("unix") -> "Unix";
+            case String ua when ua.contains("debian") -> "Debian";
             default -> "Unknown Operating System";
         };
     }

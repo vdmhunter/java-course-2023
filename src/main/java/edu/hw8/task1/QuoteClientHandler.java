@@ -5,7 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
-import java.util.HashMap;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.Semaphore;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,37 +20,17 @@ public class QuoteClientHandler implements Runnable {
     private final Socket clientSocket;
     private final Semaphore connectionSemaphore;
     private static final int BUFFER_SIZE = 1024;
-    private static final HashMap<String, String> QUOTES = new HashMap<>();
-    private static final String DEFAULT_QUOTE = "Извини, ты даже не достоин оскорблений. Твои слова не стоят и "
-        + "байта в памяти.";
+    private static final List<String> QUOTES = Arrays.asList(
+        "Не переходи на личности там, где их нет.",
+        "Если твои противники перешли на личные оскорбления, будь уверена — твоя победа не за горами.",
+        "А я тебе говорил, что ты глупый? Так вот, я забираю свои слова обратно... Ты просто бог идиотизма.",
+        "Чем ниже интеллект, тем громче оскорбления.",
+        "Такая самоуверенность, будто у тебя в руках не мышь, а пульт дистанционного управления вселенной.",
+        "Твоя эрудиция поражает — как если бы Google решил наделить котенка библиотечными знаниями."
+    );
+    private static final String DEFAULT_QUOTE =
+        "Извини, ты даже не достоин оскорблений. Твои слова не стоят и байта в памяти.";
     private static final Logger LOGGER = LogManager.getLogger();
-
-    static {
-        QUOTES.put(
-            "личности",
-            "Не переходи на личности там, где их нет."
-        );
-        QUOTES.put(
-            "оскорбления",
-            "Если твои противники перешли на личные оскорбления, будь уверена — твоя победа не за горами."
-        );
-        QUOTES.put(
-            "глупый",
-            "А я тебе говорил, что ты глупый? Так вот, я забираю свои слова обратно... Ты просто бог идиотизма."
-        );
-        QUOTES.put(
-            "интеллект",
-            "Чем ниже интеллект, тем громче оскорбления."
-        );
-        QUOTES.put(
-            "самоуверенность",
-            "Такая самоуверенность, будто у тебя в руках не мышь, а пульт дистанционного управления вселенной."
-        );
-        QUOTES.put(
-            "эрудиция",
-            "Твоя эрудиция поражает — как если бы Google решил наделить котенка библиотечными знаниями."
-        );
-    }
 
     /**
      * Constructs a new {@code QuoteClientHandler} for a specific client socket and semaphore.
@@ -81,7 +62,6 @@ public class QuoteClientHandler implements Runnable {
      */
     @Generated()
     private void processRequest() {
-
         try (InputStream inputStream = clientSocket.getInputStream();
              OutputStream outputStream = clientSocket.getOutputStream()) {
 
@@ -92,7 +72,10 @@ public class QuoteClientHandler implements Runnable {
 
                 if (bytesRead != -1) {
                     String request = new String(buffer, 0, bytesRead);
-                    String response = QUOTES.getOrDefault(request.toLowerCase(), DEFAULT_QUOTE);
+                    String response = QUOTES.stream()
+                        .filter(quote -> quote.toLowerCase().contains(request.toLowerCase()))
+                        .findFirst()
+                        .orElse(DEFAULT_QUOTE);
 
                     outputStream.write(response.getBytes());
                 } else {

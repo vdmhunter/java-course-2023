@@ -1,6 +1,6 @@
 package edu.project4;
 
-import edu.project4.models.FractalImg;
+import edu.project4.models.FractalImage;
 import edu.project4.models.Rect;
 import edu.project4.processors.GammaCorrector;
 import edu.project4.renderers.MultiThreadedRenderer;
@@ -16,7 +16,7 @@ public class FractalFlameGenerator {
     private FractalFlameGenerator() {
     }
 
-    public static FractalImg generate(
+    public static FractalImage generate(
         int width,
         int height,
         Rect world,
@@ -27,15 +27,16 @@ public class FractalFlameGenerator {
         int symmetry,
         double gamma,
         int nThreads,
-        Path path
+        Path path,
+        ImageFormat format
     ) throws IOException {
-        var canvas = FractalImg.create(width, height);
+        var canvas = FractalImage.create(width, height);
 
         Renderer renderer = nThreads == 1
             ? new SingleThreadedRenderer()
             : new MultiThreadedRenderer(nThreads);
 
-        FractalImg renderedImage = renderer.render(
+        FractalImage renderedImage = renderer.render(
             canvas,
             world,
             variations,
@@ -50,7 +51,7 @@ public class FractalFlameGenerator {
             processor.process(renderedImage);
         }
 
-        ImageUtils.save(renderedImage, path);
+        ImageUtils.save(renderedImage, path, format);
 
         return renderedImage;
     }

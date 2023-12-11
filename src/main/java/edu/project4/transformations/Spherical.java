@@ -1,10 +1,11 @@
 package edu.project4.transformations;
 
 import edu.project4.models.Point;
+import org.jetbrains.annotations.NotNull;
 
 public class Spherical implements Transformation {
     @Override
-    public Point apply(Point point) {
+    public Point apply(@NotNull Point point) {
         double x = point.x();
         double y = point.y();
         double r2 = x * x + y * y;

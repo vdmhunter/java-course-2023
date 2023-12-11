@@ -1,6 +1,7 @@
 package edu.project4.renderers;
 
-import edu.project4.models.FractalImg;
+import edu.common.Generated;
+import edu.project4.models.FractalImage;
 import edu.project4.models.Rect;
 import edu.project4.transformations.Transformation;
 import java.util.List;
@@ -16,8 +17,8 @@ public class MultiThreadedRenderer implements Renderer {
     }
 
     @Override
-    public FractalImg render(
-        FractalImg canvas,
+    public FractalImage render(
+        FractalImage canvas,
         Rect world,
         List<Transformation> variations,
         int samples,
@@ -47,6 +48,13 @@ public class MultiThreadedRenderer implements Renderer {
             threads[i].start();
         }
 
+        extracted(threads);
+
+        return canvas;
+    }
+
+    @Generated
+    private static void extracted(Thread[] threads) {
         for (Thread thread : threads) {
             try {
                 thread.join();
@@ -54,7 +62,5 @@ public class MultiThreadedRenderer implements Renderer {
                 Thread.currentThread().interrupt();
             }
         }
-
-        return canvas;
     }
 }

@@ -1,6 +1,7 @@
 package edu.project4.renderers;
 
-import edu.project4.models.FractalImg;
+import edu.common.Generated;
+import edu.project4.models.FractalImage;
 import edu.project4.models.Pixel;
 import edu.project4.models.Point;
 import edu.project4.models.Rect;
@@ -17,8 +18,8 @@ public class SingleThreadedRenderer implements Renderer {
     public static final int START = -20;
 
     @Override
-    public FractalImg render(
-        FractalImg canvas,
+    public FractalImage render(
+        FractalImage canvas,
         Rect world,
         List<Transformation> variations,
         int samples,
@@ -42,7 +43,7 @@ public class SingleThreadedRenderer implements Renderer {
         return canvas;
     }
 
-    private void processSymmetry(FractalImg canvas, Rect world, Point pw, int symmetry) {
+    private void processSymmetry(FractalImage canvas, Rect world, Point pw, int symmetry) {
         double theta2 = 0.0;
         for (int s = 0; s < symmetry; ++s) {
             theta2 += Math.PI * 2.0 / symmetry;
@@ -54,29 +55,33 @@ public class SingleThreadedRenderer implements Renderer {
         }
     }
 
-    private void updatePixel(FractalImg canvas, Rect world, Point pwr) {
+    private void updatePixel(FractalImage canvas, Rect world, Point pwr) {
         Pixel pixel = mapRange(world, pwr, canvas);
         if (pixel != null) {
             synchronized (pixel) {
                 if (pixel.getHitCount() == 0) {
-                    pixel.setR(COLOR.getRed());
-                    pixel.setG(COLOR.getGreen());
-                    pixel.setB(COLOR.getBlue());
+                    pixel.setRed(COLOR.getRed());
+                    pixel.setGreen(COLOR.getGreen());
+                    pixel.setBlue(COLOR.getBlue());
                 } else {
-                    pixel.setR((pixel.getR() + COLOR.getRed()) / 2);
-                    pixel.setG((pixel.getG() + COLOR.getGreen()) / 2);
-                    pixel.setB((pixel.getB() + COLOR.getBlue()) / 2);
+                    pixel.setRed((pixel.getRed() + COLOR.getRed()) / 2);
+                    pixel.setGreen((pixel.getGreen() + COLOR.getGreen()) / 2);
+                    pixel.setBlue((pixel.getBlue() + COLOR.getBlue()) / 2);
                 }
 
-                pixel.addHit();
+                pixel.incrementHitCount();
             }
         }
     }
 
+
+    @Generated
     private Transformation getRandomVariation(@NotNull List<Transformation> variations) {
         return variations.get(ThreadLocalRandom.current().nextInt(0, variations.size()));
     }
 
+
+    @Generated
     @Contract("_, _ -> new")
     private @NotNull Point rotate(@NotNull Point point, double angle) {
         double x = point.x() * Math.cos(angle) - point.y() * Math.sin(angle);
@@ -85,7 +90,8 @@ public class SingleThreadedRenderer implements Renderer {
         return new Point(x, y);
     }
 
-    private @Nullable Pixel mapRange(@NotNull Rect world, @NotNull Point pwr, @NotNull FractalImg canvas) {
+    @Generated
+    private @Nullable Pixel mapRange(@NotNull Rect world, @NotNull Point pwr, @NotNull FractalImage canvas) {
         int x = (int) ((pwr.x() - world.x()) * canvas.width() / world.width());
         int y = (int) ((pwr.y() - world.y()) * canvas.height() / world.height());
 

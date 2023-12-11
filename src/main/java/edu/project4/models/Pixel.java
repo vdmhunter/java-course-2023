@@ -1,42 +1,42 @@
 package edu.project4.models;
 
 public class Pixel {
-    private int r;
-    private int g;
-    private int b;
+    private int red;
+    private int green;
+    private int blue;
     private int hitCount;
     private double normal;
 
-    public Pixel(int r, int g, int b, int hitCount) {
-        this.r = r;
-        this.g = g;
-        this.b = b;
+    public Pixel(int red, int green, int blue, int hitCount) {
+        this.red = red;
+        this.green = green;
+        this.blue = blue;
         this.hitCount = hitCount;
-        this.normal = 0.0;
+        this.normal = 0.0D;
     }
 
-    public void setR(int r) {
-        this.r = r;
+    public int getRed() {
+        return red;
     }
 
-    public int getR() {
-        return r;
+    public void setRed(int red) {
+        this.red = red;
     }
 
-    public int getG() {
-        return g;
+    public int getGreen() {
+        return green;
     }
 
-    public void setG(int g) {
-        this.g = g;
+    public void setGreen(int green) {
+        this.green = green;
     }
 
-    public int getB() {
-        return b;
+    public int getBlue() {
+        return blue;
     }
 
-    public void setB(int b) {
-        this.b = b;
+    public void setBlue(int blue) {
+        this.blue = blue;
     }
 
     public int getHitCount() {
@@ -51,7 +51,7 @@ public class Pixel {
         this.normal = normal;
     }
 
-    public void addHit() {
-        ++this.hitCount;
+    public void incrementHitCount() {
+        this.hitCount++;
     }
 }

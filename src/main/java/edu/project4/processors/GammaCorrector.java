@@ -1,25 +1,25 @@
 package edu.project4.processors;
 
-import edu.project4.models.FractalImg;
+import edu.project4.models.FractalImage;
 import edu.project4.models.Pixel;
 import org.jetbrains.annotations.NotNull;
 
 public final class GammaCorrector {
     private final double gamma;
-    private double max = 0.0;
+    private double max = 0.0D;
 
     public GammaCorrector(double gamma) {
         this.gamma = gamma;
     }
 
-    public void process(@NotNull FractalImg image) {
+    public void process(@NotNull FractalImage image) {
         calculateNormal(image);
         adjustColors(image);
     }
 
-    private void calculateNormal(@NotNull FractalImg image) {
-        for (int row = 0; row < image.height(); ++row) {
-            for (int col = 0; col < image.width(); ++col) {
+    private void calculateNormal(@NotNull FractalImage image) {
+        for (int row = 0; row < image.height(); row++) {
+            for (int col = 0; col < image.width(); col++) {
                 Pixel current = image.getPixel(col, row);
 
                 if (current.getHitCount() != 0) {
@@ -30,9 +30,9 @@ public final class GammaCorrector {
         }
     }
 
-    private void adjustColors(@NotNull FractalImg image) {
-        for (int row = 0; row < image.height(); ++row) {
-            for (int col = 0; col < image.width(); ++col) {
+    private void adjustColors(@NotNull FractalImage image) {
+        for (int row = 0; row < image.height(); row++) {
+            for (int col = 0; col < image.width(); col++) {
                 Pixel current = image.getPixel(col, row);
                 current.setNormal(current.getNormal() / max);
                 applyGammaCorrection(current);
@@ -41,9 +41,9 @@ public final class GammaCorrector {
     }
 
     private void applyGammaCorrection(@NotNull Pixel pixel) {
-        pixel.setR(applyGammaToChannel(pixel.getR(), pixel.getNormal()));
-        pixel.setG(applyGammaToChannel(pixel.getG(), pixel.getNormal()));
-        pixel.setB(applyGammaToChannel(pixel.getB(), pixel.getNormal()));
+        pixel.setRed(applyGammaToChannel(pixel.getRed(), pixel.getNormal()));
+        pixel.setGreen(applyGammaToChannel(pixel.getGreen(), pixel.getNormal()));
+        pixel.setBlue(applyGammaToChannel(pixel.getBlue(), pixel.getNormal()));
     }
 
     private int applyGammaToChannel(int colorChannel, double normal) {

@@ -19,7 +19,7 @@ import org.apache.logging.log4j.Logger;
  * The {@code Main} class for the Maze Generator program.
  * This class provides a text-based interface for generating and solving mazes using different algorithms.
  */
-public class Main {
+public final class Main {
     private static final int HEIGHT = 19;
     private static final int WIDTH = 79;
     private static final String WALL = "\u001B[34m█\u001B[0m";

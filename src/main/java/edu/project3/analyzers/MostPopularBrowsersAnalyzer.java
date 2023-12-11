@@ -49,24 +49,15 @@ public final class MostPopularBrowsersAnalyzer extends Analyzer {
     @Contract(pure = true)
     public static @NotNull String detectBrowser(@NotNull String userAgent) {
         var ua = userAgent.toLowerCase();
-        String browser;
 
-        if (ua.contains("msie") || ua.contains("trident")) {
-            browser = "Internet Explorer";
-        } else if (ua.contains("edge")) {
-            browser = "Microsoft Edge";
-        } else if (ua.contains("opr") || ua.contains("opera")) {
-            browser = "Opera";
-        } else if (ua.contains("chrome")) {
-            browser = "Google Chrome";
-        } else if (ua.contains("safari")) {
-            browser = "Safari";
-        } else if (ua.contains("firefox")) {
-            browser = "Firefox";
-        } else {
-            browser = "Unknown Browser";
-        }
-
-        return browser;
+        return switch (ua) {
+            case String _ua when _ua.contains("msie") || _ua.contains("trident") -> "Internet Explorer";
+            case String _ua when _ua.contains("edge") -> "Microsoft Edge";
+            case String _ua when _ua.contains("opr") || _ua.contains("opera") -> "Opera";
+            case String _ua when _ua.contains("chrome") -> "Google Chrome";
+            case String _ua when _ua.contains("safari") -> "Safari";
+            case String _ua when _ua.contains("firefox") -> "Firefox";
+            default -> "Unknown Browser";
+        };
     }
 }

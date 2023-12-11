@@ -210,6 +210,7 @@
                             <exclude>**/edu/hw1/Task0.class</exclude>
                             <exclude>**/edu/hw1/Main.class</exclude>
                             <exclude>**/edu/project1/Main.class</exclude>
+                            <exclude>**/edu/project2/Main.class</exclude>
                             <exclude>**/edu/project3/Main.class</exclude>
                         </excludes>
                     </configuration>

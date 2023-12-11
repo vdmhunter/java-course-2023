@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import org.jetbrains.annotations.NotNull;
 import static edu.project3.parser.NginxLogParser.parseLogFiles;
 import static edu.project3.parser.NginxLogParser.parseLogLines;
@@ -98,8 +99,8 @@ public class Processor {
         OffsetDateTime from = settings.getFrom();
         OffsetDateTime to = settings.getTo();
 
-        boolean afterFrom = (from == null || timeLocal.isAfter(from));
-        boolean beforeTo = (to == null || timeLocal.isBefore(to));
+        boolean afterFrom = (Objects.isNull(from) || timeLocal.isAfter(from));
+        boolean beforeTo = (Objects.isNull(to) || timeLocal.isBefore(to));
 
         return afterFrom && beforeTo;
     }

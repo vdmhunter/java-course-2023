@@ -43,7 +43,6 @@ public final class AlphabeticPasswordGenerator {
      */
     public @NotNull String generate() {
         checkNextPasswordAvailability();
-
         var password = new StringBuilder();
 
         for (int index : currentIndex) {

@@ -38,7 +38,6 @@ public final class CharacterSubsetPasswordGenerator {
      */
     public @NotNull String generatePassword() {
         checkPasswordAvailability();
-
         var password = new StringBuilder();
 
         for (int index : currentIndex) {
@@ -46,6 +45,7 @@ public final class CharacterSubsetPasswordGenerator {
         }
 
         incrementIndices();
+
         return password.toString();
     }
 

@@ -137,7 +137,7 @@ public final class PasswordRecoveryService {
         try {
             var md = MessageDigest.getInstance("MD5");
             byte[] digest = md.digest(input.getBytes());
-            StringBuilder hexString = new StringBuilder();
+            var hexString = new StringBuilder();
 
             for (byte b : digest) {
                 String hex = Integer.toHexString(FF & b);
@@ -153,6 +153,7 @@ public final class PasswordRecoveryService {
         } catch (NoSuchAlgorithmException e) {
             String errorMessage = "MD5 algorithm not available";
             LOGGER.error(errorMessage, e);
+
             throw new Md5HashingException(errorMessage, e);
         }
     }

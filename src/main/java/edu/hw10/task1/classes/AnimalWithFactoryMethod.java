@@ -13,13 +13,6 @@ public class AnimalWithFactoryMethod {
     protected int pawsCount;
 
     /**
-     * Constructs a new {@code AnimalWithFactoryMethod} with default values.
-     * The use of the default constructor is restricted.
-     */
-    private AnimalWithFactoryMethod() {
-    }
-
-    /**
      * Creates a new instance of {@code AnimalWithFactoryMethod} with the specified name and number of paws.
      *
      * @param name      The name of the animal. Must not be {@code null}.

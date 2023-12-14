@@ -45,7 +45,7 @@ class Task2Test {
         }
 
         // Assert
-        Assertions.assertTrue(directories.stream().anyMatch(s -> s.contains("SubFolderWithMoreThan1000Files_")));
+        Assertions.assertTrue(directories.stream().allMatch(s -> s.contains("SubFolderWithMoreThan1000Files_")));
     }
 
     @Test
@@ -62,7 +62,7 @@ class Task2Test {
         }
 
         // Assert
-        Assertions.assertTrue(files.stream().anyMatch(s -> s.contains("FileWithSizeMoreThan1000_")));
+        Assertions.assertTrue(files.stream().allMatch(s -> s.contains("FileWithSizeMoreThan1000_")));
     }
 
     private void createRandomFolderStructure(Path currentDir, int remainingSubFolders) throws IOException {

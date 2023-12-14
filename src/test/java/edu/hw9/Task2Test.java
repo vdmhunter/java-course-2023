@@ -78,7 +78,7 @@ class Task2Test {
             String subFolderPrefix = "SubFolder_";
             int fileCount = random.nextInt(51) + 50;
 
-            if (!thousandFilesFlag && random.nextInt(11) == 5) {
+            if (!thousandFilesFlag && random.nextInt(5) == 3) {
                 fileCount = 1_001;
                 subFolderPrefix = "SubFolderWithMoreThan1000Files_";
                 thousandFilesFlag = true;
@@ -87,7 +87,6 @@ class Task2Test {
             Path subFolder = Files.createDirectory(currentDir.resolve(subFolderPrefix + i));
 
             createFiles(subFolder, fileCount, random);
-
             createRandomFolderStructure(subFolder, remainingSubFolders - 1);
         }
     }

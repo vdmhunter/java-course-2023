@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ForkJoinPool;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,14 +19,16 @@ import org.junit.jupiter.api.io.TempDir;
  * Tests for Homework 9, Task 2
  */
 class Task2Test {
+    boolean thousandFilesFlag = false;
+    boolean largeFileSizeFlag = false;
     @TempDir Path tempDir;
 
     @BeforeEach
     void setup() throws IOException {
-        createSubFolderWithFilesInTempDir("testFolder1_",101);
-        createSubFolderWithFilesInTempDir("testFolder2_",1_001);
-        createFileInTempDir("file1.txt", 1_024);
-        createFileInTempDir("file2.tmp", 512);
+        thousandFilesFlag = false;
+        largeFileSizeFlag = false;
+
+        createRandomFolderStructure(tempDir, 5);
     }
 
     @Test
@@ -35,7 +38,6 @@ class Task2Test {
         List<String> directories;
         File startSearchPath = tempDir.toFile();
 
-
         // Act
         try (ForkJoinPool pool = new ForkJoinPool()) {
             var task = new DirSearchTask(startSearchPath, 1_000);
@@ -43,7 +45,7 @@ class Task2Test {
         }
 
         // Assert
-        Assertions.assertTrue(directories.stream().anyMatch(s -> s.contains("testFolder2_")));
+        Assertions.assertTrue(directories.stream().anyMatch(s -> s.contains("SubFolderWithMoreThan1000Files_")));
     }
 
     @Test
@@ -60,22 +62,53 @@ class Task2Test {
         }
 
         // Assert
-        Assertions.assertTrue(files.stream().anyMatch(s -> s.contains("file1.txt")));
+        Assertions.assertTrue(files.stream().anyMatch(s -> s.contains("FileWithSizeMoreThan1000_")));
     }
 
+    private void createRandomFolderStructure(Path currentDir, int remainingSubFolders) throws IOException {
+        if (remainingSubFolders <= 0) {
+            return;
+        }
 
-    private void createSubFolderWithFilesInTempDir(String folderPrefix, int numberOfFiles) throws IOException {
-        Path folder = Files.createTempDirectory(tempDir, folderPrefix);
+        Random random = new Random();
 
-        for (int i = 0; i < numberOfFiles; i++) {
-            Files.createTempFile(folder, "testFile", ".tmp");
+        int subFolderCount = random.nextInt(5) + 1;
+
+        for (int i = 0; i < subFolderCount; i++) {
+            String subFolderPrefix = "SubFolder_";
+            int fileCount = random.nextInt(51) + 50;
+
+            if (!thousandFilesFlag && random.nextInt(11) == 5) {
+                fileCount = 1_001;
+                subFolderPrefix = "SubFolderWithMoreThan1000Files_";
+                thousandFilesFlag = true;
+            }
+
+            Path subFolder = Files.createDirectory(currentDir.resolve(subFolderPrefix + i));
+
+            createFiles(subFolder, fileCount, random);
+
+            createRandomFolderStructure(subFolder, remainingSubFolders - 1);
         }
     }
 
-    private void createFileInTempDir(String fileName, int numberOfChars) throws IOException {
-        Path filePath = tempDir.resolve(fileName);
-        String chars = "*".repeat(numberOfChars);
+    private void createFiles(Path subFolder, int fileCount, Random random) throws IOException {
+        for (int j = 0; j < fileCount; j++) {
+            String filePrefix = "File_";
+            String fileExt = ".tmp";
 
-        Files.write(filePath, chars.getBytes());
+            if (!largeFileSizeFlag && random.nextInt(101) == 50) {
+                fileCount = 1_000;
+                filePrefix = "FileWithSizeMoreThan1000_";
+                fileExt = ".txt";
+                largeFileSizeFlag = true;
+            }
+
+            var path = Files.createFile(subFolder.resolve(filePrefix + j + fileExt));
+
+            if (path.getFileName().toString().startsWith("FileWithSizeMoreThan1000_")) {
+                Files.write(path, "*".repeat(1_024).getBytes());
+            }
+        }
     }
 }

@@ -39,7 +39,9 @@
         <assertj.version>3.24.2</assertj.version>
         <mockito.version>5.6.0</mockito.version>
         <awaitility.version>4.2.0</awaitility.version>
-        <bytebuddy.version>1.14.9</bytebuddy.version>
+        <bytebuddy-agent.version>1.14.8</bytebuddy-agent.version>
+        <bytebuddy.version>1.14.10</bytebuddy.version>
+        <asm.version>9.6</asm.version>
 
         <maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
@@ -109,6 +111,24 @@
             <version>${commons-cli.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.ow2.asm</groupId>
+            <artifactId>asm</artifactId>
+            <version>${asm.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy-agent</artifactId>
+            <version>${bytebuddy-agent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+            <version>${bytebuddy.version}</version>
+        </dependency>
+
         <!-- Logging -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -140,12 +160,6 @@
             <groupId>org.awaitility</groupId>
             <artifactId>awaitility</artifactId>
             <version>${awaitility.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>net.bytebuddy</groupId>
-            <artifactId>byte-buddy</artifactId>
-            <version>${bytebuddy.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -275,7 +289,9 @@
                         <consoleOutput>true</consoleOutput>
                         <logViolationsToConsole>true</logViolationsToConsole>
                         <failsOnError>true</failsOnError>
-                        <excludes>**/edu/project3/analyzers/MostPopularBrowsersAnalyzer.java,**/edu/project3/analyzers/MostPopularOperatingSystemsAnalyzer.java</excludes>
+                        <excludes>
+                            **/edu/project3/analyzers/MostPopularBrowsersAnalyzer.java,**/edu/project3/analyzers/MostPopularOperatingSystemsAnalyzer.java
+                        </excludes>
                     </configuration>
                 </plugin>
             </plugins>

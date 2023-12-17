@@ -9,7 +9,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 /**
  * tests for homework 11, task 3
@@ -17,12 +18,22 @@ import org.junit.jupiter.api.Test;
 class Task3Test {
     private static final Logger LOGGER = LogManager.getLogger();
 
-    @Test
+    @ParameterizedTest(name = "Test {index} - Iterative Fibonacci Calculation using ByteBuddy: n={0}, expected={1}")
+    @CsvSource({
+        "1,1",
+        "2,1",
+        "3,2",
+        "4,3",
+        "5,5",
+        "6,8",
+        "7,13",
+        "8,21",
+        "9,34",
+        "10,55",
+    })
     @DisplayName("Test iterative Fibonacci Calculation using ByteBuddy")
-    void ByteBuddy_TestIterativeFibonacci() {
+    void ByteBuddy_TestIterativeFibonacci(int n, long expected) {
         // Arrange
-        long expected = 144L;
-
         Class<?> dynamicType = new ByteBuddy()
             .subclass(Object.class)
             .name("IterativeFibonacci")
@@ -38,7 +49,7 @@ class Task3Test {
         // Act
         try {
             Method fibMethod = dynamicType.getMethod("fib", int.class);
-            actual = (long) fibMethod.invoke(dynamicType, 12);
+            actual = (long) fibMethod.invoke(dynamicType, n);
         } catch (Exception e) {
             LOGGER.error(e);
         }

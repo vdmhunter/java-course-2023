@@ -1,11 +1,11 @@
 package edu.hw9.task2;
 
+import edu.common.Generated;
 import java.io.File;
 import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.RecursiveTask;
-import edu.common.Generated;
 import org.jetbrains.annotations.NotNull;
 
 /**

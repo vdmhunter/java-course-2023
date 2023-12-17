@@ -1,5 +1,6 @@
 package edu.hw9.task2;
 
+import edu.common.Generated;
 import java.io.File;
 import java.io.Serial;
 import java.util.ArrayList;
@@ -40,6 +41,7 @@ public class DirSearchTask extends RecursiveTask<List<String>> {
      * @return A list of directory paths that meet the criteria.
      */
     @Override
+    @Generated
     protected List<String> compute() {
         int count = 0;
         List<String> directories = new ArrayList<>();

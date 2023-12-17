@@ -5,6 +5,7 @@ import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.RecursiveTask;
+import edu.common.Generated;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -60,6 +61,7 @@ public class FileSearchTask extends RecursiveTask<List<String>> {
      * @param currentFile The current file or directory being processed.
      * @param foundFiles  The list to store paths of files that meet the criteria.
      */
+    @Generated
     private void searchFiles(@NotNull File currentFile, List<String> foundFiles) {
         File[] files = currentFile.listFiles();
 
@@ -80,6 +82,7 @@ public class FileSearchTask extends RecursiveTask<List<String>> {
      * @param currentFile The file to process.
      * @param foundFiles  The list to store paths of files that meet the criteria.
      */
+    @Generated
     private void processFile(@NotNull File currentFile, List<String> foundFiles) {
         if (currentFile.length() > size && currentFile.getName().endsWith(extension)) {
             foundFiles.add(currentFile.getPath());

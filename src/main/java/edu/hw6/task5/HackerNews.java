@@ -71,6 +71,7 @@ public class HackerNews {
      * @param response The HTTP response containing the response body.
      * @return An array of long values representing the IDs of the top stories.
      */
+    @Generated
     private long[] parseTopStories(@NotNull HttpResponse<String> response) {
         String responseBody = response.body();
         String[] numberStrings = responseBody.substring(1, responseBody.length() - 1).split(",");
@@ -86,6 +87,7 @@ public class HackerNews {
      * @param response The HTTP response containing the response body.
      * @return The title of the Hacker News story.
      */
+    @Generated
     private @NotNull String parseStoryTitle(@NotNull HttpResponse<String> response) {
         String responseBody = response.body();
         String regex = "\"title\":\"(.*?)\"";

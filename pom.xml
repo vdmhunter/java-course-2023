@@ -40,6 +40,7 @@
         <mockito.version>5.6.0</mockito.version>
         <awaitility.version>4.2.0</awaitility.version>
         <bytebuddy.version>1.14.9</bytebuddy.version>
+        <jmh.version>1.37</jmh.version>
 
         <maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
@@ -148,6 +149,19 @@
             <version>${bytebuddy.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- JMH -->
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-core</artifactId>
+            <version>${jmh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-generator-annprocess</artifactId>
+            <version>${jmh.version}</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -227,6 +241,7 @@
                             <exclude>**/edu/project1/Main.class</exclude>
                             <exclude>**/edu/project2/Main.class</exclude>
                             <exclude>**/edu/project3/Main.class</exclude>
+                            <exclude>**/ReflectionBenchmark_*.class</exclude>
                         </excludes>
                     </configuration>
                 </plugin>

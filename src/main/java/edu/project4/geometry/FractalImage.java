@@ -1,8 +1,8 @@
 package edu.project4.geometry;
 
+import edu.common.Generated;
 import java.util.Arrays;
 import java.util.Objects;
-import edu.common.Generated;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 

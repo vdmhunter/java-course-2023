@@ -1,7 +1,7 @@
 package edu.project4.geometry;
 
-import java.util.Objects;
 import edu.common.Generated;
+import java.util.Objects;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 

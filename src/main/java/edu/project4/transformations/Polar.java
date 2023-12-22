@@ -5,15 +5,14 @@ import edu.project4.geometry.Point;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * The {@code Spherical} class represents a transformation that applies a "Spherical" effect to a 2D point.
- * It transforms the point by mapping its Cartesian coordinates to spherical coordinates.
+ * The {@code Polar} class represents a transformation that converts Cartesian coordinates to polar coordinates.
  */
-public class Spherical implements Transformation {
+public class Polar implements Transformation {
     /**
-     * Applies the "Spherical" transformation to the given 2D point.
+     * Applies the polar transformation to the given 2D point.
      *
      * @param point The input point to be transformed.
-     * @return The transformed point after mapping Cartesian coordinates to spherical coordinates.
+     * @return The transformed point after converting Cartesian coordinates to polar coordinates.
      * @throws NullPointerException if the input point is {@code null}.
      */
     @Generated
@@ -23,7 +22,11 @@ public class Spherical implements Transformation {
         double y = point.y();
 
         double r = Math.sqrt(x * x + y * y);
+        double theta = Math.atan2(y, x);
 
-        return new Point(x / (r * r), y / (r * r));
+        double newX = theta / Math.PI;
+        double newY = r - 1;
+
+        return new Point(newX, newY);
     }
 }

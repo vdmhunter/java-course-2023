@@ -5,16 +5,16 @@ import edu.project4.geometry.Point;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * The {@code Disc} class represents a transformation that applies a "Disc" effect to a 2D point.
- * It transforms the point by mapping its Cartesian coordinates to polar coordinates and scaling
- * the result based on the polar angle.
+ * The {@code Diamond} class represents a transformation that applies a "Diamond" effect to a 2D point.
+ * It transforms the point by mapping its Cartesian coordinates to polar coordinates and applying sine and cosine
+ * functions.
  */
-public class Disc implements Transformation {
+public class Diamond implements Transformation {
     /**
-     * Applies the "Disc" transformation to the given 2D point.
+     * Applies the "Diamond" transformation to the given 2D point.
      *
      * @param point The input point to be transformed.
-     * @return The transformed point after applying the "Disc" effect.
+     * @return The transformed point after applying the "Diamond" effect.
      * @throws NullPointerException if the input point is {@code null}.
      */
     @Generated
@@ -26,8 +26,8 @@ public class Disc implements Transformation {
         double r = Math.sqrt(x * x + y * y);
         double theta = Math.atan2(y, x);
 
-        double newX = (theta / Math.PI) * Math.sin(Math.PI * r);
-        double newY = (theta / Math.PI) * Math.cos(Math.PI * r);
+        double newX = Math.sin(theta) * Math.cos(r);
+        double newY = Math.cos(theta) * Math.sin(r);
 
         return new Point(newX, newY);
     }

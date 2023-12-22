@@ -99,7 +99,7 @@ class Project4Test {
         );
 
         long single = System.nanoTime() - timeStart;
-        LOGGER.trace("Single thread, seconds:\t" + (double) single / 1_000_000_000);
+        LOGGER.trace("Single thread, seconds: {}", (double) single / 1_000_000_000);
 
         timeStart = System.nanoTime();
         ImageGenerator.generate(new ImageGenerator.Params(
@@ -118,8 +118,8 @@ class Project4Test {
         );
 
         long multi = System.nanoTime() - timeStart;
-        LOGGER.trace("Multi threads, seconds:\t" + (double) multi / 1_000_000_000);
-        LOGGER.trace("Multi threaded renderer is faster by:\t" + ((double) single / multi));
+        LOGGER.trace("Multi threads, seconds: {}", (double) multi / 1_000_000_000);
+        LOGGER.trace("Multi threaded renderer is faster by: {}", ((double) single / multi));
 
         //Assert
         Assertions.assertTrue(Files.size(imageFile) > 0);

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.IntStream;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * The {@code Helper} class provides utility methods for maze generation and solving.
@@ -28,7 +29,7 @@ public final class Helper {
      * @param type the type of the cells in the maze
      * @return a 2D array of {@link Cell} representing the filled maze
      */
-    public static Cell[][] createFilledMaze(int rows, int cols, Cell.Type type) {
+    public static @NotNull Cell[][] createFilledMaze(int rows, int cols, Cell.Type type) {
         return IntStream.range(0, rows)
             .mapToObj(i -> IntStream.range(0, cols)
                 .mapToObj(j -> new Cell(i, j, type))
@@ -43,7 +44,7 @@ public final class Helper {
      * @param cell the cell
      * @return a {@link List} of unvisited neighbor cells
      */
-    public static List<Cell> getUnvisitedNeighbors(Maze maze, Cell cell) {
+    public static @NotNull List<Cell> getUnvisitedNeighbors(@NotNull Maze maze, @NotNull Cell cell) {
         Cell[][] grid = maze.grid();
         int row = cell.getRow();
         int col = cell.getCol();
@@ -75,7 +76,7 @@ public final class Helper {
      * @param coordinate the coordinate
      * @return true if the cell at the coordinate is a wall, false otherwise
      */
-    private static boolean isWall(Cell[][] grid, Coordinate coordinate) {
+    private static boolean isWall(Cell[][] grid, @NotNull Coordinate coordinate) {
         int row = coordinate.row();
         int col = coordinate.col();
 
@@ -90,7 +91,7 @@ public final class Helper {
      * @param visited a 2D array of Cells representing the visited cells
      * @return a {@link List} of available neighbor cells that have not been visited
      */
-    public static List<Cell> getAvailableNeighbors(Maze maze, Cell cell, Cell[][] visited) {
+    public static @NotNull List<Cell> getAvailableNeighbors(@NotNull Maze maze, @NotNull Cell cell, Cell[][] visited) {
         Cell[][] grid = maze.grid();
         int row = cell.getRow();
         int col = cell.getCol();
@@ -123,7 +124,7 @@ public final class Helper {
      * @param coordinate the coordinate
      * @return true if the cell at the coordinate is a passage and has not been visited, false otherwise
      */
-    private static boolean isUnvisitedPassage(Cell[][] grid, Cell[][] visited, Coordinate coordinate) {
+    private static boolean isUnvisitedPassage(Cell[][] grid, Cell[][] visited, @NotNull Coordinate coordinate) {
         int row = coordinate.row();
         int col = coordinate.col();
 
@@ -138,7 +139,7 @@ public final class Helper {
      * @param coordinate the coordinate
      * @return true if the coordinate is valid in the grid, false otherwise
      */
-    private static boolean isValid(Cell[][] grid, Coordinate coordinate) {
+    private static boolean isValid(Cell[][] grid, @NotNull Coordinate coordinate) {
         int row = coordinate.row();
         int col = coordinate.col();
 
@@ -152,7 +153,7 @@ public final class Helper {
      * @param <T>   the type of elements in the list
      * @return a randomly chosen element from the list
      */
-    public static <T> T chooseRandom(List<T> array) {
+    public static <T> T chooseRandom(@NotNull List<T> array) {
         return array.get(RANDOM.nextInt(array.size()));
     }
 
@@ -179,7 +180,7 @@ public final class Helper {
      * @param currentCell  the current cell
      * @param neighborCell the neighbor cell
      */
-    public static void removeWallGrid(Maze maze, Cell currentCell, Cell neighborCell) {
+    public static void removeWallGrid(@NotNull Maze maze, @NotNull Cell currentCell, @NotNull Cell neighborCell) {
         int midRow = currentCell.getRow() + (neighborCell.getRow() - currentCell.getRow()) / 2;
         int midCol = currentCell.getCol() + (neighborCell.getCol() - currentCell.getCol()) / 2;
 

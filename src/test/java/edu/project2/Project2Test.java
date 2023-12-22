@@ -3,6 +3,7 @@ package edu.project2;
 import edu.project2.generators.GrowingTreeGenerator;
 import edu.project2.generators.RecursiveBacktrackerGenerator;
 import edu.project2.solvers.BfsSolver;
+import edu.project2.solvers.DfsMultithreadSolver;
 import edu.project2.solvers.DfsSolver;
 import edu.project2.types.Cell;
 import edu.project2.types.Coordinate;
@@ -84,8 +85,8 @@ class Project2Test {
             () -> Assertions.assertNotNull(maze),
             () -> Assertions.assertNotNull(path),
             () -> Assertions.assertFalse(path.isEmpty()),
-            () -> Assertions.assertEquals(start, path.get(path.size() - 1)),
-            () -> Assertions.assertEquals(end, path.get(0)),
+            () -> Assertions.assertEquals(start, path.getLast()),
+            () -> Assertions.assertEquals(end, path.getFirst()),
             () -> {
                 for (int i = 0; i < path.size() - 1; i++) {
                     Coordinate current = path.get(i);
@@ -139,8 +140,8 @@ class Project2Test {
             () -> Assertions.assertNotNull(maze),
             () -> Assertions.assertNotNull(path),
             () -> Assertions.assertFalse(path.isEmpty()),
-            () -> Assertions.assertEquals(start, path.get(path.size() - 1)),
-            () -> Assertions.assertEquals(end, path.get(0)),
+            () -> Assertions.assertEquals(start, path.getLast()),
+            () -> Assertions.assertEquals(end, path.getFirst()),
             () -> {
                 for (int i = 0; i < path.size() - 1; i++) {
                     Coordinate current = path.get(i);
@@ -153,7 +154,40 @@ class Project2Test {
     }
 
     @Test
-    @DisplayName("DfsSolver should return an empty path when there is no valid path from start to end in a maze.")
+    @DisplayName("DfsMultithreadSolver should find a valid path from start to end in a generated maze")
+    void dfsMultithreadSolver_TestSolve() {
+        // Arrange
+        int height = 19;
+        int width = 79;
+        Coordinate start = new Coordinate(0, 0);
+        Coordinate end = new Coordinate(height - 1, width - 1);
+        var generator = new GrowingTreeGenerator();
+        var solver = new DfsMultithreadSolver();
+
+        // Act
+        Maze maze = generator.generate(height, width);
+        List<Coordinate> path = solver.solve(maze, start, end);
+
+        // Assert
+        Assertions.assertAll(
+            () -> Assertions.assertNotNull(maze),
+            () -> Assertions.assertNotNull(path),
+            () -> Assertions.assertFalse(path.isEmpty()),
+            () -> Assertions.assertEquals(start, path.getLast()),
+            () -> Assertions.assertEquals(end, path.getFirst()),
+            () -> {
+                for (int i = 0; i < path.size() - 1; i++) {
+                    Coordinate current = path.get(i);
+                    Coordinate next = path.get(i + 1);
+
+                    Assertions.assertTrue(isNeighbor(current, next));
+                }
+            }
+        );
+    }
+
+    @Test
+    @DisplayName("DfsSolver should return an empty path when there is no valid solution path.")
     void dfsSolver_TestSolveNoPath() {
         // Arrange
         int height = 19;
@@ -161,6 +195,28 @@ class Project2Test {
         Cell[][] grid = createFilledMaze(height, width, Cell.Type.WALL);
         Maze maze = new Maze(height, width, grid);
         var solver = new DfsSolver();
+
+        Coordinate start = new Coordinate(0, 0);
+        Coordinate end = new Coordinate(height - 1, width - 1);
+
+        List<Coordinate> path = solver.solve(maze, start, end);
+
+        // Assert
+        Assertions.assertAll(
+            () -> Assertions.assertNotNull(path),
+            () -> Assertions.assertTrue(path.isEmpty())
+        );
+    }
+
+    @Test
+    @DisplayName("DfsMultithreadSolver should return an empty path when there is no valid solution path.")
+    void dfsMultithreadSolver_TestSolveNoPath() {
+        // Arrange
+        int height = 19;
+        int width = 79;
+        Cell[][] grid = createFilledMaze(height, width, Cell.Type.WALL);
+        Maze maze = new Maze(height, width, grid);
+        var solver = new DfsMultithreadSolver();
 
         Coordinate start = new Coordinate(0, 0);
         Coordinate end = new Coordinate(height - 1, width - 1);

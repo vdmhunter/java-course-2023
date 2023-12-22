@@ -5,6 +5,7 @@ import edu.project2.types.Coordinate;
 import edu.project2.types.Maze;
 import java.util.ArrayList;
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * The {@code Solver} interface defines the contract for classes that solve mazes.
@@ -27,7 +28,7 @@ public interface Solver {
      * @param currentIndex the current coordinate
      * @return a {@link List} of {@link Coordinate}s representing the path from start to end
      */
-    default List<Coordinate> reconstructPath(Cell[][] cameFrom, Coordinate currentIndex) {
+    default List<Coordinate> reconstructPath(@NotNull Cell[][] cameFrom, Coordinate currentIndex) {
         List<Coordinate> totalPath = new ArrayList<>();
         totalPath.add(currentIndex);
 

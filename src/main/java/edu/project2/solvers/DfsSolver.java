@@ -3,10 +3,9 @@ package edu.project2.solvers;
 import edu.project2.types.Cell;
 import edu.project2.types.Coordinate;
 import edu.project2.types.Maze;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
+import org.jetbrains.annotations.NotNull;
 import static edu.project2.Helper.createFilledMaze;
 import static edu.project2.Helper.getAvailableNeighbors;
 
@@ -24,39 +23,47 @@ public class DfsSolver implements Solver {
      * @return a {@link List} of {@link Coordinate}s representing the path from start to end
      */
     @Override
-    public List<Coordinate> solve(Maze maze, Coordinate start, Coordinate end) {
+    public List<Coordinate> solve(@NotNull Maze maze, Coordinate start, Coordinate end) {
         var cameFrom = createFilledMaze(maze.height(), maze.width(), Cell.Type.UNDEFINED);
         var visited = createFilledMaze(maze.height(), maze.width(), Cell.Type.UNVISITED);
 
-        Queue<Coordinate> cellsStack = new ArrayDeque<>();
-        cellsStack.add(start);
+        List<Coordinate> path = new ArrayList<>();
+        boolean found = dfs(maze, start, end, visited, cameFrom, path);
 
-        while (!cellsStack.isEmpty()) {
-            Coordinate currentCellIndex = cellsStack.poll();
+        if (found) {
+            return path;
+        } else {
+            return new ArrayList<>();
+        }
+    }
 
-            if (currentCellIndex.equals(end)) {
-                return reconstructPath(cameFrom, currentCellIndex);
-            }
+    private boolean dfs(
+        Maze maze,
+        @NotNull Coordinate current,
+        Coordinate end,
+        Cell[][] visited,
+        Cell[][] cameFrom,
+        List<Coordinate> path
+    ) {
+        if (current.equals(end)) {
+            path.add(current);
 
-            visited[currentCellIndex.row()][currentCellIndex.col()].setType(Cell.Type.VISITED);
+            return true;
+        }
 
-            List<Cell> availableNeighbors =
-                getAvailableNeighbors(
-                    maze,
-                    maze.grid()[currentCellIndex.row()][currentCellIndex.col()],
-                    visited
-                );
+        visited[current.row()][current.col()].setType(Cell.Type.VISITED);
 
-            for (Cell neighbor : availableNeighbors) {
-                cameFrom[neighbor.getRow()][neighbor.getCol()] =
-                    maze.grid()[currentCellIndex.row()][currentCellIndex.col()];
-            }
+        List<Cell> availableNeighbors = getAvailableNeighbors(maze, maze.grid()[current.row()][current.col()], visited);
 
-            for (Cell neighbor : availableNeighbors) {
-                cellsStack.add(new Coordinate(neighbor.getRow(), neighbor.getCol()));
+        for (Cell neighbor : availableNeighbors) {
+            cameFrom[neighbor.getRow()][neighbor.getCol()] = maze.grid()[current.row()][current.col()];
+            if (dfs(maze, new Coordinate(neighbor.getRow(), neighbor.getCol()), end, visited, cameFrom, path)) {
+                path.add(current);
+
+                return true;
             }
         }
 
-        return new ArrayList<>();
+        return false;
     }
 }

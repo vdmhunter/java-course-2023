@@ -42,6 +42,7 @@
         <bytebuddy-agent.version>1.14.8</bytebuddy-agent.version>
         <bytebuddy.version>1.14.10</bytebuddy.version>
         <asm.version>9.6</asm.version>
+        <jmh.version>1.37</jmh.version>
 
         <maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
@@ -242,6 +243,7 @@
                             <exclude>**/edu/project2/Main.class</exclude>
                             <exclude>**/edu/project3/Main.class</exclude>
                             <exclude>**/edu/project4/Main.class</exclude>
+                            <exclude>**/ReflectionBenchmark_*.class</exclude>
                         </excludes>
                     </configuration>
                 </plugin>

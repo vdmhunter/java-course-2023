@@ -25,7 +25,7 @@ class Task2Test {
         //Assert
         Assertions.assertAll(
             () -> Assertions.assertEquals(2, result.size()),
-            () -> Assertions.assertEquals(LocalDate.of(year, 1, 13), result.get(0)),
+            () -> Assertions.assertEquals(LocalDate.of(year, 1, 13), result.getFirst()),
             () -> Assertions.assertEquals(LocalDate.of(year, 10, 13), result.get(1))
         );
     }

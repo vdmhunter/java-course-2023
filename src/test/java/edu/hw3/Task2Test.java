@@ -20,6 +20,7 @@ class Task2Test {
     @ParameterizedTest(name = "Test {index} - Happy path: Bracket clustering for \"{0}\"")
     @MethodSource("provideBracketsForHappyPaths")
     @DisplayName("Happy paths")
+    @SuppressWarnings("SpellCheckingInspection")
     void clusterize_HappyPaths(String str, ArrayList<String> expected) {
         // Act
         List<String> actual = BracketClusterizer.clusterize(str);
@@ -41,6 +42,7 @@ class Task2Test {
 
     @Test
     @DisplayName("Test when input string is null")
+    @SuppressWarnings("SpellCheckingInspection")
     void clusterize_InputStringIsNull() {
         // Arrange
         var expectedType = NullPointerException.class;
@@ -51,6 +53,7 @@ class Task2Test {
 
     @Test
     @DisplayName("Test when input string is empty")
+    @SuppressWarnings("SpellCheckingInspection")
     void clusterize_InputStringIsEmpty() {
         // Arrange
         var expectedType = IllegalArgumentException.class;

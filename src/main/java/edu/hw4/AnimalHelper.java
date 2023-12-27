@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * The {@code AnimalHelper} class provides a collection of static methods for various tasks related to
@@ -23,7 +25,7 @@ public final class AnimalHelper {
      * @param animals The list of animals to be sorted.
      * @return A new list of animals sorted by height in ascending order.
      */
-    public static List<Animal> task1SortAnimalsByHeight(List<Animal> animals) {
+    public static List<Animal> task1SortAnimalsByHeight(@NotNull List<Animal> animals) {
         return animals.stream()
             .sorted(Comparator.comparingInt(Animal::height))
             .toList();
@@ -36,7 +38,7 @@ public final class AnimalHelper {
      * @param k       The number of top animals to select.
      * @return A new list of the top 'k' heaviest animals sorted by weight in descending order.
      */
-    public static List<Animal> task2SortAndSelectTopByWeight(List<Animal> animals, int k) {
+    public static List<Animal> task2SortAndSelectTopByWeight(@NotNull List<Animal> animals, int k) {
         return animals.stream()
             .sorted(Comparator.comparingInt(Animal::weight).reversed())
             .limit(k)
@@ -49,7 +51,7 @@ public final class AnimalHelper {
      * @param animals The list of animals to be categorized and counted.
      * @return A map associating each animal type with the number of animals of that type.
      */
-    public static Map<Animal.Type, Integer> task3CountAnimalsByType(List<Animal> animals) {
+    public static Map<Animal.Type, Integer> task3CountAnimalsByType(@NotNull List<Animal> animals) {
         return animals.stream()
             .collect(Collectors.groupingBy(Animal::type, Collectors.summingInt(e -> 1)));
     }
@@ -60,7 +62,7 @@ public final class AnimalHelper {
      * @param animals The list of animals to search for the one with the longest name.
      * @return The animal with the longest name, or null if the list is empty.
      */
-    public static Animal task4FindAnimalWithLongestName(List<Animal> animals) {
+    public static Animal task4FindAnimalWithLongestName(@NotNull List<Animal> animals) {
         return animals.stream()
             .max(Comparator.comparingInt(animal -> animal.name().length()))
             .orElse(null);
@@ -73,7 +75,7 @@ public final class AnimalHelper {
      * @param animals The list of animals to compare genders.
      * @return The dominant gender (Animal.Sex.M or Animal.Sex.F) or null if genders are equally prevalent.
      */
-    public static Animal.Sex task5CompareGenders(List<Animal> animals) {
+    public static @Nullable Animal.Sex task5CompareGenders(@NotNull List<Animal> animals) {
         Map<Animal.Sex, Long> genderCounts = animals.stream()
             .collect(Collectors.groupingBy(Animal::sex, Collectors.counting()));
 
@@ -95,7 +97,7 @@ public final class AnimalHelper {
      * @param animals The list of animals to search for the heaviest animal of each type.
      * @return A map associating each animal type with the heaviest animal of that type.
      */
-    public static Map<Animal.Type, Animal> task6FindHeaviestAnimalByType(List<Animal> animals) {
+    public static Map<Animal.Type, Animal> task6FindHeaviestAnimalByType(@NotNull List<Animal> animals) {
         return animals.stream()
             .collect(Collectors.toMap(
                 Animal::type,
@@ -111,7 +113,7 @@ public final class AnimalHelper {
      * @param k       The position (k) of the oldest animal to retrieve.
      * @return The k-th the oldest animal or null if k is out of bounds.
      */
-    public static Animal task7FindKthOldestAnimal(List<Animal> animals, int k) {
+    public static @Nullable Animal task7FindKthOldestAnimal(@NotNull List<Animal> animals, int k) {
         List<Animal> sortedAnimals = animals.stream()
             .sorted(Comparator.comparingInt(Animal::age))
             .toList();
@@ -131,7 +133,7 @@ public final class AnimalHelper {
      * @return An optional containing the heaviest animal below the specified height, or an empty optional if
      *     no such animal is found.
      */
-    public static Optional<Animal> task8FindHeaviestAnimalBelowHeight(List<Animal> animals, int k) {
+    public static @NotNull Optional<Animal> task8FindHeaviestAnimalBelowHeight(@NotNull List<Animal> animals, int k) {
         return animals.stream()
             .filter(animal -> animal.height() < k)
             .max(Comparator.comparingInt(Animal::weight));
@@ -143,7 +145,7 @@ public final class AnimalHelper {
      * @param animals The list of animals to compute the sum of paws for.
      * @return The total sum of paws across all animals in the list.
      */
-    public static Integer task9SumOfPaws(List<Animal> animals) {
+    public static @NotNull Integer task9SumOfPaws(@NotNull List<Animal> animals) {
         return animals.stream()
             .map(Animal::paws)
             .mapToInt(Integer::intValue)
@@ -156,7 +158,7 @@ public final class AnimalHelper {
      * @param animals The list of animals to search for animals with age-paw mismatch.
      * @return A list of animals with age-paw discrepancies.
      */
-    public static List<Animal> task10FindAnimalsWithAgeNotMatchingPaws(List<Animal> animals) {
+    public static List<Animal> task10FindAnimalsWithAgeNotMatchingPaws(@NotNull List<Animal> animals) {
         return animals.stream()
             .filter(animal -> animal.age() != animal.paws())
             .toList();
@@ -168,7 +170,7 @@ public final class AnimalHelper {
      * @param animals The list of animals to search for animals that meet the criteria.
      * @return A list of animals that can bite and are taller than 100 centimeters
      */
-    public static List<Animal> task11FindAnimalsCanBiteAndTall(List<Animal> animals) {
+    public static List<Animal> task11FindAnimalsCanBiteAndTall(@NotNull List<Animal> animals) {
         final int height = 100;
 
         return animals.stream()
@@ -182,7 +184,7 @@ public final class AnimalHelper {
      * @param animals The list of animals to count based on weight exceeding height.
      * @return The number of animals in the list where weight is greater than height.
      */
-    public static Integer task12CountAnimalsWeightGreaterThanHeight(List<Animal> animals) {
+    public static Integer task12CountAnimalsWeightGreaterThanHeight(@NotNull List<Animal> animals) {
         return (int) animals.stream()
             .filter(animal -> animal.weight() > animal.height())
             .count();
@@ -194,7 +196,7 @@ public final class AnimalHelper {
      * @param animals The list of animals to search for animals with multi-word names.
      * @return A list of animals with names consisting of more than two words.
      */
-    public static List<Animal> task13FindAnimalsWithNamesConsistingOfMoreThanTwoWords(List<Animal> animals) {
+    public static List<Animal> task13FindAnimalsWithNamesConsistingOfMoreThanTwoWords(@NotNull List<Animal> animals) {
         return animals.stream()
             .filter(animal -> animal.name().split(" ").length > 2)
             .toList();
@@ -207,7 +209,7 @@ public final class AnimalHelper {
      * @param k       The minimum height required for a dog to be considered tall.
      * @return True if there is a dog taller than the specified height; otherwise, false.
      */
-    public static boolean task14HasDogTallerThanK(List<Animal> animals, int k) {
+    public static boolean task14HasDogTallerThanK(@NotNull List<Animal> animals, int k) {
         return animals.stream()
             .anyMatch(animal -> animal.type() == Animal.Type.DOG && animal.height() > k);
     }
@@ -220,7 +222,11 @@ public final class AnimalHelper {
      * @param l       The upper age limit for animals to be considered.
      * @return A map associating each animal type with the total sum of weights of animals within the age range.
      */
-    public static Map<Animal.Type, Integer> task15SumOfWeightsByTypeAndAgeRange(List<Animal> animals, int k, int l) {
+    public static Map<Animal.Type, Integer> task15SumOfWeightsByTypeAndAgeRange(
+        @NotNull List<Animal> animals,
+        int k,
+        int l
+    ) {
         return animals.stream()
             .filter(animal -> animal.age() >= k && animal.age() <= l)
             .collect(Collectors.groupingBy(Animal::type, Collectors.summingInt(Animal::weight)));
@@ -232,7 +238,7 @@ public final class AnimalHelper {
      * @param animals The list of animals to be sorted.
      * @return A new list of animals sorted by type, sex, and name.
      */
-    public static List<Animal> task16SortAnimalsByTypeSexName(List<Animal> animals) {
+    public static List<Animal> task16SortAnimalsByTypeSexName(@NotNull List<Animal> animals) {
         return animals.stream()
             .sorted(Comparator.comparing(Animal::type)
                 .thenComparing(Animal::sex)
@@ -246,7 +252,7 @@ public final class AnimalHelper {
      * @param animals The list of animals to compare the biting behavior of spiders and dogs.
      * @return True if spiders bite more often than dogs; otherwise, false.
      */
-    public static boolean task17DoSpidersBiteMoreOften(List<Animal> animals) {
+    public static boolean task17DoSpidersBiteMoreOften(@NotNull List<Animal> animals) {
         long spiderCount = animals.stream()
             .filter(animal -> animal.type() == Animal.Type.SPIDER && (animal.bites() == null || animal.bites()))
             .count();
@@ -264,7 +270,7 @@ public final class AnimalHelper {
      * @param animalLists A list of lists, where each inner list contains animals.
      * @return The heaviest fish among all the provided animal lists, or null if no fish is found.
      */
-    public static Animal task18FindHeaviestFish(List<List<Animal>> animalLists) {
+    public static Animal task18FindHeaviestFish(@NotNull List<List<Animal>> animalLists) {
         return animalLists.stream()
             .flatMap(List::stream)
             .filter(animal -> animal.type() == Animal.Type.FISH)
@@ -278,7 +284,7 @@ public final class AnimalHelper {
      * @param animals The list of animals to validate.
      * @return A map associating each animal's name with a list of validation errors, if any.
      */
-    public static Map<String, List<ValidationError>> task19GetValidationErrors(List<Animal> animals) {
+    public static Map<String, List<ValidationError>> task19GetValidationErrors(@NotNull List<Animal> animals) {
         return animals.stream()
             .collect(Collectors.toMap(
                 Animal::name,

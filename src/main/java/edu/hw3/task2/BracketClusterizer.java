@@ -11,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
  * The {@code BracketClusterizer} class provides a method {@link BracketClusterizer#clusterize(String)}
  * to cluster matching pairs of parentheses within a given string.
  */
+@SuppressWarnings("SpellCheckingInspection")
 public final class BracketClusterizer {
     private static final String EMPTY_INPUT_STRING_ERROR_MESSAGE = "Input string must not be empty.";
     private static final String UNBALANCED_PARENTHESES_ERROR_MESSAGE = "Unbalanced parentheses in the input string.";

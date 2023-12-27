@@ -18,7 +18,7 @@ class Task2Test {
 
     @Test
     @DisplayName("Test ByteBuddy dynamically modified sum() method behavior")
-    void ByteBuddy_TestSumModification() {
+    void byteBuddy_TestSumModification() {
         // Arrange
         int a = 2;
         int b = 3;

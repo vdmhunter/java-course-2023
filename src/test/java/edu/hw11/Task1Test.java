@@ -19,7 +19,7 @@ class Task1Test {
 
     @Test
     @DisplayName("Test ByteBuddy dynamically generated toString() returns 'Hello, ByteBuddy!'")
-    void ByteBuddy_TestToString() {
+    void byteBuddy_TestToString() {
         // Arrange
         Object instance;
 

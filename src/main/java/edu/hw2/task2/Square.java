@@ -1,5 +1,8 @@
 package edu.hw2.task2;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 /**
  * {@code Square} class represents a square with a specific size.
  * It extends the Rectangle class, inheriting all its methods.
@@ -31,7 +34,8 @@ public class Square extends Rectangle {
      * @return a new Square object with specified size
      * @throws IllegalArgumentException if size is negative
      */
-    public final Square newSquareWithSize(int size) {
+    @Contract("_ -> new")
+    public final @NotNull Square newSquareWithSize(int size) {
         if (size < 0) {
             throw new IllegalArgumentException("The size of the square must be positive value.");
         }

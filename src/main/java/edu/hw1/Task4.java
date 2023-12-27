@@ -1,6 +1,7 @@
 package edu.hw1;
 
 import java.util.Objects;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * The {@code Task4} class provides a method {@link Task4#fixString(String)}
@@ -19,7 +20,7 @@ public final class Task4 {
      * @throws NullPointerException     if the input string is {@code null}.
      * @throws IllegalArgumentException if the input string is empty.
      */
-    public static String fixString(String str) {
+    public static @NotNull String fixString(String str) {
         Objects.requireNonNull(str);
 
         if (str.isEmpty()) {

@@ -129,7 +129,7 @@ class Project3Test {
 
     @Test
     @DisplayName("Test readLogLinesFromUrl with invalid URL")
-    void NginxLogsProvider_TestReadLogLinesFromUrlWithInvalidUrl() throws MalformedURLException {
+    void nginxLogsProvider_TestReadLogLinesFromUrlWithInvalidUrl() throws MalformedURLException {
         // Arrange
         @SuppressWarnings("deprecation")
         var invalidUrl = new URL("https://nonexistent-url.com");

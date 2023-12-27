@@ -74,7 +74,7 @@ class Task1Test {
     }
 
     @Test
-    @DisplayName("Test QuoteClient's multithreaded communication with QuoteServer")
+    @DisplayName("Test QuoteClient's multi thread processing communication with QuoteServer")
     void quoteClient_TestMultiThread() throws IOException {
 
         // Arrange

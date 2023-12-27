@@ -34,8 +34,7 @@ public class ReflectionBenchmark {
     private Student student;
     private Method method;
     private MethodHandle methodHandle;
-    @SuppressWarnings("rawtypes")
-    private Function function;
+    private Function<Student, String> function;
     private static final String METHOD_NAME = "name";
 
     /**
@@ -90,8 +89,10 @@ public class ReflectionBenchmark {
             MethodType.methodType(String.class, Student.class)
         );
 
-        //noinspection rawtypes
-        function = (Function) callSite.getTarget().invokeExact();
+        @SuppressWarnings("unchecked")
+        Function<Student, String> castedFunction = (Function<Student, String>) callSite.getTarget().invokeExact();
+
+        function = castedFunction;
     }
 
     /**
@@ -134,7 +135,6 @@ public class ReflectionBenchmark {
      */
     @Benchmark
     public void lambdaMetaFactory(@NotNull Blackhole bh) {
-        //noinspection unchecked
         bh.consume(function.apply(student));
     }
 }

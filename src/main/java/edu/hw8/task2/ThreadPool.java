@@ -24,4 +24,9 @@ public interface ThreadPool extends AutoCloseable {
      * @param runnable The task to be executed.
      */
     void execute(Runnable runnable);
+
+    /**
+     * Closes the thread pool and performs cleanup operations.
+     */
+    void close();
 }

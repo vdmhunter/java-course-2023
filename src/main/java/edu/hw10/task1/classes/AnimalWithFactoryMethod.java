@@ -8,9 +8,9 @@ import edu.hw10.task1.annotations.NotNull;
  * It encapsulates information about the name and the number of paws of the animal.
  * This class is designed with annotations to enforce constraints on its properties.
  */
-public class AnimalWithFactoryMethod {
-    protected String name;
-    protected int pawsCount;
+public final class AnimalWithFactoryMethod {
+    private String name;
+    private int pawsCount;
 
     /**
      * Constructs a new {@code AnimalWithFactoryMethod} with default values.

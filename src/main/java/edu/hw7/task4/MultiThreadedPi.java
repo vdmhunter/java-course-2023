@@ -4,7 +4,8 @@ import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * The {@code MultiThreadedPi} class is responsible for estimating the value of Pi using a multithreaded approach.
+ * The {@code MultiThreadedPi} class is responsible for estimating the value of Pi using a multi thread
+ * processing approach.
  * It utilizes multiple threads to distribute the workload and improve performance in estimating Pi
  * based on random points.
  */

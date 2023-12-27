@@ -1,12 +1,16 @@
 package edu.hw8.task3;
 
 import edu.common.Generated;
+import java.io.Serial;
 
 /**
  * The {@code Md5HashingException} class is a custom exception that extends {@link RuntimeException}.
  * It is thrown when there is an error during the MD5 hashing process.
  */
 public class Md5HashingException extends RuntimeException {
+    @Serial
+    private static final long serialVersionUID = -831618926612826216L;
+
     /**
      * Constructs a new {@code Md5HashingException} with the specified detail message and cause.
      *

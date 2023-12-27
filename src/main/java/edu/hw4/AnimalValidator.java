@@ -2,6 +2,7 @@ package edu.hw4;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * The {@code AnimalValidator} class provides a set of static methods for validating {@link Animal} classes
@@ -20,7 +21,7 @@ public final class AnimalValidator {
      * @param animal The {@link Animal} to be validated.
      * @return A {@link List} of {@link ValidationError} objects representing validation errors.
      */
-    public static List<ValidationError> getValidationErrors(Animal animal) {
+    public static @NotNull List<ValidationError> getValidationErrors(@NotNull Animal animal) {
         List<ValidationError> errors = new ArrayList<>();
 
         if (animal.age() < 0) {

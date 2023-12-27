@@ -37,6 +37,6 @@ public final class DateParser {
      * otherwise an empty {@link Optional}
      */
     public Optional<LocalDate> parseDate(String string) {
-        return handlers.get(0).handle(string);
+        return handlers.getFirst().handle(string);
     }
 }

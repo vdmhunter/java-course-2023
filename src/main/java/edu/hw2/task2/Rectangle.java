@@ -1,5 +1,8 @@
 package edu.hw2.task2;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 /**
  * The {@code Rectangle} class represents a rectangle with a specific width and height.
  * <br/>
@@ -64,7 +67,8 @@ public class Rectangle {
      * @return a new Rectangle object with specified width and same height as this rectangle
      * @throws IllegalArgumentException if width is negative
      */
-    public final Rectangle newRectangleWithWidth(int width) {
+    @Contract("_ -> new")
+    public final @NotNull Rectangle newRectangleWithWidth(int width) {
         if (width < 0) {
             throw new IllegalArgumentException("The width of the rectangle must be positive value.");
         }

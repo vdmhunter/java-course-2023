@@ -154,8 +154,8 @@ class Project2Test {
     }
 
     @Test
-    @DisplayName("DfsMultithreadSolver should find a valid path from start to end in a generated maze")
-    void dfsMultithreadSolver_TestSolve() {
+    @DisplayName("DfsMultiThreadSolver should find a valid path from start to end in a generated maze")
+    void dfsMultiThreadSolver_TestSolve() {
         // Arrange
         int height = 19;
         int width = 79;
@@ -209,8 +209,8 @@ class Project2Test {
     }
 
     @Test
-    @DisplayName("DfsMultithreadSolver should return an empty path when there is no valid solution path.")
-    void dfsMultithreadSolver_TestSolveNoPath() {
+    @DisplayName("DfsMultiThreadSolver should return an empty path when there is no valid solution path.")
+    void dfsMultiThreadSolver_TestSolveNoPath() {
         // Arrange
         int height = 19;
         int width = 79;

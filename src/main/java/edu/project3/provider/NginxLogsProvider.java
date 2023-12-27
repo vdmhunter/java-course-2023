@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * The {@code NginxLogsProvider} class provides utility methods for obtaining Nginx log entries from various sources.
  */
-public class NginxLogsProvider {
+public final class NginxLogsProvider {
     private static final Path LOG_FILES_PATH = Path.of("src/main/resources/project3/");
 
     private NginxLogsProvider() {

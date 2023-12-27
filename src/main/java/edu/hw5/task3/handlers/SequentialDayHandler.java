@@ -2,6 +2,7 @@ package edu.hw5.task3.handlers;
 
 import java.time.Clock;
 import java.time.LocalDate;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * {@code SequentialDayHandler} is a concrete implementation of the {@link Handler} class,
@@ -42,7 +43,7 @@ public class SequentialDayHandler extends Handler {
      * @see Clock
      */
     @Override
-    protected LocalDate parse(String string) {
+    protected LocalDate parse(@NotNull String string) {
         return switch (string.trim().toLowerCase()) {
             case "today" -> LocalDate.now(clock).plusDays(0);
             case "yesterday" -> LocalDate.now(clock).plusDays(-1);

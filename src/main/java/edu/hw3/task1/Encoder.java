@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
  * The {@code Encoder} class provides utility method {@link Encoder#atbash(String)}
  * for encoding strings using the Atbash cipher.
  */
+@SuppressWarnings("SpellCheckingInspection")
 public final class Encoder {
     private static final int LATIN_ALPHABET_LETTER_COUNT = 26;
 

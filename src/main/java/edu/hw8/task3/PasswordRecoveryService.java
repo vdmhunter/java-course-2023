@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * The {@code PasswordRecoveryService} class is responsible for recovering passwords by generating
  * and checking password hashes against a provided database of hashed logins. It supports both
- * single-threaded and multithreaded password recovery strategies.
+ * single-threaded and multi thread processing password recovery strategies.
  */
 public final class PasswordRecoveryService {
     private final Map<String, String> hashedLoginDatabase;
@@ -73,7 +73,7 @@ public final class PasswordRecoveryService {
     }
 
     /**
-     * Runs the multithreaded password recovery process using character subset password generators
+     * Runs the multi thread processing password recovery process using character subset password generators
      * and the specified executor service.
      *
      * @param executorService The executor service for managing password generation threads.

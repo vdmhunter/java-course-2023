@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 class Task8Test {
     @Test
     @DisplayName("Test BackwardIterator with Integer collection")
-    void backwardIterator_TesrWithIntegerCollection() {
+    void backwardIterator_TestWithIntegerCollection() {
         // Arrange
         BackwardIterator<Integer> iterator = new BackwardIterator<>(List.of(1, 2, 3));
         List<Integer> expected = List.of(3, 2, 1);

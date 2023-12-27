@@ -32,7 +32,7 @@ class Task3Test {
         "10,55",
     })
     @DisplayName("Test iterative Fibonacci Calculation using ByteBuddy")
-    void ByteBuddy_TestIterativeFibonacci(int n, long expected) {
+    void byteBuddy_TestIterativeFibonacci(int n, long expected) {
         // Arrange
         Class<?> dynamicType = new ByteBuddy()
             .subclass(Object.class)

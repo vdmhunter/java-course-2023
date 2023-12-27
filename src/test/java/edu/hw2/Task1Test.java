@@ -12,7 +12,7 @@ import static edu.hw2.task1.Expr.*;
 class Task1Test {
     @Test
     @DisplayName("Evaluate the complex expression provided in the task description")
-    void Expr_TaskTest() {
+    void expr_TaskTest() {
         // Arrange
         var two = new Constant(2);
         var four = new Constant(4);

@@ -21,6 +21,7 @@ class Task1Test {
         "Привет мир!,Привет мир!"
     })
     @DisplayName("Happy paths")
+    @SuppressWarnings("SpellCheckingInspection")
     void atbash_HappyPaths(String str, String expected) {
         // Act
         String actual = Encoder.atbash(str);
@@ -31,6 +32,7 @@ class Task1Test {
 
     @Test
     @DisplayName("Test when input string is null")
+    @SuppressWarnings("SpellCheckingInspection")
     void atbash_InputStringIsNull() {
         // Arrange
         var expectedType = NullPointerException.class;
@@ -41,6 +43,7 @@ class Task1Test {
 
     @Test
     @DisplayName("Test when input string is empty")
+    @SuppressWarnings("SpellCheckingInspection")
     void atbash_InputStringIsEmpty() {
         // Arrange
         var expectedType = IllegalArgumentException.class;

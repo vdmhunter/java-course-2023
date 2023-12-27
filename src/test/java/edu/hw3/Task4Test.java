@@ -23,6 +23,7 @@ class Task4Test {
         "3999,MMMCMXCIX"
     })
     @DisplayName("Happy paths")
+    @SuppressWarnings("SpellCheckingInspection")
     void integerToRoman_HappyPaths(int num, String expected) {
         // Act
         String actual = IntegerToRomanConverter.intToRoman(num);

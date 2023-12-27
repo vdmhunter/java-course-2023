@@ -1,5 +1,7 @@
 package edu.hw2.task4;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * The {@code StackTraceInspector} class provides utility method {@link StackTraceInspector#callingInfo()}
  * to extract information about the caller of a method or function in the Java program.
@@ -16,7 +18,7 @@ public final class StackTraceInspector {
      * @return A {@link  CallingInfo} object containing details about the caller, including the class name
      * and method name from which this function is called.
      */
-    public static CallingInfo callingInfo() {
+    public static @NotNull CallingInfo callingInfo() {
         StackTraceElement[] stackTraceElements = new Throwable().getStackTrace();
         StackTraceElement caller = stackTraceElements[1];
 

@@ -25,31 +25,31 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <maven.version>3.8.8</maven.version>
+        <maven.version>3.9.6</maven.version>
         <jdk.version>21</jdk.version>
         <java.release>21</java.release>
 
         <revision>1.0.0</revision>
 
-        <jetbrains-annotations.version>24.0.1</jetbrains-annotations.version>
-        <log4j.version>2.21.1</log4j.version>
+        <jetbrains-annotations.version>24.1.0</jetbrains-annotations.version>
+        <log4j.version>2.22.0</log4j.version>
         <commons-cli.version>1.6.0</commons-cli.version>
 
-        <junit.version>5.10.0</junit.version>
+        <junit.version>5.10.1</junit.version>
         <assertj.version>3.24.2</assertj.version>
-        <mockito.version>5.6.0</mockito.version>
+        <mockito.version>5.8.0</mockito.version>
         <awaitility.version>4.2.0</awaitility.version>
-        <bytebuddy-agent.version>1.14.8</bytebuddy-agent.version>
-        <bytebuddy.version>1.14.10</bytebuddy.version>
+        <bytebuddy-agent.version>1.14.11</bytebuddy-agent.version>
+        <bytebuddy.version>1.14.11</bytebuddy.version>
         <asm.version>9.6</asm.version>
         <jmh.version>1.37</jmh.version>
 
         <maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
-        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
-        <maven-surefire-plugin.version>3.2.1</maven-surefire-plugin.version>
+        <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
+        <maven-surefire-plugin.version>3.2.3</maven-surefire-plugin.version>
         <maven-enforcer-plugin.version>3.4.1</maven-enforcer-plugin.version>
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
-        <maven-site-plugin.version>4.0.0-M11</maven-site-plugin.version>
+        <maven-site-plugin.version>4.0.0-M13</maven-site-plugin.version>
 
         <jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>
     </properties>
@@ -208,7 +208,12 @@
                     <configuration>
                         <release>${java.release}</release>
                         <parameters>true</parameters>
-                        <compilerArgument>-Xlint:all</compilerArgument>
+                        <compilerArgs>
+                            <!-- We turn off:
+                            - `processing` because it complains about every annotation
+                            -->
+                            <arg>-Xlint:all,-processing</arg>
+                        </compilerArgs>
                     </configuration>
                 </plugin>
                 <plugin>

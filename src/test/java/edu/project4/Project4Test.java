@@ -45,7 +45,7 @@ class Project4Test {
     private static final int HEIGHT = 1080;
     private static final int SAMPLES = 100_000;
     private static final short ITERATION_PER_SAMPLE = 100;
-    private static final double GAMMA = 1.5;
+    private static final double GAMMA = 1.5D;
     private static final long SEED = 6L;
     private static final Logger LOGGER = LogManager.getLogger();
 
@@ -75,7 +75,6 @@ class Project4Test {
         transformations.add(new Spiral());
         transformations.add(new Swirl());
         transformations.add(new Tangent());
-
 
         ImageFormat format = ImageFormat.PNG;
         Path path = imageFile.toAbsolutePath();

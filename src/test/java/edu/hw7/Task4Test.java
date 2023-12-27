@@ -29,7 +29,7 @@ class Task4Test {
     }
 
     @Test
-    @DisplayName("Testing multithreaded Monte Carlo Pi calculation")
+    @DisplayName("Testing multi thread processing Monte Carlo Pi calculation")
     void multiThreadedPi_TestCalculate() throws InterruptedException {
         // Arrange
         long totalPointsCount = 10_000_000L;
